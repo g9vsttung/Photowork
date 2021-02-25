@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace PhotoWork.Controllers
@@ -16,6 +18,8 @@ namespace PhotoWork.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+           // SqlConnection con = new SqlConnection(
+           // WebConfigurationManager.ConnectionStrings["PhotWork"].ConnectionString);
 
             return View();
         }

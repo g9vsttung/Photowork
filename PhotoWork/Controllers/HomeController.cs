@@ -18,8 +18,7 @@ namespace PhotoWork.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-           // SqlConnection con = new SqlConnection(
-           // WebConfigurationManager.ConnectionStrings["PhotWork"].ConnectionString);
+           
 
             return View();
         }

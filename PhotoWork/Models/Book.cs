@@ -11,9 +11,11 @@ namespace PhotoWork.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Book
     {
+        [Key]
         public int BookID { get; set; }
         public string BookName { get; set; }
         public Nullable<int> BookPrice { get; set; }

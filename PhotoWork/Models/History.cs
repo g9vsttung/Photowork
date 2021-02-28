@@ -11,14 +11,15 @@ namespace PhotoWork.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Book
+    
+    public partial class History
     {
-        [Key]
-        public int BookID { get; set; }
-        public string BookName { get; set; }
-        public Nullable<int> BookPrice { get; set; }
-        public Nullable<int> BookQuantity { get; set; }
+        public string ID { get; set; }
+        public string PhotographerID { get; set; }
+        public byte[] Date { get; set; }
+        public decimal MoneyOut { get; set; }
+        public decimal Ramain { get; set; }
+    
+        public virtual Photographer Photographer { get; set; }
     }
 }

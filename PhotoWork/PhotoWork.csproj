@@ -128,29 +128,77 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Book.cs">
-      <DependentUpon>BookStore.tt</DependentUpon>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookStore.Context.cs">
+    <Compile Include="Models\AuthenticatedUser.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChattingRecord.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\History.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Invoice.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MediaFile.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Package.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PackageDetail.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Photographer.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhotographerSkill.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhotoWork.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BookStore.Context.tt</DependentUpon>
+      <DependentUpon>PhotoWork.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookStore.cs">
+    <Compile Include="Models\PhotoWork.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BookStore.tt</DependentUpon>
+      <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookStore.Designer.cs">
+    <Compile Include="Models\PhotoWork.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BookStore.edmx</DependentUpon>
+      <DependentUpon>PhotoWork.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Skill.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>PhotoWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,24 +210,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BookStore.Context.tt">
+    <Content Include="Models\PhotoWork.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BookStore.edmx</DependentUpon>
-      <LastGenOutput>BookStore.Context.cs</LastGenOutput>
+      <DependentUpon>PhotoWork.edmx</DependentUpon>
+      <LastGenOutput>PhotoWork.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BookStore.tt">
+    <Content Include="Models\PhotoWork.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BookStore.edmx</DependentUpon>
-      <LastGenOutput>BookStore.cs</LastGenOutput>
+      <DependentUpon>PhotoWork.edmx</DependentUpon>
+      <LastGenOutput>PhotoWork.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BookStore.edmx">
+    <EntityDeploy Include="Models\PhotoWork.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BookStore.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhotoWork.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BookStore.edmx.diagram">
-      <DependentUpon>BookStore.edmx</DependentUpon>
+    <Content Include="Models\PhotoWork.edmx.diagram">
+      <DependentUpon>PhotoWork.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -203,14 +251,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
-    <Content Include="Views\Books\Details.cshtml" />
-    <Content Include="Views\Books\Edit.cshtml" />
-    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

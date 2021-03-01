@@ -32,6 +32,7 @@ namespace PhotoWork.Models
         public Nullable<bool> isDelete { get; set; }
         public Nullable<System.DateTime> deleteDate { get; set; }
         public string PhotographerID { get; set; }
+        public Nullable<double> Rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChattingRecord> ChattingRecords { get; set; }

@@ -111,7 +111,6 @@
           </Key>
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TotalProjectDone" Type="int" />
-          <Property Name="RatingAvg" Type="float" />
           <Property Name="isAvaiable" Type="bit" />
           <Property Name="LinkProject" Type="varchar" MaxLength="200" />
           <Property Name="Bio" Type="nvarchar" MaxLength="2000" />
@@ -141,6 +140,7 @@
           <Property Name="isDelete" Type="bit" />
           <Property Name="deleteDate" Type="date" />
           <Property Name="PhotographerID" Type="varchar" MaxLength="50" />
+          <Property Name="Rating" Type="float" />
         </EntityType>
         <EntityType Name="ServiceSkill">
           <Key>
@@ -652,7 +652,6 @@
           </Key>
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TotalProjectDone" Type="Int32" />
-          <Property Name="RatingAvg" Type="Double" />
           <Property Name="isAvaiable" Type="Boolean" />
           <Property Name="LinkProject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Bio" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
@@ -689,6 +688,7 @@
           <Property Name="isDelete" Type="Boolean" />
           <Property Name="deleteDate" Type="DateTime" Precision="0" />
           <Property Name="PhotographerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Double" />
           <NavigationProperty Name="ChattingRecords" Relationship="Self.FK__ChattingR__Servi__66603565" FromRole="Service" ToRole="ChattingRecord" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Service__619B8048" FromRole="Service" ToRole="Invoice" />
           <NavigationProperty Name="MediaFiles" Relationship="Self.FK__MediaFile__Servi__59063A47" FromRole="Service" ToRole="MediaFile" />
@@ -1174,7 +1174,6 @@
               <MappingFragment StoreEntitySet="Photographer">
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="TotalProjectDone" ColumnName="TotalProjectDone" />
-                <ScalarProperty Name="RatingAvg" ColumnName="RatingAvg" />
                 <ScalarProperty Name="isAvaiable" ColumnName="isAvaiable" />
                 <ScalarProperty Name="LinkProject" ColumnName="LinkProject" />
                 <ScalarProperty Name="Bio" ColumnName="Bio" />
@@ -1205,6 +1204,7 @@
                 <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="deleteDate" ColumnName="deleteDate" />
                 <ScalarProperty Name="PhotographerID" ColumnName="PhotographerID" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

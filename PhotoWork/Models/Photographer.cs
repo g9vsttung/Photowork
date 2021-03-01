@@ -24,7 +24,6 @@ namespace PhotoWork.Models
     
         public string Username { get; set; }
         public Nullable<int> TotalProjectDone { get; set; }
-        public Nullable<double> RatingAvg { get; set; }
         public Nullable<bool> isAvaiable { get; set; }
         public string LinkProject { get; set; }
         public string Bio { get; set; }

@@ -11,10 +11,13 @@ namespace PhotoWork.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AuthenticatedUser
     {
+        [Required(ErrorMessage ="buoc nhap")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "buoc nhap")]
         public string passwords { get; set; }
         public string Role { get; set; }
         public string phoneNumber { get; set; }

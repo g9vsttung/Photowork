@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c5b27c557c647f3a2f1ba8472383e24" Name="Diagram1">
+      <Diagram DiagramId="11224a7d815448cbbd9c11ec0527dc40" Name="Diagram1">
         <EntityTypeShape EntityType="PhotoWorkModel.Admin" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.AuthenticatedUser" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="13.5" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.ChattingRecord" Width="1.5" PointX="12.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.ChattingRecord" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Client" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="15.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.MediaFile" Width="1.5" PointX="12.75" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Package" Width="1.5" PointX="10.5" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.PackageDetail" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Photographer" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Photographer" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.PhotographerSkill" Width="1.5" PointX="13.5" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Service" Width="1.5" PointX="10.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Service" Width="1.5" PointX="10.5" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Skill" Width="1.5" PointX="15.75" PointY="17.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="PhotoWorkModel.FK__Admin__Username__3A81B327" ManuallyRouted="false" />

@@ -23,8 +23,16 @@ namespace PhotoWork
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                   
+                      "~/Content/owl.carousel*" ));
+
+
+            //EXTRA
+            //--OWN CAROUSEL
+            bundles.Add(new ScriptBundle("~/bundles/own-carousel").Include(
+                        "~/Scripts/own.carousel*"));
+            
         }
     }
 }

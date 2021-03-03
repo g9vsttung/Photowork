@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model PhotoWork.Models.AuthenticatedUser
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,37 +7,157 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/one-page-wonder.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+      <!--Owl Carousel-->
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/owl.theme.default.min.css">
+    
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Navigation -->
+    <nav class="fixed-top navbar-custom navbar-fixed-top top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a class="navbar-brand" href="index.html">  PhotoWork</a>
+            <div class="navbar-brand" id="navbarResponsive" style="float:right">
+                @Html.ActionLink("Đăng kí", "Index")
+                <a data-toggle="modal" data-target="#LoginModal" class="regis">
+                    Đăng nhập
+                </a>
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+
+        </div>
+        <hr />
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-light" data-toggle="dropdown">
+                            Chụp Ảnh
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Ngoại cảnh</a>
+                            <a class="dropdown-item" href="#">Studio</a>
+                            <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
+                            <a class="dropdown-item" href="#">Nhóm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-light" data-toggle="dropdown">
+                            Quay Phim
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Studio</a>
+                            <a class="dropdown-item" href="#">Ngoại cảnh</a>
+                            <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
+                            <a class="dropdown-item" href="#">Theo ngày</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-light" data-toggle="dropdown">
+                            Chỉnh Sửa
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Ảnh</a>
+                            <a class="dropdown-item" href="#">Video/Clip</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </nav>
+    <!-- LOGIN MODAL -->
+    <form action="" name="LOGIN" method="POST">
+        <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đăng Nhập</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <label for="uname"><b>Email: </b></label>
+                            <input type="email" placeholder="Example: abc@gmail.com" name="email" required class="form-control"><br>
 
+                            <label for="psw"><b>Mật khẩu: </b></label>
+                            <input type="password" placeholder="Enter Password" name="password" required class="form-control"><br>
+                            <span id="accountERR" style="color: red;font-style: italic;"></span><br>
+                            <span class="psw"><a href="#" style="text-decoration: none ">Bạn đã quên mật khẩu?</a></span>
+
+                        </div>
+                        <div class="or-container">
+                            <div class="line-separator"></div>
+                            <div class="or-label"><b>HOẶC</b></div>
+                            <div class="line-separator"></div>
+                        </div>
+                        <div class="container">
+                            <button class="btn btn-danger" type="button" style="margin-left: 24%;">ĐĂNG NHẬP VỚI GOOGLE</button><br><br>
+                            <span class="psw"><a href="signup.html" style="text-decoration: none ">Tạo tài khoản mới.</a></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="Login()">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+  
+
+
+
+
+
+
+
+   
+        @RenderBody()
+        
+    <!-- Footer -->
+
+    <footer>
+        <div>
+            <h3>  Copyright &copy; 2021 PhotoWork.com</h3>
+            <h5>Liên hệ: 0123-456-789</h5>
+            <h5>Email:demoweb@gmail.com</h5>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <link rel="stylesheet" href="~/Content/one-page-wonder.css">
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
+
 </body>
+
+
 </html>

@@ -41,7 +41,9 @@ h6 {
     font-weight: 700;
     letter-spacing: 0.1rem;
 }
-
+.row p{
+    font-size:18px;
+}
 .bg-black {
     background-color: #000 !important;
 }
@@ -52,9 +54,10 @@ h6 {
 /*.navbar-brand a {
    padding-left:20px;
 }*/
-.category{
-    display:inline-block;
+.category {
+    display: inline-block;
 }
+
 .regis {
     border: 1px solid #bf9c99;
     text-align: center;
@@ -66,36 +69,36 @@ h6 {
     text-decoration: none;
     color: black;
 }
-.col{
-    text-align:center;
-    font-weight:bold;
+
+.col {
+    text-align: center;
+    font-weight: bold;
 }
-.dropdown button{
-    font-size:2rem;
-    font-weight:bold;
+
+.dropdown button {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
+
 .dropdown-menu {
-    font-size: 2rem;
-    font-weight:normal;
+    font-size: 1.2rem;
+    font-weight: normal;
 }
+
 .navbar-custom {
-    padding-top: 2rem;
-    font-size: 2rem;
+    padding-top: 1rem;
     background-color: white;
-    border-bottom:1px solid black;
+    border-bottom: 1px solid black;
 }
 
     .navbar-custom .navbar-brand {
         text-transform: uppercase;
         letter-spacing: 0.1rem;
         font-weight: 700;
-        margin-left: 50px;
-        font-size:2rem;
     }
 
     .navbar-custom .navbar-nav .nav-item .nav-link {
         text-transform: uppercase;
-        font-size: 2rem;
         font-weight: 700;
         letter-spacing: 0.1rem;
     }
@@ -116,9 +119,7 @@ header.masthead {
     header.masthead .masthead-content {
         z-index: 1;
         position: relative;
-        color:white;
-        
-            
+        color: white;
     }
 
         header.masthead .masthead-content .masthead-heading {

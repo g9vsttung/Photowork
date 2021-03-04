@@ -7,12 +7,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/one-page-wonder.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-      <!--Owl Carousel-->
-    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/Content/owl.theme.default.min.css">
-    
+    @Styles.Render("~/Content/owl")  <!--Owl Carousel-->
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <!-- Navigation -->
@@ -24,13 +20,10 @@
                 <a data-toggle="modal" data-target="#LoginModal" class="regis">
                     Đăng nhập
                 </a>
-
             </div>
-
         </div>
         <hr />
         <div class="container">
-
             <div class="row">
                 <div class="col">
                     <div class="dropdown">
@@ -87,12 +80,10 @@
                         <div class="container">
                             <label for="uname"><b>Email: </b></label>
                             <input type="email" placeholder="Example: abc@gmail.com" name="email" required class="form-control"><br>
-
                             <label for="psw"><b>Mật khẩu: </b></label>
                             <input type="password" placeholder="Enter Password" name="password" required class="form-control"><br>
                             <span id="accountERR" style="color: red;font-style: italic;"></span><br>
                             <span class="psw"><a href="#" style="text-decoration: none ">Bạn đã quên mật khẩu?</a></span>
-
                         </div>
                         <div class="or-container">
                             <div class="line-separator"></div>
@@ -112,32 +103,17 @@
             </div>
         </div>
     </form>
-  
-
-
-
-
-
-
-
-   
-        @RenderBody()
-        
+    @RenderBody()
     <!-- Footer -->
-
     <footer>
         <div>
-            <h3>  Copyright &copy; 2021 PhotoWork.com</h3>
+            <h3>Copyright &copy; 2021 PhotoWork.com</h3>
             <h5>Liên hệ: 0123-456-789</h5>
             <h5>Email:demoweb@gmail.com</h5>
         </div>
     </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
-    <link rel="stylesheet" href="~/Content/one-page-wonder.css">
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -156,8 +132,5 @@
             }
         })
     </script>
-
 </body>
-
-
 </html>

@@ -9,6 +9,7 @@ namespace PhotoWork
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                         "~/Scripts/jquery.min.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -19,20 +20,23 @@ namespace PhotoWork
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                        "~/Scripts/popper.min.js",
+                      "~/Scripts/bootstrap.js",
+                       "~/Scripts/bootstrap.min.js",
+                       "~/Scripts/owl.carousel.min.js"
+                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                   
-                      "~/Content/owl.carousel*" ));
+                      "~/Content/one-page-wonder.css",
+                      "~/Content/owl.carousel*"));
+            bundles.Add(new StyleBundle("~/Content/owl").Include(
+                    "~/Content/owl.carousel.min.css",
+                     "~/Content/owl.theme.default.min.css"
+                     ));
 
 
-            //EXTRA
-            //--OWN CAROUSEL
-            bundles.Add(new ScriptBundle("~/bundles/own-carousel").Include(
-                        "~/Scripts/own.carousel*"));
-            
         }
     }
 }

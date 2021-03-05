@@ -28,8 +28,17 @@ namespace PhotoWork.Controllers
         [HttpPost]
         public ActionResult Login(AuthenticatedUser model, string returnUrl)
         {
+            /*
+             1.Check Account
+                - FormsAuthentication.SetAuthCookie(dataItem.Email, false);
+                - Nếu không tồn tại thì quay về trang Login và đưa ra msg 
+                - Nếu tồn tại:
+                    + nếu role là Guest : return RedirectToAction("Index","Guests");
+                    + nếu role là Photographer : return RedirectToAction("Index","Photographers");
+                    + nếu role là Admin : return RedirectToAction("Index","Admins");
+             */
             PhotoWorkEntities db = new PhotoWorkEntities();
-            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == model.Email && x.passwords == model.passwords).First();
+            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == model.Email && x.passwords == model.passwords).FirstOrDefault();           
             if (dataItem != null)
             {
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);
@@ -53,7 +62,6 @@ namespace PhotoWork.Controllers
       
 
         [Authorize]
-        [AllowAnonymous]
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();

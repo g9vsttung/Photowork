@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthenticatedUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +275,11 @@
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Views\Shared\fullpage.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\AuthenticatedUsers\Create.cshtml" />
+    <Content Include="Views\AuthenticatedUsers\Delete.cshtml" />
+    <Content Include="Views\AuthenticatedUsers\Details.cshtml" />
+    <Content Include="Views\AuthenticatedUsers\Edit.cshtml" />
+    <Content Include="Views\AuthenticatedUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,11 +20,8 @@ namespace PhotoWork
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                        "~/Scripts/popper.min.js",
-                      "~/Scripts/bootstrap.js",
-                       "~/Scripts/bootstrap.min.js",
-                       "~/Scripts/owl.carousel.min.js"
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(                 
+                       "~/Scripts/owl.carousel.min.js"                  
                        ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

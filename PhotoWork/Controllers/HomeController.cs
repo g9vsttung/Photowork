@@ -17,12 +17,8 @@ namespace PhotoWork.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
+    
+       
        [AllowAnonymous]
         public ActionResult Login()
         {

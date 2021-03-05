@@ -1,0 +1,87 @@
+﻿@model PhotoWork.Models.AuthenticatedUser
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG KÍ THÀNH VIÊN</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/owl")  <!--Owl Carousel-->
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    @*<div class="register-right">
+            <h2>ĐĂNG KÍ THÀNH VIÊN</h2>
+            <h6>
+                Bạn muốn trở thành
+
+                <select name="Role">
+                    <option value="client">Khách hàng</option>
+                    <option value="photographer">Photographer</option>
+
+
+                </select>
+            </h6>
+
+            <div class="container">
+
+                <form action="">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Số điện thoại:</label>
+                        <input type="tel" class="form-control" placeholder="0123-456-789" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Họ tên:</label>
+                        <input type="text" class="form-control" placeholder="Nguyễn Văn Đậu" name="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Mật khẩu:</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Nhập lại mật khẩu:</label>
+                        <input type="password" class="form-control" name="repassword">
+                    </div>
+                    <button type="button" class="btn btn-dark">Quay lại trang chủ</button>
+                    <button type="submit" class="btn btn-primary">Đăng kí</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="register-left">
+
+        </div>*@
+    @RenderBody()
+
+    <script>
+        function dangki() {
+            //alert(10);
+            var passwords = document.getElementById("passwords").value;
+            var repasswords = document.getElementById("repasswords").value;
+            if (passwords != repasswords) {
+                document.getElementById("repasswordserror").innerHTML = "Mật khẩu không trùng khớp!";
+                return;
+            } else {
+                document.forms["register"].submit();
+            }
+        }
+    </script>
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

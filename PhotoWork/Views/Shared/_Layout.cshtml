@@ -4,94 +4,123 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Welcome to PhotoWork</title>
+    <link rel="shortcut icon" type="image/png" href="~/Content/img/Logo_WhiteBackGroud.png">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/owl")  <!--Owl Carousel-->
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="fixed-top navbar-custom navbar-fixed-top top">
-        <div class="container">
-            <a class="navbar-brand" href="/Home/Index">  PhotoWork</a>
-            <div class="navbar-brand" id="navbarResponsive" style="float:right">
-                @Html.ActionLink("Đăng kí", "Register")
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Open modal
-                </button>
+    <header>
+        <!-- Navigation -->
+        <nav class="fixed-top navbar-custom navbar-fixed-top top">
+            <div class="container">
+                <a class="navbar-brand" href="/Home/Index"><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
+                <div class="navbar-brand" id="navbarResponsive" style="float:right">
+                    @Html.ActionLink("Đăng kí", "Create", "AuthenticatedUsers")
+                    <a data-toggle="modal" href="#exampleModal" class="regis">
+                        ĐĂNG NHẬP
+                    </a>
+                </div>
             </div>
-        </div>
-        <hr />
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-light" data-toggle="dropdown">
-                            Chụp Ảnh
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Ngoại cảnh</a>
-                            <a class="dropdown-item" href="#">Studio</a>
-                            <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
-                            <a class="dropdown-item" href="#">Nhóm</a>
+            <hr />
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-light" data-toggle="dropdown">
+                                Chụp Ảnh
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Ngoại cảnh</a>
+                                <a class="dropdown-item" href="#">Studio</a>
+                                <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
+                                <a class="dropdown-item" href="#">Nhóm</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-light" data-toggle="dropdown">
+                                Quay Phim
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Studio</a>
+                                <a class="dropdown-item" href="#">Ngoại cảnh</a>
+                                <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
+                                <a class="dropdown-item" href="#">Theo ngày</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-light" data-toggle="dropdown">
+                                Chỉnh Sửa
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Ảnh</a>
+                                <a class="dropdown-item" href="#">Video/Clip</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-light" data-toggle="dropdown">
-                            Quay Phim
+            </div>
+        </nav>
+
+        <!-- LOGIN MODAL -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đăng nhập</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Studio</a>
-                            <a class="dropdown-item" href="#">Ngoại cảnh</a>
-                            <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
-                            <a class="dropdown-item" href="#">Theo ngày</a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.passwords, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.passwords, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <span class="psw">
+                                <a href="" style="text-decoration: none " id="loginform-left">Bạn đã quên mật khẩu?</a>
+                                <a href="/Home/Register" style="text-decoration: none " id="loginform-right">Tạo tài khoản mới.</a>
+                            </span>
+                        </div><br />
+
+                        <div class="container">
+                            <div class="or-label">
+                                <hr /><b>HOẶC</b>
+                            </div>
+                            <button class="btn btn-danger" type="button" style="margin-left: 24%;">ĐĂNG NHẬP VỚI GOOGLE</button><br><br>
+
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-light" data-toggle="dropdown">
-                            Chỉnh Sửa
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Ảnh</a>
-                            <a class="dropdown-item" href="#">Video/Clip</a>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary">Đăng nhập</button>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
-
-    <!-- LOGIN MODAL -->
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    Modal body..
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @RenderBody()
+    </header>
+   
+        @RenderBody()
+   
     <!-- Footer -->
     <footer>
         <div>
@@ -121,4 +150,6 @@
         })
     </script>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

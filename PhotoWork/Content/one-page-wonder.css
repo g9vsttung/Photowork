@@ -51,9 +51,19 @@ h6 {
 .rounded-pill {
     border-radius: 5rem;
 }
-/*.navbar-brand a {
-   padding-left:20px;
-}*/
+#loginform-left{
+    float:left;
+    font-style:italic;
+}
+#loginform-right {
+    float: right;
+    font-style: italic;
+    color:red;
+}
+.or-label{
+    text-align:center;
+    padding-bottom:5px;
+}
 .category {
     display: inline-block;
 }
@@ -103,6 +113,9 @@ h6 {
         letter-spacing: 0.1rem;
     }
 
+    header{
+        height:150px;
+    }
 header.masthead {
     position: relative;
     overflow: hidden;
@@ -114,6 +127,7 @@ header.masthead {
     background-attachment: scroll;
     background-size: cover;
     width: 100%;
+    height:100px;
 }
 
     header.masthead .masthead-content {
@@ -167,8 +181,7 @@ header.masthead {
 
 @media (min-width: 992px) {
     header.masthead {
-        padding-top: calc(15rem + 55px);
-        padding-bottom: 10rem;
+        padding-bottom: 20rem;
     }
 
         header.masthead .masthead-content .masthead-heading {

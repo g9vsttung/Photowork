@@ -17,11 +17,18 @@ namespace PhotoWork.Controllers
         {
             return View();
         }
-      /*  public ActionResult Login()
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+       [AllowAnonymous]
+        public ActionResult Login()
         {
 
             return View();
-        }*/
+        }
         [HttpPost]
         public ActionResult Login(AuthenticatedUser model, string returnUrl)
         {
@@ -47,6 +54,8 @@ namespace PhotoWork.Controllers
                 return View();
             }
         }
+      
+
         [Authorize]
         [AllowAnonymous]
         public ActionResult SignOut()

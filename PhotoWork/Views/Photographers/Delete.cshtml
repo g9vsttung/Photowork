@@ -1,0 +1,97 @@
+﻿@model PhotoWork.Models.Photographer
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Photographer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalProjectDone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalProjectDone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isAvaiable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isAvaiable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkSocialMedia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkSocialMedia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentMoney)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentMoney)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.logFileLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.logFileLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.passwords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthenticatedUser.passwords)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

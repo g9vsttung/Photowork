@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,17 +49,17 @@ namespace PhotoWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ServiceName,Description,isAvaiable,CreateDate,isDelete,deleteDate,PhotographerID,Rating")] Service service)
+        public ActionResult Create(string returnUrl)
         {
-            if (ModelState.IsValid)
-            {
-                db.Services.Add(service);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            string id = Request.Form["txtId"];
+            string name = Request.Form["txtName"];
+            string des = Request.Form["txtDes"];
 
-            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username",  service.PhotographerID);
-            return View(service);
+                db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id),new SqlParameter("@name",name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
+                
+                return RedirectToAction("Index");
+            
+
         }
 
         // GET: Services/Edit/5

@@ -12,62 +12,50 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Service</h4>
-        <hr />
+<div class="form-horizontal">
+    <h4>Service</h4>
+    <hr />
+    @using (Html.BeginForm("CreateSer", "Services", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+    {
+
+
+
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+            <div class="control-label col-md-4">ID:</div>
+            <div class="col-md-12">
+                <input class="form-control" type="text" name="txtId" required />
+                <span id="email_ERR" class="text-danger"></span>
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+            <div class="control-label col-md-4">Service name:</div>
+            <div class="col-md-12">
+                <input class="form-control" type="text" name="txtName" required />
+                <span id="email_ERR" class="text-danger"></span>
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            <div class="control-label col-md-4">Description:</div>
+            <div class="col-md-12">
+                <input class="form-control" type="text" name="txtDes" required />
+                <span id="email_ERR" class="text-danger"></span>
             </div>
         </div>
-
-      
-
+        <button type="submit" class="btn btn-primary">Tạo</button>
 
 
-      
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhotographerID, "PhotographerID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PhotographerID", new SelectList(Enum.GetValues(typeof(Username))), "Select Photographer", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PhotographerID, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+
+
+
+
+
+    }
+</div>
 }
 
 <div>

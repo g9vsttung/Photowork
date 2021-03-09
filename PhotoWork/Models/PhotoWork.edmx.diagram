@@ -7,7 +7,7 @@
       <Diagram DiagramId="11224a7d815448cbbd9c11ec0527dc40" Name="Diagram1">
         <EntityTypeShape EntityType="PhotoWorkModel.Admin" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.AuthenticatedUser" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="13.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="14.375" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.ChattingRecord" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Client" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />

@@ -1,4 +1,4 @@
-﻿@model PhotoWork.Models.AuthenticatedUser
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
                                 Chụp Ảnh
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Ngoại cảnh</a>
+                                <a class="dropdown-item" href="/Services/Index">Ngoại cảnh</a>
                                 <a class="dropdown-item" href="#">Studio</a>
                                 <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
                                 <a class="dropdown-item" href="#">Nhóm</a>
@@ -68,6 +68,7 @@
             </div>
         </nav>
         @Html.Hidden("pageInitCounter", Session["Account_ERR"])
+
         <!-- LOGIN MODAL -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -80,30 +81,30 @@
                     </div>
                     @using (Html.BeginForm("Login", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
                     {
+
                         <div class="modal-body">
                             <div class="container">
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="control-label col-md-4">Email:</div>                                  
                                     <div class="col-md-12">
-                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        <input class="form-control" type="email" name="email" required/>                                     
+                                        <span id="email_ERR" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <h2> @ViewBag.AccountERR</h2>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    <div class="col-md-12">
-                                        @Html.PasswordFor(model => model.passwords,  new { @class = "form-control" } )
-                                        @Html.ValidationMessageFor(model => model.passwords, "", new { @class = "text-danger" })
+                                <div class="form-group">                                 
+                                    <div class="control-label col-md-4">Mật khẩu: </div>
+                                    <div class="col-md-12">                                      
+                                        <input class="form-control" type="password" name="password" required/>
+                                        <span id="pasword_ERR" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <span id="ERR" style="color:red;font-style:italic;margin-left:25px;"></span>
                                 </div>
-                                
-                         
+
+
                                 <span class="psw">
 
                                     <a href="" style="text-decoration: none " id="loginform-left">Bạn đã quên mật khẩu?</a>
@@ -128,9 +129,9 @@
             </div>
         </div>
     </header>
-   
-        @RenderBody()
-   
+
+    @RenderBody()
+
     <!-- Footer -->
     <footer>
         <div>
@@ -146,7 +147,7 @@
             var msg = $("#pageInitCounter").val();
             if (msg.length != 0) {
                 $("#exampleModal").modal();
-                $("#ERR").html('*'+msg);
+                $("#ERR").html('*' + msg);
             }
         });
         $('.owl-carousel').owlCarousel({

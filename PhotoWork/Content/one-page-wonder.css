@@ -41,9 +41,11 @@ h6 {
     font-weight: 700;
     letter-spacing: 0.1rem;
 }
-.row p{
-    font-size:18px;
+
+.row p {
+    font-size: 18px;
 }
+
 .bg-black {
     background-color: #000 !important;
 }
@@ -51,19 +53,23 @@ h6 {
 .rounded-pill {
     border-radius: 5rem;
 }
-#loginform-left{
-    float:left;
-    font-style:italic;
+
+#loginform-left {
+    float: left;
+    font-style: italic;
 }
+
 #loginform-right {
     float: right;
     font-style: italic;
-    color:red;
+    color: red;
 }
-.or-label{
-    text-align:center;
-    padding-bottom:5px;
+
+.or-label {
+    text-align: center;
+    padding-bottom: 5px;
 }
+
 .category {
     display: inline-block;
 }
@@ -113,71 +119,72 @@ h6 {
         letter-spacing: 0.1rem;
     }
 
-    header{
-        height:150px;
-    }
-header.masthead {
-    position: relative;
-    overflow: hidden;
-    padding-top: calc(9rem );
-    padding-bottom: 7rem;
-    background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: scroll;
-    background-size: cover;
-    width: 100%;
-    height:100px;
+header {
+    height: 150px;
 }
 
-    header.masthead .masthead-content {
-        z-index: 1;
+    header.masthead {
         position: relative;
-        color: white;
+        overflow: hidden;
+        padding-top: calc(9rem );
+        padding-bottom: 7rem;
+        background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+        background-size: cover;
+        width: 100%;
+        height: 100px;
     }
 
-        header.masthead .masthead-content .masthead-heading {
-            font-size: 2rem;
+        header.masthead .masthead-content {
+            z-index: 1;
+            position: relative;
+            color: white;
         }
 
-        header.masthead .masthead-content .masthead-subheading {
-            font-size: 1rem;
+            header.masthead .masthead-content .masthead-heading {
+                font-size: 2rem;
+            }
+
+            header.masthead .masthead-content .masthead-subheading {
+                font-size: 1rem;
+            }
+
+        header.masthead .bg-circle {
+            z-index: 0;
+            position: absolute;
+            border-radius: 100%;
+            background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
         }
 
-    header.masthead .bg-circle {
-        z-index: 0;
-        position: absolute;
-        border-radius: 100%;
-        background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
-    }
+        header.masthead .bg-circle-1 {
+            height: 90rem;
+            width: 90rem;
+            bottom: -55rem;
+            left: -55rem;
+        }
 
-    header.masthead .bg-circle-1 {
-        height: 90rem;
-        width: 90rem;
-        bottom: -55rem;
-        left: -55rem;
-    }
+        header.masthead .bg-circle-2 {
+            height: 50rem;
+            width: 50rem;
+            top: -25rem;
+            right: -25rem;
+        }
 
-    header.masthead .bg-circle-2 {
-        height: 50rem;
-        width: 50rem;
-        top: -25rem;
-        right: -25rem;
-    }
+        header.masthead .bg-circle-3 {
+            height: 20rem;
+            width: 20rem;
+            bottom: -10rem;
+            right: 5%;
+        }
 
-    header.masthead .bg-circle-3 {
-        height: 20rem;
-        width: 20rem;
-        bottom: -10rem;
-        right: 5%;
-    }
-
-    header.masthead .bg-circle-4 {
-        height: 30rem;
-        width: 30rem;
-        top: -5rem;
-        right: 35%;
-    }
+        header.masthead .bg-circle-4 {
+            height: 30rem;
+            width: 30rem;
+            top: -5rem;
+            right: 35%;
+        }
 
 @media (min-width: 992px) {
     header.masthead {
@@ -228,3 +235,38 @@ header.masthead {
     .btn-secondary:focus {
         box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
     }
+
+.service-form {
+    margin-left: 20px;
+}
+
+.service-form {
+    border: 1px solid #a9b0ab;
+    width: 250px;
+    height: 380px;
+    margin-bottom: 50px;
+}
+.service-form .price{
+    float:right;
+    font-weight:bold;
+    font-size:20px;
+}
+    .service-form .img-service {
+        width:100%;
+        height: 200px;
+        padding-bottom: 5px;
+    }
+    .service-form p{
+        margin-bottom:5px;
+    }
+    .service-form .avatar {
+        
+        width: 50px;
+      margin-bottom:5px;
+        border-radius: 50%;
+        margin-right:10px;
+     
+    }
+.photographer-pro {
+    margin-left: 10px;
+}

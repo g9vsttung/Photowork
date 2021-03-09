@@ -38,8 +38,9 @@ namespace PhotoWork.Controllers
             var dataItem = db.AuthenticatedUsers.Where(x => x.Email == Email && x.passwords == Password).FirstOrDefault();
             if (dataItem != null)
             {
+                Session["Account_ERR"] = "";
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 
-                Session["user_name"] = dataItem.FullName;  //set session 
+                Session["ROLE"] = dataItem.Role;  //set session 
                
                 if (dataItem.Role.ToLower() == "admin")
                 {
@@ -61,7 +62,6 @@ namespace PhotoWork.Controllers
             }
 
             Session["Account_ERR"]  = "Sai mật khẩu hoặc email" ;
-
             return RedirectToAction("Index", "Home");
 
         }

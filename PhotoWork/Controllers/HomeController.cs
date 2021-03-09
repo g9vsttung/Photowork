@@ -21,7 +21,7 @@ namespace PhotoWork.Controllers
 
       
         [HttpPost]
-        public ActionResult Login(AuthenticatedUser model, string returnUrl)
+        public ActionResult Login(string returnUrl)
         {
             /*
              1.Check Account
@@ -32,8 +32,10 @@ namespace PhotoWork.Controllers
                     + nếu role là Photographer : return RedirectToAction("Index","Photographers");
                     + nếu role là Admin : return RedirectToAction("Index","Admins");
              */
+            String Email = Request.Form["email"];
+            String Password = Request.Form["password"];
             PhotoWorkEntities db = new PhotoWorkEntities();
-            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == model.Email && x.passwords == model.passwords).FirstOrDefault();
+            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == Email && x.passwords == Password).FirstOrDefault();
             if (dataItem != null)
             {
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 

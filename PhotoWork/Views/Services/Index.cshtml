@@ -5,11 +5,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<br />
+<div class="container">
+    <label>@Session["test"]
+        PHOTOWORK <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
+        @ViewBag.Category <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
+        @ViewBag.Skill
+    </label>
+</div><br />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="service-form">
+                <img src="~/Content/img/01.jpg"  class="img-service"/>
+                <div class="photographer-pro">
+                    <img src="~/Content/img/01.jpg" class="avatar" />
+                    <label>Nguyễn Văn A</label>
+                    <p>Tell something</p>             
+                     <i class="fa fa-star" style="color:#f0b30c">4.2</i><hr />                   
+                </div>
+                <div class="price">
+                    Giá khởi điểm 11000k
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="service-form">
+                <img src="~/Content/img/01.jpg" width="220px" height="200px" />
+                <div class="photographer-pro">
+                    <img src="~/Content/img/01.jpg" width="10px" height="10px" />
+                    <label>Nguyễn Văn A</label>
+                  
+                </div>
+                <div>
+                    4.2<hr />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="service-form">
+                <img src="~/Content/img/01.jpg" width="220px" height="200px" />
+                <div class="photographer-pro">
+                    <img src="~/Content/img/01.jpg" width="10px" height="10px" />
+                    <label>Nguyễn Văn A</label>
+                </div>
+                <div>
+                    4.2<hr />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="service-form">
+                <img src="~/Content/img/01.jpg" width="220px" height="200px" />
+                <div class="photographer-pro">
+                    <img src="~/Content/img/01.jpg" width="10px" height="10px" />
+                    <label>Nguyễn Văn A</label>
+                </div>
+                <div>
+                    4.2<hr />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="service-form">
+                <img src="~/Content/img/01.jpg" width="220px" height="200px" />
+                <div class="photographer-pro">
+                    <img src="~/Content/img/01.jpg" width="10px" height="10px" />
+                    <label>Nguyễn Văn A</label>
+                </div>
+                <div>
+                    4.2<hr />
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+</div>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
 
 <p>
     @Html.ActionLink("Create New", "Create","Services")
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -18,25 +100,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isAvaiable)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isDelete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deleteDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photographer.LinkProject)
-        </th>
-        <th></th>
+       
     </tr>
 
 @foreach (var item in Model) {
@@ -47,30 +111,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isAvaiable)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deleteDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photographer.LinkProject)
-        </td>
-        <td>
+        
+      @*  <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
+        </td>*@
     </tr>
 }
 
 </table>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

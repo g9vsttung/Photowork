@@ -41,6 +41,8 @@ namespace PhotoWork.Controllers
                 Session["Account_ERR"] = "";
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 
                 Session["ROLE"] = dataItem.Role;  //set session 
+
+
                 Session["USERNAME"] = Email;
                 
                 if (dataItem.Role.ToLower() == "admin")
@@ -63,7 +65,6 @@ namespace PhotoWork.Controllers
             }
 
             Session["Account_ERR"]  = "Sai mật khẩu hoặc email" ;
-
             return RedirectToAction("Index", "Home");
 
         }

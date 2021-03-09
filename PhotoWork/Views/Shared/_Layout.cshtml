@@ -33,10 +33,10 @@
                                 Chụp Ảnh
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/Services/Index">Ngoại cảnh</a>
-                                <a class="dropdown-item" href="#">Studio</a>
-                                <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
-                                <a class="dropdown-item" href="#">Nhóm</a>
+                                @Html.ActionLink("Ngoại Cảnh", "Index", "Services",  new { id = "1" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Studio", "Index", "Services", new { id = "2" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services",  new { id = "3" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Nhóm", "Index", "Services", new { id = "4" }, new { @class = "dropdown-item" })
                             </div>
                         </div>
                     </div>
@@ -46,10 +46,10 @@
                                 Quay Phim
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Studio</a>
-                                <a class="dropdown-item" href="#">Ngoại cảnh</a>
-                                <a class="dropdown-item" href="#">Sự kiện/ hội nghị</a>
-                                <a class="dropdown-item" href="#">Theo ngày</a>
+                                @Html.ActionLink("Ngoại Cảnh", "Index", "Services", new { id = "5" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Studio", "Index", "Services", new { id = "6" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services",  new { id = "7" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Nhóm", "Index", "Services",  new { id = "8" }, new { @class = "dropdown-item" })
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,9 @@
                                 Chỉnh Sửa
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Ảnh</a>
-                                <a class="dropdown-item" href="#">Video/Clip</a>
+                                @Html.ActionLink("Ảnh", "Index", "Services",  new { id = "9" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Video/Clip", "Index", "Services", new { id = "10" }, new { @class = "dropdown-item" })
+                                
                             </div>
                         </div>
                     </div>

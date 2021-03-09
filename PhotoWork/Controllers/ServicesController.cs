@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+
+using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -16,10 +18,36 @@ namespace PhotoWork.Controllers
         private PhotoWorkEntities db = new PhotoWorkEntities();
 
         // GET: Services
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index(int id)
         {
-            var services = db.Services.Include(s => s.Photographer);
-            return View(services.ToList());
+            if (Session["ROLE"] == null)
+            {
+                var services = db.Services.Include(s => s.Photographer);
+                return View(services.ToList());
+            }
+        
+            string Role = Session["ROLE"].ToString().ToLower();
+
+            if (Role == "photographer")
+            {
+                return RedirectToAction("", "Photographers");
+            }
+            else if (Role == "client")
+            {
+                return RedirectToAction("", "Client");
+            }
+            else if (Role == "admin")
+            {
+                return RedirectToAction("ErrorAction", "Services");
+            }
+            return RedirectToAction("Details", "Services");
+
+        }
+        public ActionResult ErrorAction()
+        {
+            ViewBag.ERROR = "Bạn không đủ quyền truy cập";
+            return View();
         }
 
         // GET: Services/Details/5
@@ -34,9 +62,15 @@ namespace PhotoWork.Controllers
             {
                 return HttpNotFound();
             }
+            Skill skill = db.Skills.Find(id);
+            ViewBag.Skill = skill.name.ToString();
+            string categoryId = skill.CategoryID.ToString();
+            ViewBag.Category = db.Categories.Where(c => c.CategoryID == categoryId)
+                                                .FirstOrDefault<Category>().name.ToString();
+            Debug.WriteLine(skill.name.ToString());
+            Debug.WriteLine("Hello");
             return View(service);
         }
-
         // GET: Services/Create
         public ActionResult Create()
         {
@@ -60,6 +94,10 @@ namespace PhotoWork.Controllers
                 return RedirectToAction("Index");
             
 
+
+            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username", service.PhotographerID);
+            return View(service);
+
         }
 
         // GET: Services/Edit/5
@@ -70,6 +108,8 @@ namespace PhotoWork.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Service service = db.Services.Find(id);
+
+
             if (service == null)
             {
                 return HttpNotFound();

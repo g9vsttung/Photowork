@@ -41,7 +41,10 @@ namespace PhotoWork.Controllers
                 Session["Account_ERR"] = "";
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 
                 Session["ROLE"] = dataItem.Role;  //set session 
-               
+
+
+                Session["USERNAME"] = Email;
+                
                 if (dataItem.Role.ToLower() == "admin")
                 {
                     return RedirectToAction("Index", "Admins");

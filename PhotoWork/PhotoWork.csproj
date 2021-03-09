@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticatedUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhotographersController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -285,7 +286,15 @@
     <Content Include="Views\Services\Details.cshtml" />
     <Content Include="Views\Services\Edit.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
+
     <Content Include="Views\Services\ErrorAction.cshtml" />
+
+    <Content Include="Views\Photographers\Create.cshtml" />
+    <Content Include="Views\Photographers\Delete.cshtml" />
+    <Content Include="Views\Photographers\Details.cshtml" />
+    <Content Include="Views\Photographers\Edit.cshtml" />
+    <Content Include="Views\Photographers\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

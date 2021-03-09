@@ -12,19 +12,14 @@ namespace PhotoWork.Controllers
 {
     public class HomeController : Controller
     {
-       /* [Authorize(Roles = "Admin")]*/
+        /* [Authorize(Roles = "Admin")]*/
         public ActionResult Index()
         {
             return View();
         }
-    
-       
-       [AllowAnonymous]
-        public ActionResult Login()
-        {
 
-            return View();
-        }
+
+      
         [HttpPost]
         public ActionResult Login(AuthenticatedUser model, string returnUrl)
         {
@@ -38,28 +33,37 @@ namespace PhotoWork.Controllers
                     + nếu role là Admin : return RedirectToAction("Index","Admins");
              */
             PhotoWorkEntities db = new PhotoWorkEntities();
-            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == model.Email && x.passwords == model.passwords).FirstOrDefault();           
+            var dataItem = db.AuthenticatedUsers.Where(x => x.Email == model.Email && x.passwords == model.passwords).FirstOrDefault();
             if (dataItem != null)
             {
-                FormsAuthentication.SetAuthCookie(dataItem.Email, false);
-                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 
+                Session["user_name"] = dataItem.FullName;  //set session 
+               
+                if (dataItem.Role.ToLower() == "admin")
                 {
-                    return Redirect(returnUrl);
+                    return RedirectToAction("Index", "Admins");
+                }
+                else if (dataItem.Role.ToLower() == "photographer")
+                {
+                    return RedirectToAction("Index", "Photographers");
+                }
+                else if (dataItem.Role.ToLower() == "client")
+                {
+                    return RedirectToAction("Index", "Clients");
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    Session["Account_ERR"] = "Xin lỗi, bạn không đủ quyền truy cập ";
+                    return RedirectToAction("Index", "Home");
                 }
+            }
 
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid user/pass");
-                return View();
-            }
+            Session["Account_ERR"]  = "Sai mật khẩu hoặc email" ;
+
+            return RedirectToAction("Index", "Home");
+
         }
-      
+
 
         [Authorize]
         public ActionResult SignOut()

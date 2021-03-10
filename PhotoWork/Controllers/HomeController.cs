@@ -74,5 +74,37 @@ namespace PhotoWork.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+
+        //GET: Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //POSt: Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var check = db.AuthenticatedUsers.Users.FirstOrDefault(s => s.Email == _user.Email);
+                if (check == null)
+                {
+                    _user.Password = GetMD5(_user.Password);
+                    _db.Configuration.ValidateOnSaveEnabled = false;
+                    _db.Users.Add(_user);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.error = "Email already exists";
+                    return View();
+                }
+            }
+            return View();
+        }
+
     }
 }

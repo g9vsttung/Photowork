@@ -18,7 +18,10 @@
             <div class="container">
                 <a class="navbar-brand" href="/Home/Index"><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
                 <div class="navbar-brand" id="navbarResponsive" style="float:right">
-                    @Html.ActionLink("Đăng kí", "Create", "AuthenticatedUsers")
+                   
+                    <a data-toggle="modal" href="#exampleModal1" class="regis">
+                        ĐĂNG KÍ
+                    </a>
                     <a data-toggle="modal" href="#exampleModal" class="regis">
                         ĐĂNG NHẬP
                     </a>
@@ -33,9 +36,9 @@
                                 Chụp Ảnh
                             </button>
                             <div class="dropdown-menu">
-                                @Html.ActionLink("Ngoại Cảnh", "Index", "Services",  new { id = "1" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Ngoại Cảnh", "Index", "Services", new { id = "1" }, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Studio", "Index", "Services", new { id = "2" }, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services",  new { id = "3" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services", new { id = "3" }, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Nhóm", "Index", "Services", new { id = "4" }, new { @class = "dropdown-item" })
                             </div>
                         </div>
@@ -48,8 +51,8 @@
                             <div class="dropdown-menu">
                                 @Html.ActionLink("Ngoại Cảnh", "Index", "Services", new { id = "5" }, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Studio", "Index", "Services", new { id = "6" }, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services",  new { id = "7" }, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Nhóm", "Index", "Services",  new { id = "8" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Sự kiện/ hội nghị", "Index", "Services", new { id = "7" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Nhóm", "Index", "Services", new { id = "8" }, new { @class = "dropdown-item" })
                             </div>
                         </div>
                     </div>
@@ -59,9 +62,9 @@
                                 Chỉnh Sửa
                             </button>
                             <div class="dropdown-menu">
-                                @Html.ActionLink("Ảnh", "Index", "Services",  new { id = "9" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Ảnh", "Index", "Services", new { id = "9" }, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Video/Clip", "Index", "Services", new { id = "10" }, new { @class = "dropdown-item" })
-                                
+
                             </div>
                         </div>
                     </div>
@@ -69,6 +72,7 @@
             </div>
         </nav>
         @Html.Hidden("pageInitCounter", Session["Account_ERR"])
+        @Html.Hidden("pageInitCounter1", Session["ERROR"])
 
         <!-- LOGIN MODAL -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -88,16 +92,16 @@
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Email:</div>                                  
+                                    <div class="control-label col-md-4">Email:</div>
                                     <div class="col-md-12">
-                                        <input class="form-control" type="email" name="email" required/>                                     
+                                        <input class="form-control" type="email" name="email" required />
                                         <span id="email_ERR" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="form-group">                                 
+                                <div class="form-group">
                                     <div class="control-label col-md-4">Mật khẩu: </div>
-                                    <div class="col-md-12">                                      
-                                        <input class="form-control" type="password" name="password" required/>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" name="password" required />
                                         <span id="pasword_ERR" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -129,6 +133,85 @@
                 </div>
             </div>
         </div>
+
+        <!-- REGISTER MODAL -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModal1Label">Đăng kí</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                    {
+
+                        <div class="modal-body">
+                            <div class="container">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Email:</div>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="email" name="email" required />
+                                        <span id="email_ERR" class="text-danger">@Request.QueryString["emailError"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Mật khẩu: </div>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" name="password" required />
+                                        <span id="pasword_ERR" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Xác nhận mật khẩu:</div>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" name="rePassword" required />
+                                        <span id="email_ERR" class="text-danger">@Request.QueryString["confirmError"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Vai trò:</div>
+                                    <div class="col-md-12">
+                                        <select name="role">
+                                            <option>Client</option>
+                                            <option>Photographer</option>
+                                        </select>                                        
+                                        <span id="email_ERR" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Số điện thoại:</div>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="number" name="phone" required />
+                                        <span id="email_ERR" class="text-danger">@Request.QueryString["phoneError"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Họ & Tên:</div>
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="text" name="fullName" required />
+                                        <span id="email_ERR" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span id="ERR" style="color:red;font-style:italic;margin-left:25px;"></span>
+                                </div>
+
+                            </div><br />
+
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Đăng kí</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </header>
 
     @RenderBody()
@@ -149,6 +232,10 @@
             if (msg.length != 0) {
                 $("#exampleModal").modal();
                 $("#ERR").html('*' + msg);
+            }
+            var msg1 = $("#pageInitCounter1").val();
+            if (msg1.length != 0) {
+                $("#exampleModal1").modal();
             }
         });
         $('.owl-carousel').owlCarousel({

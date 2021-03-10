@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create","Services")
+    @Html.ActionLink("Create New", "Create", "Services")
 </p>
 
 <table class="table">
@@ -43,28 +43,28 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ServiceName)
+                @item.ServiceName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @item.Description
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isAvaiable)
+                @item.isAvaiable
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
+                @item.CreateDate
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isDelete)
+                @item.isDelete
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.deleteDate)
+                @item.deleteDate
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rating)
+                @item.Rating
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Photographer.LinkProject)
+                @item.ID
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

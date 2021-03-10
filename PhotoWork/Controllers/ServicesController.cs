@@ -95,9 +95,6 @@ namespace PhotoWork.Controllers
             
 
 
-            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username", service.PhotographerID);
-            return View(service);
-
         }
 
         // GET: Services/Edit/5

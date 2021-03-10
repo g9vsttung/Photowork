@@ -17,7 +17,30 @@ namespace PhotoWork.Controllers
 
         // GET: Photographers
         public ActionResult Index()
-        { List<Service> list = db.Services.SqlQuery("select * from Service where PhotographerID=@id", new SqlParameter("@id", Session["USERNAME"])).ToList<Service>();
+        {
+            string ConnectionString = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            string SQL = "select * from Service where PhotographerID=@id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            List<Service> list = new List<Service>();
+            while (rd.Read())
+            {
+                list.Add(new Service()
+                {
+                    ID = rd["ID"].ToString(),
+                    ServiceName = rd["ServiceName"].ToString(),
+                    Description = rd["Description"].ToString(),
+                    isAvaiable = Boolean.Parse(rd["isAvaiable"].ToString()),
+                    isDelete = Boolean.Parse(rd["isDelete"].ToString()),
+                    CreateDate = DateTime.Parse(rd["CreateDate"].ToString()),
+                    Rating = int.Parse(rd["Rating"].ToString())
+
+                });
+            }
+            // "select * from Service where PhotographerID=@id", new SqlParameter("@id", Session["USERNAME"])).ToList<Service>()
             Session.Add("LIST", list);
             return View(list);
         }

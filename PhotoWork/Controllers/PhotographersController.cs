@@ -13,12 +13,13 @@ namespace PhotoWork.Controllers
 {
     public class PhotographersController : Controller
     {
+        string ConnectionString = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
         private PhotoWorkEntities db = new PhotoWorkEntities();
 
         // GET: Photographers
         public ActionResult Index()
         {
-            string ConnectionString = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
+            
             SqlConnection connection = new SqlConnection(ConnectionString);
             string SQL = "select * from Service where PhotographerID=@id";
             SqlCommand command = new SqlCommand(SQL, connection);
@@ -40,8 +41,10 @@ namespace PhotoWork.Controllers
 
                 });
             }
+            connection.Close();
             // "select * from Service where PhotographerID=@id", new SqlParameter("@id", Session["USERNAME"])).ToList<Service>()
             Session.Add("LIST", list);
+
             return View(list);
         }
 

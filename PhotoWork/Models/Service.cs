@@ -11,8 +11,7 @@ namespace PhotoWork.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Service
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +23,10 @@ namespace PhotoWork.Models
             this.PackageDetails = new HashSet<PackageDetail>();
             this.Skills = new HashSet<Skill>();
         }
-        [Key]
+        //extra 
+        public double StartingPrice { get; set; }
+        public string FullName { get; set; }
+        //
         public string ID { get; set; }
         public string ServiceName { get; set; }
         public string Description { get; set; }

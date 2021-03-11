@@ -1,13 +1,48 @@
-﻿@model PhotoWork.Models.Service
+﻿@model IEnumerable<PhotoWork.Models.Service>
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<br />
+<div class="container">
+    <label>
+        @Session["test"]
+        PHOTOWORK <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
+        @ViewBag.Category <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
+        @ViewBag.Skill
+    </label>
+</div>
+<br />
 
-<div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="service-form">
+                    <img src="~/Content/img/01.jpg" class="img-service" />
+                    <div class="photographer-pro">
+                        <img src="~/Content/img/01.jpg" class="avatar" />
+                        @Html.DisplayFor(modelItem => item.FullName)
+                        <p> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <i class="fa fa-star" style="color:#f0b30c">4.2</i>
+                    </div><hr />
+                    <div class="price">
+                        Giá khởi điểm @Html.DisplayFor(modelItem => item.StartingPrice)k
+                    </div>
+                </div>
+            </div>
+        }
+            
+
+        </div>
+
+</div>
+
+@*<div>
     <h4>Service</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -81,3 +116,4 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+*@

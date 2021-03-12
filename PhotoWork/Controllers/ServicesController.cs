@@ -16,7 +16,7 @@ namespace PhotoWork.Controllers
     public class ServicesController : Controller
     {
         private PhotoWorkEntities db = new PhotoWorkEntities();
-
+        string con = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
         // GET: Services
         [AllowAnonymous]
         public ActionResult Index(int id)
@@ -96,6 +96,11 @@ namespace PhotoWork.Controllers
 
 
         }
+        public ActionResult GoToEdit(string id)
+        {
+            TempData["photoId"] = id;
+            return View("Edit", "Services","");
+        }
 
         // GET: Services/Edit/5
         public ActionResult Edit(string id)
@@ -105,13 +110,11 @@ namespace PhotoWork.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Service service = db.Services.Find(id);
-
-
             if (service == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username", "LinkProject", service.PhotographerID);
+            
             return View(service);
         }
 
@@ -122,13 +125,21 @@ namespace PhotoWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ServiceName,Description,isAvaiable,CreateDate,isDelete,deleteDate,PhotographerID,Rating")] Service service)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(service).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username", "LinkProject", service.PhotographerID);
+            
+            string name = Request.Form["txtName"];  
+            string des = Request.Form["txtDes"];
+            bool avai = Boolean.Parse(Request.Form["cbIsAvaiable"]);
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "update Service set ServiceName=@name, Description=@des,isavaiable=@avai where id=@id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@des", des);
+            command.Parameters.AddWithValue("@avai", avai);
+            command.Parameters.AddWithValue("@id", service.ID);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            
             return View(service);
         }
 

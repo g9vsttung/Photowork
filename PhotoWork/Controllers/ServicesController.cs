@@ -16,17 +16,23 @@ namespace PhotoWork.Controllers
     public class ServicesController : Controller
     {
         private PhotoWorkEntities db = new PhotoWorkEntities();
+
         string con = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
+
+       
+
+
+
         // GET: Services
         [AllowAnonymous]
         public ActionResult Index(int id)
         {
+            Session["SERVICE_ID"] = id;
             if (Session["ROLE"] == null)
             {
-                var services = db.Services.Include(s => s.Photographer);
-                return View(services.ToList());
+                return RedirectToAction("Details", "Services");
             }
-        
+
             string Role = Session["ROLE"].ToString().ToLower();
 
             if (Role == "photographer")
@@ -41,8 +47,10 @@ namespace PhotoWork.Controllers
             {
                 return RedirectToAction("ErrorAction", "Services");
             }
-            return RedirectToAction("Details", "Services");
-
+            else
+            {
+               return  RedirectToAction("Details", "Services");
+            }            
         }
         public ActionResult ErrorAction()
         {
@@ -51,25 +59,42 @@ namespace PhotoWork.Controllers
         }
 
         // GET: Services/Details/5
+
         public ActionResult Details(string id)
         {
-            if (id == null)
+            
+            if (id == null) id = Session["SERVICE_ID"].ToString();
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice"+
+                            " from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p "+
+                            "where ss.ServiceID = s.ID and ss.SkillID = @id and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0 and p.PackageID = 1 and p.ServiceID = s.ID";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            List<Service> list = new List<Service>();
+            while (rd.Read())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                list.Add(new Service()
+                {
+                    ID = rd["ID"].ToString(),
+                    ServiceName = rd["ServiceName"].ToString(),
+                    Description = rd["Description"].ToString(),
+                    Rating = int.Parse(rd["Rating"].ToString()),
+                    FullName = rd["FullName"].ToString(),
+                    PhotographerID = rd["PhotographerID"].ToString(),
+                    StartingPrice = double.Parse(rd["startingPrice"].ToString())
+
+                });
             }
-            Service service = db.Services.Find(id);
-            if (service == null)
-            {
-                return HttpNotFound();
-            }
+            connection.Close();
             Skill skill = db.Skills.Find(id);
-            ViewBag.Skill = skill.name.ToString();
-            string categoryId = skill.CategoryID.ToString();
-            ViewBag.Category = db.Categories.Where(c => c.CategoryID == categoryId)
-                                                .FirstOrDefault<Category>().name.ToString();
-            Debug.WriteLine(skill.name.ToString());
-            Debug.WriteLine("Hello");
-            return View(service);
+            Session.Add("LIST", list);         
+            ViewBag.Skill = skill.name;
+            ViewBag.Category = db.Categories.Where(c => c.CategoryID == skill.CategoryID)
+                                               .FirstOrDefault<Category>().name.ToString();
+           
+            return View(list.ToList());
         }
         // GET: Services/Create
         public ActionResult Create()
@@ -88,12 +113,8 @@ namespace PhotoWork.Controllers
             string id = Request.Form["txtId"];
             string name = Request.Form["txtName"];
             string des = Request.Form["txtDes"];
-
-                db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id),new SqlParameter("@name",name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
-                
-                return RedirectToAction("Index");
-            
-
+            db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id), new SqlParameter("@name", name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
+            return RedirectToAction("Index");
 
         }
         public ActionResult GoToEdit(string id)

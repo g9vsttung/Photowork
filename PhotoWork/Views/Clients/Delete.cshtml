@@ -1,0 +1,65 @@
+﻿@model PhotoWork.Models.Client
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.timeReported)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timeReported)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkSocialmedia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkSocialmedia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.logFileLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.logFileLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.passwords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthenticatedUser.passwords)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -2,6 +2,7 @@
 using PhotoWork.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,10 +15,29 @@ namespace PhotoWork.Controllers
 {
     public class HomeController : Controller
     {
-        string con = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
+        string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         /* [Authorize(Roles = "Admin")]*/
         public ActionResult Index()
         {
+            if (Session["ROLE"] == null)
+            {
+                return View();
+            }
+
+            string Role = Session["ROLE"].ToString().ToLower();
+        
+            if (Role == "admin")
+            {
+                return RedirectToAction("Index", "Admins");
+            }
+            else if (Role == "photographer")
+            {
+                return RedirectToAction("Index", "Photographers");
+            }
+            else if (Role == "client")
+            {
+                return RedirectToAction("Index", "Clients");
+            }
             return View();
         }
 
@@ -36,7 +56,7 @@ namespace PhotoWork.Controllers
             if (!Regex.IsMatch(email, "[a-zA-Z]{1}[a-zA-Z0-9]{0,15}@gmail\\.com"))
             {
                 check = false;
-                error.email= "Email phải thuộc dạng [tên]@gmail.com";
+                error.email = "Email phải thuộc dạng [tên]@gmail.com";
             }
 
             if (!password.Equals(rePassword))
@@ -55,32 +75,32 @@ namespace PhotoWork.Controllers
             if (check)
             {
                 SqlConnection connection = new SqlConnection(con);
-            string SQL = "insert into AuthenticatedUser(email, passwords, role, phoneNumber, fullName,isActive,isBanned,Avatar) values(@email,@pass,@role,@phone,@name,1,0,'1')";
-            SqlCommand command = new SqlCommand(SQL,connection);
-            command.Parameters.AddWithValue("@email", email);
-            command.Parameters.AddWithValue("@pass", password);
-            command.Parameters.AddWithValue("@role", role);
-            command.Parameters.AddWithValue("@phone", phone);
-            command.Parameters.AddWithValue("@name", fullName);
-            connection.Open();
-            int n=command.ExecuteNonQuery();
-            connection.Close();
-             
-            SQL = "insert into Photographer(username) values(@email)";
-            command = new SqlCommand(SQL, connection);
-            command.Parameters.AddWithValue("@email", email);
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+                string SQL = "insert into AuthenticatedUser(email, passwords, role, phoneNumber, fullName,isActive,isBanned,Avatar) values(@email,@pass,@role,@phone,@name,1,0,'1')";
+                SqlCommand command = new SqlCommand(SQL, connection);
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@pass", password);
+                command.Parameters.AddWithValue("@role", role);
+                command.Parameters.AddWithValue("@phone", phone);
+                command.Parameters.AddWithValue("@name", fullName);
+                connection.Open();
+                int n = command.ExecuteNonQuery();
+                connection.Close();
+
+                SQL = "insert into Photographer(username) values(@email)";
+                command = new SqlCommand(SQL, connection);
+                command.Parameters.AddWithValue("@email", email);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 Session.Add("ERROR", "have error");
-                
+
                 return RedirectToAction("Index", "Home", new { id = 1, emailError = error.email, confirmError = error.password, phoneError = error.phone });
             }
-                
+
         }
         [HttpPost]
         public ActionResult Login(string returnUrl)
@@ -101,13 +121,13 @@ namespace PhotoWork.Controllers
             var dataItem = db.AuthenticatedUsers.Where(x => x.Email == Email && x.passwords == Password).FirstOrDefault();
             if (dataItem != null)
             {
-                
+
                 FormsAuthentication.SetAuthCookie(dataItem.Email, false);  //set Cookie 
                 Session["ROLE"] = dataItem.Role;  //set session 
 
 
-                Session["USERNAME"] = Email;
-                
+                Session["USERNAME"] = dataItem.Email;
+
                 if (dataItem.Role.ToLower() == "admin")
                 {
                     return RedirectToAction("Index", "Admins");
@@ -127,7 +147,7 @@ namespace PhotoWork.Controllers
                 }
             }
 
-            Session["Account_ERR"]  = "Sai mật khẩu hoặc email" ;
+            Session["Account_ERR"] = "Sai mật khẩu hoặc email";
             return RedirectToAction("Index", "Home");
 
         }
@@ -137,7 +157,8 @@ namespace PhotoWork.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Home");
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
 
     }

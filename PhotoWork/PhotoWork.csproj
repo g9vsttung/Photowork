@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticatedUsersController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotographersController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -293,6 +294,13 @@
     <Content Include="Views\Photographers\Details.cshtml" />
     <Content Include="Views\Photographers\Edit.cshtml" />
     <Content Include="Views\Photographers\Index.cshtml" />
+    <Content Include="Views\Shared\_PhotographerLayout.cshtml" />
+    <Content Include="Views\Shared\_ClientLayout.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

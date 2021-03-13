@@ -27,8 +27,14 @@ footer {
     bottom: 0;
     height: 140px;
     width: 100%;
+} 
+.search-area input{
+    border-radius:6px;
+    width:80%;
 }
-
+.search-area button {
+    margin-bottom:4px;
+}
 h1,
 h2,
 h3,
@@ -105,7 +111,10 @@ h6 {
     font-size: 1.2rem;
     font-weight: normal;
 }
-
+.dropdown-item{
+    font-weight:normal;
+    font-size:15px;
+}
 .navbar-custom {
     padding-top: 1rem;
     background-color: white;

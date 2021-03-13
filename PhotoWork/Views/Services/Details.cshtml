@@ -2,7 +2,14 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["ROLE"] == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else if (String.Compare(Session["ROLE"].ToString(), "client") == 0)
+    {
+        Layout = "~/Views/Shared/_ClientLayout.cshtml";
+    }
 }
 
 <br />

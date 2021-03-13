@@ -1,0 +1,59 @@
+﻿@model PhotoWork.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.timeReported)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timeReported)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkSocialmedia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkSocialmedia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.logFileLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.logFileLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.passwords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthenticatedUser.passwords)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Username }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

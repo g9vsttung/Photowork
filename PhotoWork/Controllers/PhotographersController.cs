@@ -38,7 +38,7 @@ namespace PhotoWork.Controllers
                     Description = rd["Description"].ToString(),
                     isAvaiable = Boolean.Parse(rd["isAvaiable"].ToString()),
                     isDelete = Boolean.Parse(rd["isDelete"].ToString()),
-                    CreateDate = Convert.ToDateTime(rd["CreateDate"].ToString(), new CultureInfo("en-US")),
+                    CreateDate = DateTime.Parse(rd["CreateDate"].ToString()),
                     Rating = int.Parse(rd["Rating"].ToString())
                     //.
                 });

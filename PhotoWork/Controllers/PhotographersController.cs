@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,14 +15,14 @@ namespace PhotoWork.Controllers
 {
     public class PhotographersController : Controller
     {
-        string ConnectionString = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
+        string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         private PhotoWorkEntities db = new PhotoWorkEntities();
 
         // GET: Photographers
         public ActionResult Index()
         {
             
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlConnection connection = new SqlConnection(con);
             string SQL = "select * from Service where PhotographerID=@id";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
@@ -38,7 +40,7 @@ namespace PhotoWork.Controllers
                     isDelete = Boolean.Parse(rd["isDelete"].ToString()),
                     CreateDate = DateTime.Parse(rd["CreateDate"].ToString()),
                     Rating = int.Parse(rd["Rating"].ToString())
-
+                    //.
                 });
             }
             connection.Close();

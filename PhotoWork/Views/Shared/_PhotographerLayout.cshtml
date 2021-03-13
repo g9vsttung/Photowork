@@ -1,0 +1,57 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Dashboard</title>
+    <link rel="shortcut icon" type="image/png" href="~/Content/img/Logo_WhiteBackGroud.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/owl")  <!--Owl Carousel-->
+    @Scripts.Render("~/bundles/jquery")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header style="height:90px;">
+        <!-- Navigation -->
+        <nav class="fixed-top navbar-custom navbar-fixed-top top" style="height:70px;">
+            <div class="container">
+                <a class="navbar-brand" href="/Home/Index"><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
+                <div class="navbar-brand" id="navbarResponsive" style="float:right">
+                    <a class="regis" data-toggle="dropdown">
+                        TÀI KHOẢN
+                    </a>
+                    <div class="dropdown-menu">                     
+                        <a href="#" class="dropdown-item">Trang cá nhân</a>
+                        <a href="Home/SignOut" class="dropdown-item">Đăng xuất</a>
+
+                    </div>
+                </div>
+            </div>
+       
+           
+        </nav>
+        @Html.Hidden("pageInitCounter", Session["Account_ERR"])
+        @Html.Hidden("pageInitCounter1", Session["ERROR"])
+      
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div>
+            <h3>Copyright &copy; 2021 PhotoWork.com</h3>
+            <h5>Liên hệ: 0123-456-789</h5>
+            <h5>Email:demoweb@gmail.com</h5>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>

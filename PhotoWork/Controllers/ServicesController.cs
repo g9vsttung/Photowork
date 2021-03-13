@@ -10,19 +10,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PhotoWork.Models;
+using System.Configuration;
 
 namespace PhotoWork.Controllers
 {
     public class ServicesController : Controller
     {
         private PhotoWorkEntities db = new PhotoWorkEntities();
-
-        string con = @"server=SE140240\SQLEXPRESS;database=PhotoWork;uid=sa;pwd=123456";
-
-       
-
-
-
+        string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         // GET: Services
         [AllowAnonymous]
         public ActionResult Index(int id)
@@ -30,26 +25,17 @@ namespace PhotoWork.Controllers
             Session["SERVICE_ID"] = id;
             if (Session["ROLE"] == null)
             {
-                return RedirectToAction("Details", "Services");
+                return RedirectToAction("Details", "Services", new { id = id });
             }
 
-            string Role = Session["ROLE"].ToString().ToLower();
-
-            if (Role == "photographer")
-            {
-                return RedirectToAction("", "Photographers");
-            }
-            else if (Role == "client")
-            {
-                return RedirectToAction("", "Client");
-            }
-            else if (Role == "admin")
+            string Role = Session["ROLE"].ToString().ToLower();          
+           if (Role == "admin" || Role == "photographer")
             {
                 return RedirectToAction("ErrorAction", "Services");
             }
             else
             {
-               return  RedirectToAction("Details", "Services");
+                return RedirectToAction("Details", "Services", new { id=id});
             }            
         }
         public ActionResult ErrorAction()
@@ -63,7 +49,7 @@ namespace PhotoWork.Controllers
         public ActionResult Details(string id)
         {
             
-            if (id == null) id = Session["SERVICE_ID"].ToString();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SqlConnection connection = new SqlConnection(con);
             string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice"+
                             " from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p "+

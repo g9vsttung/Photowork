@@ -1,0 +1,119 @@
+﻿@model PhotoWork.Models.Invoice
+@{
+    var report = Model.FileReportLocation;
+    var contract = Model.Contract;
+}
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div>
+    <h2>Chi tiết của hóa đơn  #@Html.DisplayFor(model => model.ID)</h2>   <hr />
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-left">
+                @Html.DisplayNameFor(model => model.SubmitDate)
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-right">
+                @Html.DisplayFor(model => model.SubmitDate)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-left">
+                @Html.DisplayNameFor(model => model.PhotographerID)
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-right">
+                <a href="Admins/ViewProfile/@Model.PhotographerID">@Html.DisplayFor(model => model.PhotographerID)</a> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-left">
+                @Html.DisplayNameFor(model => model.ClientID)
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-right">
+                <a href="Admins/ViewProfile/@Model.ClientID">  @Html.DisplayFor(model => model.ClientID)</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-left">
+                @Html.DisplayNameFor(model => model.FileReportLocation)
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-right">
+                <a href="~/storage/report/@report" download> @report </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-left">
+                @Html.DisplayNameFor(model => model.Contract)
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 invoice-right">
+                <a href="~/storage/contract/@contract" download> @contract </a>
+            </div>
+        </div><br />
+        <label style="color:red">@TempData["status"]</label>
+        <br />
+        @Html.ActionLink("Quay về trang chủ", "", "Admins", new { @class = "btn btn-dark" })
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal"> Tạm Khóa Người Dùng</button>
+
+        @Html.ActionLink("Đã Giải Quyết", "", "Admins", new { @class = "btn btn-success" })
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Khóa tài khoản người dùng</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    @using (Html.BeginForm("BanUser", "Admins", new { id = Model.ID }, FormMethod.Post))
+                    {
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Vai trò người dùng </th>
+                                        <th>Email</th>
+                                        <th>Chặn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Photographer</td>
+                                        <td>@Model.PhotographerID</td>
+                                        <td>
+                                            <input type="checkbox" name="user" value="@Model.PhotographerID" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Khách hàng</td>
+                                        <td>@Model.ClientID</td>
+                                        <td>
+                                            <input type="checkbox" name="user" value="@Model.ClientID">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-success">Đồng ý</button>
+                        </div>
+                    }
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>

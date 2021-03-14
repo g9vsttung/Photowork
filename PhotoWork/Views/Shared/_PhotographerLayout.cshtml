@@ -24,7 +24,7 @@
                         TÀI KHOẢN
                     </a>
                     <div class="dropdown-menu">                     
-                        <a href="#" class="dropdown-item">Trang cá nhân</a>
+                        <a href="" class="dropdown-item">Trang cá nhân</a>
                         <a href="Home/SignOut" class="dropdown-item">Đăng xuất</a>
 
                     </div>
@@ -33,9 +33,6 @@
        
            
         </nav>
-        @Html.Hidden("pageInitCounter", Session["Account_ERR"])
-        @Html.Hidden("pageInitCounter1", Session["ERROR"])
-      
     </header>
     <main>
         @RenderBody()

@@ -23,10 +23,7 @@ namespace PhotoWork.Models
             this.PackageDetails = new HashSet<PackageDetail>();
             this.Skills = new HashSet<Skill>();
         }
-        //extra 
-        public double StartingPrice { get; set; }
-        public string FullName { get; set; }
-        //
+    
         public string ID { get; set; }
         public string ServiceName { get; set; }
         public string Description { get; set; }
@@ -36,7 +33,10 @@ namespace PhotoWork.Models
         public Nullable<System.DateTime> deleteDate { get; set; }
         public string PhotographerID { get; set; }
         public Nullable<double> Rating { get; set; }
-    
+        //Extra 
+        public string FullName { get; set; }
+        public double StartingPrice { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChattingRecord> ChattingRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

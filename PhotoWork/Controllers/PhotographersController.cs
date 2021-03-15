@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PhotoWork.DTO;
 using PhotoWork.Models;
 
 namespace PhotoWork.Controllers
@@ -61,6 +62,24 @@ namespace PhotoWork.Controllers
             {
                 return HttpNotFound();
             }
+            return View(photographer);
+        }
+        public ActionResult GoToProfile(string id)
+        {
+            PhotographerProfile profile = new PhotographerProfile();
+            AuthenticatedUser photographer = db.AuthenticatedUsers.Find(Session["USERNAME"].ToString());
+            SqlConnection connection = new SqlConnection(con);
+            connection.Open();
+            string SQL = "select Username,phoneNumber,FullName,TotalProjectDone,Bio,LinkProject, LinkSocialMedia,CurrentMoney from Photographer p, AuthenticatedUser a  where a.email = p.username and p.username = @id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                profile = new PhotographerProfile(reader["Username"].ToString(),reader["phoneNumber"].ToString(),reader["FullName"].ToString(),int.Parse(reader["TotalProjectDone"].ToString()),reader["Bio"].ToString(),reader["LinkProject"].ToString(),reader["LinkSocialMedia"].ToString(),float.Parse(reader["CurrentMoney"].ToString()));
+            }
+            connection.Close();
             return View(photographer);
         }
 

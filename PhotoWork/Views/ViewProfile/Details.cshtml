@@ -1,0 +1,98 @@
+﻿@model PhotoWork.Models.AuthenticatedUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AuthenticatedUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.passwords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passwords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avatar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isBanned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isBanned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.logFileLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.logFileLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.LinkSocialmedia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.LinkSocialmedia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photographer.LinkProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photographer.LinkProject)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Email }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

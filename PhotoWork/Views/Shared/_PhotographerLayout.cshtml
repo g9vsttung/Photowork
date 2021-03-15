@@ -24,7 +24,7 @@
                         TÀI KHOẢN
                     </a>
                     <div class="dropdown-menu">                     
-                        <a href="" class="dropdown-item">Trang cá nhân</a>
+                        <a href="@Url.Action("GoToProfile","Photographers",new { id=Session["USERNAME"].ToString()})" class="dropdown-item">Trang cá nhân</a>
                         <a href="Home/SignOut" class="dropdown-item">Đăng xuất</a>
 
                     </div>

@@ -64,9 +64,8 @@
                 @item.ID
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit","Services", new { id = item.ID },"") |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Chỉnh sửa", "Edit","Services", new { id = item.ID },"") |
+                @Html.ActionLink("Xóa", "Delete","Services", new { id = item.ID },"")
             </td>
         </tr>
     }

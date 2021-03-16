@@ -85,7 +85,7 @@ namespace PhotoWork.Controllers
         // GET: Services/Create
         public ActionResult Create()
         {
-            ViewBag.PhotographerID = new SelectList(db.Photographers, "Username");
+            
             return View();
         }
 
@@ -93,14 +93,27 @@ namespace PhotoWork.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Create(string returnUrl)
         {
             string id = Request.Form["txtId"];
             string name = Request.Form["txtName"];
             string des = Request.Form["txtDes"];
-            db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id), new SqlParameter("@name", name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
-            return RedirectToAction("Index");
+            //db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id), new SqlParameter("@name", name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID,Rating) values(@id,@name,@des,1,@createDate,0,@photo,0)";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@des", des);
+            command.Parameters.AddWithValue("@photo", Session["USERNAME"].ToString());
+            command.Parameters.AddWithValue("@id", id);
+            DateTime date = DateTime.Now;
+            string now = date.ToString("yyyy-MM-dd");
+            command.Parameters.AddWithValue("@createDate", now);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Index", "Photographers");
 
         }
         public ActionResult GoToEdit(string id)
@@ -147,7 +160,7 @@ namespace PhotoWork.Controllers
             command.ExecuteNonQuery();
             connection.Close();
             
-            return View(service);
+            return RedirectToAction("Index", "Photographers");
         }
 
         // GET: Services/Delete/5
@@ -173,7 +186,7 @@ namespace PhotoWork.Controllers
             Service service = db.Services.Find(id);
             db.Services.Remove(service);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Photographers");
         }
 
         protected override void Dispose(bool disposing)

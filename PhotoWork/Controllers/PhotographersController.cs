@@ -49,7 +49,14 @@ namespace PhotoWork.Controllers
 
             return View(list);
         }
-
+        public ActionResult ViewProfile()
+        {
+            string id = Session["USERNAME"].ToString();
+  
+            Photographer pho = db.Photographers.Find(id);
+            pho.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
+            return View(pho);
+        }
         // GET: Photographers/Details/5
         public ActionResult Details(string id)
         {
@@ -64,7 +71,7 @@ namespace PhotoWork.Controllers
             }
             return View(photographer);
         }
-        public ActionResult GoToProfile(string id)
+       /* public ActionResult ViewProfile(string id)
         {
             PhotographerProfile profile = new PhotographerProfile();
             AuthenticatedUser photographer = db.AuthenticatedUsers.Find(Session["USERNAME"].ToString());
@@ -82,7 +89,7 @@ namespace PhotoWork.Controllers
             connection.Close();
             return View(photographer);
         }
-
+*/
         // GET: Photographers/Create
         public ActionResult Create()
         {

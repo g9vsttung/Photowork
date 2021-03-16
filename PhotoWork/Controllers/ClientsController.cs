@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,7 +20,14 @@ namespace PhotoWork.Controllers
         {
             return View();
         }
-
+        public ActionResult ViewProfile()
+        {
+            string id = Session["USERNAME"].ToString();
+            Debug.WriteLine(id);
+            Client client = db.Clients.Find(id);
+            client.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
+            return View(client);
+        }
         // GET: Clients/Details/5
         public ActionResult Details(string id)
         {

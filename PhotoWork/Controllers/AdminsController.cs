@@ -19,11 +19,25 @@ namespace PhotoWork.Controllers
         // GET: Admins
         public ActionResult Index() //Find report (condition: fileLocation not null and process not "Done")
         {
-            var reports = db.Invoices.Where(s => (s.FileReportLocation != "" && s.process != "Done"));
+            var reports = db.Invoices.Where(s => (s.FileReportLocation != "" && s.process != "Done" && s.process !="Solved"));
             //var admins = db.Admins.Include(a => a.AuthenticatedUser);
             return View(reports.ToList());
         }
-
+        public ActionResult SolveReport(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Invoice i = db.Invoices.Find(id);
+            i.process = "Solved";
+            if (ModelState.IsValid)
+            {
+                db.Entry(i).State = EntityState.Modified;
+                db.SaveChanges();             
+            }
+            return RedirectToAction("Index");
+        }
         // GET: Admins/Details/5
         public ActionResult Details(string id) //View detail of the report 
         {
@@ -32,11 +46,14 @@ namespace PhotoWork.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Invoice inv = db.Invoices.Find(id);
-            inv.PhotographerID = db.Services.Where(s => s.ID == inv.ServiceID).FirstOrDefault().PhotographerID;
+          
             if (inv == null)
             {
                 return HttpNotFound();
             }
+            inv.PhotographerID = db.Services.Where(s => s.ID == inv.ServiceID).FirstOrDefault().PhotographerID;
+            inv.isBannedClient = (bool)db.AuthenticatedUsers.Where(s => s.Email == inv.ClientID).FirstOrDefault().isBanned;
+            inv.isBannedPhotographer = (bool)db.AuthenticatedUsers.Where(s => s.Email == inv.PhotographerID).FirstOrDefault().isBanned;
             return View(inv);
         }
         [HttpPost]

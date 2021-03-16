@@ -266,6 +266,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="storage\avatar\man-icon-person-vector-worker-162495520.jpg" />
     <Content Include="storage\contract\a.txt" />
     <Content Include="storage\report\a.txt" />
     <Content Include="Web.config" />
@@ -313,6 +314,8 @@
     <Content Include="Views\Admins\Edit.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Photographers\GoToProfile.cshtml" />
+    <Content Include="Views\Clients\ViewProfile.cshtml" />
+    <Content Include="Views\Photographers\ViewProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

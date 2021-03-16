@@ -39,8 +39,8 @@ namespace PhotoWork.Controllers
                     isAvaiable = Boolean.Parse(rd["isAvaiable"].ToString()),
                     isDelete = Boolean.Parse(rd["isDelete"].ToString()),
                     CreateDate = DateTime.Parse(rd["CreateDate"].ToString()),
-                    Rating = int.Parse(rd["Rating"].ToString())
-                    //.
+                    Rating = double.Parse(rd["Rating"].ToString())
+                    
                 });
             }
             connection.Close();

@@ -40,9 +40,18 @@ namespace PhotoWork.Models
         public Nullable<int> Rating { get; set; }
         [DisplayName("File Tố Cáo")]
         public string FileReportLocation { get; set; }
+        //Extra
         [DisplayName("Email Photographer")]
         public string PhotographerID { get; set; }
+        public bool isBannedPhotographer { get; set; }
+
+        public bool isBannedClient { get; set; }
+
+
+
         public virtual Client Client { get; set; }
         public virtual Service Service { get; set; }
+
+
     }
 }

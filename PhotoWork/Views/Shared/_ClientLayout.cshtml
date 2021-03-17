@@ -19,20 +19,26 @@
         <nav class="fixed-top navbar-custom navbar-fixed-top top">
             <div class="container">
                 <a class="navbar-brand" href="/Home/Index"><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
-                <div class="navbar-brand" id="navbarResponsive" style="float:right">
-                    <div class="navbar-brand">
-                        <div class="search-area">
-                            <input type="text" required style="width:75%;" />
-                            <button class="btn btn-secondary">Search</button>
+                <div class="navbar-brand">
+                    <div class="search-area">
+                        @using (Html.BeginForm("Search", "Services", FormMethod.Post))
+                        {
+                            <select name="searchBy">
+                                <option value="Service">Dịch Vụ</option>
+                                <option value="Photographer">Photographer</option>
+                            </select>
+                            <input type="text" name="content" required placeholder="Tìm kiếm photographer/dịch vụ" />
+                            <button class="btn btn-secondary" type="submit">Search</button>
+                        }
                         </div>
-                    </div>
+                </div>
+                <div class="navbar-brand" id="navbarResponsive" style="float:right">
                     <a class="regis" data-toggle="dropdown">
                         TÀI KHOẢN
                     </a>
                     <div class="dropdown-menu">
                         <a href="Clients/ViewProfile" class="dropdown-item">Trang cá nhân</a>
                         <a href="/Home/SignOut" class="dropdown-item">Đăng xuất</a>
-
                     </div>
                 </div>
             </div>

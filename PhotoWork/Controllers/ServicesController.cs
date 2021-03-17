@@ -11,6 +11,8 @@ using System.Web;
 using System.Web.Mvc;
 using PhotoWork.Models;
 using System.Configuration;
+using System.Text;
+using System.Globalization;
 
 namespace PhotoWork.Controllers
 {
@@ -28,31 +30,116 @@ namespace PhotoWork.Controllers
                 return RedirectToAction("Details", "Services", new { id = id });
             }
 
-            string Role = Session["ROLE"].ToString().ToLower();          
-           if (Role == "admin" || Role == "photographer")
+            string Role = Session["ROLE"].ToString().ToLower();
+            if (Role == "admin" || Role == "photographer")
             {
                 return RedirectToAction("ErrorAction", "Services");
             }
             else
             {
-                return RedirectToAction("Details", "Services", new { id=id});
-            }            
+                return RedirectToAction("Details", "Services", new { id = id });
+            }
         }
         public ActionResult ErrorAction()
         {
             ViewBag.ERROR = "Bạn không đủ quyền truy cập";
             return View();
         }
+        //POST SEARCH
+        [HttpPost]
+        public ActionResult Search()
+        {
+            string searchBy = Request.Form["searchBy"];
+            string content = Request.Form["content"];
+            if (searchBy == "Photographer")
+            {
+                return RedirectToAction("SearchByPhotographer", new { content = content });
+            }
+            else if (searchBy == "Service")
+            {
+                return RedirectToAction("SearchByService", new { content = content });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        public ActionResult SearchByPhotographer(string content)
+        {
+            if (content == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "select FullName,Bio,Avatar,Username " +
+                            "from AuthenticatedUser A, Photographer p " +
+                            "where dbo.ufn_removeMark(FullName) like @content and Username=Email";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@content", "%" + nonAccentVietnamese(content) + "%");
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            List<Photographer> list = new List<Photographer>();
+            while (rd.Read())
+            {
+                list.Add(new Photographer()
+                {
+                    Username = rd["Username"].ToString(),
+                    Bio = rd["Bio"].ToString(),
+                    Avatar = rd["Avatar"].ToString(),
+                    FullName = rd["FullName"].ToString()
+                }); 
+            }
+            connection.Close();
+            return View(list);
+        }
+        private string nonAccentVietnamese(string str)
+        {
+            var normalizedString = str.Normalize(System.Text.NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
 
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+        public ActionResult SearchByService(string content)
+        {
+            if (content == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice " +
+                        "from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p " +
+                        "where ss.ServiceID = s.ID and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0 and p.PackageID = 1 " +
+                       " and p.ServiceID = s.ID and dbo.ufn_removeMark(serviceName) like @content";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@content", "%" + nonAccentVietnamese(content) + "%");
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            List<Service> list = new List<Service>();
+            while (rd.Read())
+            {
+                list.Add(new Service()
+                {
+                    ID = rd["ID"].ToString(),
+                    ServiceName = rd["ServiceName"].ToString(),
+                    Description = rd["Description"].ToString(),
+                    Rating = int.Parse(rd["Rating"].ToString()),
+                    FullName = rd["FullName"].ToString(),
+                    PhotographerID = rd["PhotographerID"].ToString(),
+                    StartingPrice = double.Parse(rd["startingPrice"].ToString())
+
+                });
+            }
+            connection.Close();
+
+            return View(list);
+        }
         // GET: Services/Details/5
-
         public ActionResult Details(string id)
         {
-            
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice"+
-                            " from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p "+
+            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice" +
+                            " from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p " +
                             "where ss.ServiceID = s.ID and ss.SkillID = @id and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0 and p.PackageID = 1 and p.ServiceID = s.ID";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@id", id);
@@ -75,17 +162,17 @@ namespace PhotoWork.Controllers
             }
             connection.Close();
             Skill skill = db.Skills.Find(id);
-            Session.Add("LIST", list);         
+            Session.Add("LIST", list);
             ViewBag.Skill = skill.name;
             ViewBag.Category = db.Categories.Where(c => c.CategoryID == skill.CategoryID)
                                                .FirstOrDefault<Category>().name.ToString();
-           
+
             return View(list.ToList());
         }
         // GET: Services/Create
         public ActionResult Create()
         {
-            
+
             return View();
         }
 
@@ -93,7 +180,7 @@ namespace PhotoWork.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+
         public ActionResult Create(string returnUrl)
         {
             string id = Request.Form["txtId"];
@@ -119,7 +206,7 @@ namespace PhotoWork.Controllers
         public ActionResult GoToEdit(string id)
         {
             TempData["photoId"] = id;
-            return View("Edit", "Services","");
+            return View("Edit", "Services", "");
         }
 
         // GET: Services/Edit/5
@@ -134,7 +221,7 @@ namespace PhotoWork.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(service);
         }
 
@@ -145,8 +232,8 @@ namespace PhotoWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ServiceName,Description,isAvaiable,CreateDate,isDelete,deleteDate,PhotographerID,Rating")] Service service)
         {
-            
-            string name = Request.Form["txtName"];  
+
+            string name = Request.Form["txtName"];
             string des = Request.Form["txtDes"];
             bool avai = Boolean.Parse(Request.Form["cbIsAvaiable"]);
             SqlConnection connection = new SqlConnection(con);
@@ -159,7 +246,7 @@ namespace PhotoWork.Controllers
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
-            
+
             return RedirectToAction("Index", "Photographers");
         }
 
@@ -186,7 +273,7 @@ namespace PhotoWork.Controllers
             Service service = db.Services.Find(id);
             db.Services.Remove(service);
             db.SaveChanges();
-            return RedirectToAction("Index","Photographers");
+            return RedirectToAction("Index", "Photographers");
         }
 
         protected override void Dispose(bool disposing)

@@ -13,7 +13,7 @@ namespace PhotoWork.Controllers
 {
     public class AdminsController : Controller
     {
-
+       
         private PhotoWorkEntities db = new PhotoWorkEntities();
 
         // GET: Admins

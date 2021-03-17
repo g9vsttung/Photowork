@@ -12,57 +12,72 @@
     <img src="~/storage/avatar/@Model.AuthenticatedUser.Avatar" alt="" width="150" height="150" style="margin-left:43%;border-radius:50%">
     <div class="row">
         <div class="col" style="text-align:right">
-            @Html.DisplayNameFor(model => model.AuthenticatedUser.FullName)
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.Email)
         </div>
         <div class="col" style="text-align:left">
+            @Model.AuthenticatedUser.Email
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="text-align:right">
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.FullName)
+        </div>
+        <div class="col-md-6" style="text-align:left">
             @Html.DisplayFor(model => model.AuthenticatedUser.FullName)
         </div>
     </div>
 
     <div class="row">
-        <div class="col" style="text-align:right">
+        <div class="col-md-6" style="text-align:right">
             @Html.DisplayNameFor(model => model.AuthenticatedUser.phoneNumber)
         </div>
-        <div class="col" style="text-align:left">
+        <div class="col-md-6" style="text-align:left">
             @Html.DisplayFor(model => model.AuthenticatedUser.phoneNumber)
         </div>
     </div>
+   
     <div class="row">
-        <div class="col" style="text-align:right">
-            @Html.DisplayNameFor(model => model.AuthenticatedUser.passwords)
-        </div>
-        <div class="col" style="text-align:left">
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col" style="text-align:right">
+        <div class="col-md-6" style="text-align:right">
             @Html.DisplayNameFor(model => model.Bio)
         </div>
-        <div class="col" style="text-align:left">
+        <div class="col-md-6" style="text-align:left">
             @Html.DisplayFor(model => model.Bio)
         </div>
     </div>
-
     <div class="row">
-        <div class="col" style="text-align:right">
-            @Html.DisplayNameFor(model => model.LinkProject)
+        <div class="col-md-6" style="text-align:right">
+            @Html.DisplayNameFor(model => model.isAvaiable)
         </div>
-        <div class="col" style="text-align:left">
-            <a href="http://@Model.LinkProject" target="_blank"> @Html.DisplayFor(model => model.LinkProject)</a>
-</div>
+        <div class="col-md-6" style="text-align:left">
+            @if ((bool)Model.isAvaiable)
+            {
+            @:Có
+            }
+            else
+            {
+            @:Không
+            }           
+        </div>
     </div>
     <div class="row">
-        <div class="col" style="text-align:right">
-             @Html.DisplayNameFor(model => model.LinkSocialMedia)
+        <div class="col-md-6" style="text-align:right">
+            @Html.DisplayNameFor(model => model.LinkProject)
         </div>
-        <div class="col" style="text-align:left">
+        <div class="col-md-6" style="text-align:left">
+            <a href="http://@Model.LinkProject" target="_blank"> @Html.DisplayFor(model => model.LinkProject)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="text-align:right">
+            @Html.DisplayNameFor(model => model.LinkSocialMedia)
+        </div>
+        <div class="col-md-6" style="text-align:left">
             <a href="http://@Model.LinkSocialMedia" target="_blank">  @Html.DisplayFor(model => model.LinkSocialMedia)</a>
         </div>
     </div>
     <div style="margin-left:300px;margin-top:20px;">
-        <button class="btn btn-dark" style="margin-right:50px;">Chỉnh sửa thông tin cá nhân</button>
-
+        @Html.ActionLink("Chỉnh sửa thông tin cá nhân", "Edit", "Photographers", new { @class = "btn btn-dark" , style="margin-right:50px"})
+      
         <button class="btn btn-success">Xem phản hồi từ khách hàng</button>
     </div>
 </div>

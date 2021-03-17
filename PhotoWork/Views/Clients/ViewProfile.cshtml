@@ -12,13 +12,20 @@
     <img src="~/storage/avatar/@Model.AuthenticatedUser.Avatar" alt="" width="150" height="150" style="margin-left:43%;border-radius:50%">
     <div class="row">
         <div class="col" style="text-align:right">
+            @Html.DisplayNameFor(model => model.AuthenticatedUser.Email)
+        </div>
+        <div class="col" style="text-align:left">
+            @Model.AuthenticatedUser.Email
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align:right">
             @Html.DisplayNameFor(model => model.AuthenticatedUser.FullName)
         </div>
         <div class="col" style="text-align:left">
             @Html.DisplayFor(model => model.AuthenticatedUser.FullName)
         </div>
     </div>
-
     <div class="row">
         <div class="col" style="text-align:right">
             @Html.DisplayNameFor(model => model.AuthenticatedUser.phoneNumber)
@@ -27,21 +34,19 @@
             @Html.DisplayFor(model => model.AuthenticatedUser.phoneNumber)
         </div>
     </div>
-    <div class="row">
-        <div class="col" style="text-align:right">
-            @Html.DisplayNameFor(model => model.AuthenticatedUser.passwords)
-        </div>
-        <div class="col" style="text-align:left">
-            
-        </div>
-    </div>
+
+
     <div class="row">
         <div class="col" style="text-align:right">
             @Html.DisplayNameFor(model => model.LinkSocialmedia)
         </div>
         <div class="col" style="text-align:left">
-           <a href="https://@Model.LinkSocialmedia"> @Html.DisplayFor(model => model.LinkSocialmedia) </a>
+            <a href="https://@Model.LinkSocialmedia"> @Html.DisplayFor(model => model.LinkSocialmedia) </a>
         </div>
     </div>
+    <div style="margin-left:40%;margin-top:20px;">
+        @Html.ActionLink("Chỉnh sửa thông tin cá nhân", "Edit", "Clients", new { @class = "btn btn-dark" })
 
+
+    </div>
 </div>

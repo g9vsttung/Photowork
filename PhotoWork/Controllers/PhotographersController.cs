@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -21,7 +22,7 @@ namespace PhotoWork.Controllers
         // GET: Photographers
         public ActionResult Index()
         {
-            
+
             SqlConnection connection = new SqlConnection(con);
             string SQL = "select * from Service where PhotographerID=@id";
             SqlCommand command = new SqlCommand(SQL, connection);
@@ -40,7 +41,7 @@ namespace PhotoWork.Controllers
                     isDelete = Boolean.Parse(rd["isDelete"].ToString()),
                     CreateDate = DateTime.Parse(rd["CreateDate"].ToString()),
                     Rating = double.Parse(rd["Rating"].ToString())
-                    
+
                 });
             }
             connection.Close();
@@ -52,7 +53,7 @@ namespace PhotoWork.Controllers
         public ActionResult ViewProfile()
         {
             string id = Session["USERNAME"].ToString();
-  
+
             Photographer pho = db.Photographers.Find(id);
             pho.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
             return View(pho);
@@ -71,25 +72,25 @@ namespace PhotoWork.Controllers
             }
             return View(photographer);
         }
-       /* public ActionResult ViewProfile(string id)
-        {
-            PhotographerProfile profile = new PhotographerProfile();
-            AuthenticatedUser photographer = db.AuthenticatedUsers.Find(Session["USERNAME"].ToString());
-            SqlConnection connection = new SqlConnection(con);
-            connection.Open();
-            string SQL = "select Username,phoneNumber,FullName,TotalProjectDone,Bio,LinkProject, LinkSocialMedia,CurrentMoney from Photographer p, AuthenticatedUser a  where a.email = p.username and p.username = @id";
-            SqlCommand command = new SqlCommand(SQL, connection);
-            command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
-            SqlDataReader reader = command.ExecuteReader();
+        /* public ActionResult ViewProfile(string id)
+         {
+             PhotographerProfile profile = new PhotographerProfile();
+             AuthenticatedUser photographer = db.AuthenticatedUsers.Find(Session["USERNAME"].ToString());
+             SqlConnection connection = new SqlConnection(con);
+             connection.Open();
+             string SQL = "select Username,phoneNumber,FullName,TotalProjectDone,Bio,LinkProject, LinkSocialMedia,CurrentMoney from Photographer p, AuthenticatedUser a  where a.email = p.username and p.username = @id";
+             SqlCommand command = new SqlCommand(SQL, connection);
+             command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
+             SqlDataReader reader = command.ExecuteReader();
 
-            if (reader.Read())
-            {
-                profile = new PhotographerProfile(reader["Username"].ToString(),reader["phoneNumber"].ToString(),reader["FullName"].ToString(),int.Parse(reader["TotalProjectDone"].ToString()),reader["Bio"].ToString(),reader["LinkProject"].ToString(),reader["LinkSocialMedia"].ToString(),float.Parse(reader["CurrentMoney"].ToString()));
-            }
-            connection.Close();
-            return View(photographer);
-        }
-*/
+             if (reader.Read())
+             {
+                 profile = new PhotographerProfile(reader["Username"].ToString(),reader["phoneNumber"].ToString(),reader["FullName"].ToString(),int.Parse(reader["TotalProjectDone"].ToString()),reader["Bio"].ToString(),reader["LinkProject"].ToString(),reader["LinkSocialMedia"].ToString(),float.Parse(reader["CurrentMoney"].ToString()));
+             }
+             connection.Close();
+             return View(photographer);
+         }
+ */
         // GET: Photographers/Create
         public ActionResult Create()
         {
@@ -118,20 +119,22 @@ namespace PhotoWork.Controllers
         }
 
         // GET: Photographers/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            if (Session["USERNAME"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
-            Photographer photographer = db.Photographers.Find(id);
-            if (photographer == null)
+            string id = Session["USERNAME"].ToString();
+            Photographer pho = db.Photographers.Find(id);
+            if (pho == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AdminID = new SelectList(db.Admins, "Username", "logFileLocation", photographer.AdminID);
-            ViewBag.Username = new SelectList(db.AuthenticatedUsers, "Email", "passwords", photographer.Username);
-            return View(photographer);
+            pho.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
+            return View(pho);
+
+
         }
 
         // POST: Photographers/Edit/5
@@ -151,7 +154,41 @@ namespace PhotoWork.Controllers
             ViewBag.Username = new SelectList(db.AuthenticatedUsers, "Email", "passwords", photographer.Username);
             return View(photographer);
         }
+        [HttpPost]
+        public ActionResult SaveEdit(Photographer photographer)
+        {
+            if (Session["USERNAME"] == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+
+            SqlConnection connection = new SqlConnection(con);
+            //Update AuthenticatedUser : FullName, PhoneNumber
+
+            string SQL = "Update AuthenticatedUser set FullName=@name ,PhoneNumber=@phone where Email=@email";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@name", Request.Form["AuthenticatedUser.FullName"].Trim());
+            command.Parameters.AddWithValue("@phone", Request.Form["AuthenticatedUser.phoneNumber"].Trim());
+            command.Parameters.AddWithValue("@email", Session["USERNAME"].ToString());
+            connection.Open();
+            command.ExecuteNonQuery();
+            //Update Photographer:isAvailable,Bio,LinkProject,LinkSocialMedia
+            SQL = "Update Photographer set isAvaiable=@isAvailable,Bio=@Bio,LinkSocialMedia=@link, LinkProject=@linkProject where Username=@Username";
+            command = new SqlCommand(SQL, connection);
+
+            command.Parameters.AddWithValue("@isAvailable", Request.Form["isReady"]);
+            command.Parameters.AddWithValue("@Bio", Request.Form["Bio"].Trim());
+            command.Parameters.AddWithValue("@link", Request.Form["LinkSocialMedia"].Trim());
+            command.Parameters.AddWithValue("@linkProject", Request.Form["LinkProject"].Trim());
+            command.Parameters.AddWithValue("@Username", Session["USERNAME"].ToString());
+           
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("ViewProfile");
+
+
+        }
         // GET: Photographers/Delete/5
         public ActionResult Delete(string id)
         {

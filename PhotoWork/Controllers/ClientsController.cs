@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -14,7 +16,7 @@ namespace PhotoWork.Controllers
     public class ClientsController : Controller
     {
         private PhotoWorkEntities db = new PhotoWorkEntities();
-
+        string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         // GET: Clients
         public ActionResult Index()
         {
@@ -23,6 +25,10 @@ namespace PhotoWork.Controllers
         public ActionResult ViewProfile()
         {
             string id = Session["USERNAME"].ToString();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
             Debug.WriteLine(id);
             Client client = db.Clients.Find(id);
             client.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
@@ -70,20 +76,22 @@ namespace PhotoWork.Controllers
             return View(client);
         }
 
-        // GET: Clients/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Clients/EditProfile
+        public ActionResult Edit()
         {
-            if (id == null)
+
+            
+            if ( Session["USERNAME"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
+            string id = Session["USERNAME"].ToString();
             Client client = db.Clients.Find(id);
             if (client == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AdminID = new SelectList(db.Admins, "Username", "logFileLocation", client.AdminID);
-            ViewBag.Username = new SelectList(db.AuthenticatedUsers, "Email", "passwords", client.Username);
+            client.AuthenticatedUser = db.AuthenticatedUsers.Find(id);
             return View(client);
         }
 
@@ -92,17 +100,36 @@ namespace PhotoWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Username,timeReported,LinkSocialmedia,updateDate,AdminID")] Client client)
+        public ActionResult SaveEdit()
         {
-            if (ModelState.IsValid)
+            
+
+          
+          
+            if(Session["USERNAME"] == null)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.AdminID = new SelectList(db.Admins, "Username", "logFileLocation", client.AdminID);
-            ViewBag.Username = new SelectList(db.AuthenticatedUsers, "Email", "passwords", client.Username);
-            return View(client);
+           
+           if (ModelState.IsValid)
+            {
+                SqlConnection connection = new SqlConnection(con);
+                //Update AuthenticatedUser : FullName, PhoneNumber
+                string SQL = "Update AuthenticatedUser set FullName=@name ,PhoneNumber=@phone where Email=@email";
+                SqlCommand command = new SqlCommand(SQL, connection);
+                command.Parameters.AddWithValue("@name", Request.Form["AuthenticatedUser.FullName"].Trim());
+                command.Parameters.AddWithValue("@phone", Request.Form["AuthenticatedUser.phoneNumber"].Trim());
+                command.Parameters.AddWithValue("@email", Session["USERNAME"].ToString());
+                connection.Open();
+                command.ExecuteNonQuery();
+                //Update Client: LinkSocialMedia
+                SQL = "Update Client set LinkSocialMedia = @link where username = @username";
+                command.Parameters.AddWithValue("@link", Request.Form["LinkSocialmedia"]);
+                command.Parameters.AddWithValue("@username", Session["USERNAME"].ToString());
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return RedirectToAction("ViewProfile");
         }
 
         // GET: Clients/Delete/5

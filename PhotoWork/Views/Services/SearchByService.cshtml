@@ -1,7 +1,7 @@
-﻿@model IEnumerable<PhotoWork.Models.Service>
+﻿@model IEnumerable <PhotoWork.Models.Service>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "SearchByService";
     if (Session["ROLE"] == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,21 +10,10 @@
     {
         Layout = "~/Views/Shared/_ClientLayout.cshtml";
     }
+
 }
 
-<br />
-<div class="container">
-    <label>
-        @Session["test"]
-        PHOTOWORK <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
-        @ViewBag.Category <img src="https://img.icons8.com/material-sharp/24/000000/chevron-right.png" height="18px" />
-        @ViewBag.Skill
-    </label>
-</div>
-<br />
-
-
-<div class="container">
+<div class="container" style="margin-top:50px">
     <div class="row">
         @foreach (var item in Model)
         {

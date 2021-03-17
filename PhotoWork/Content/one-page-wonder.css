@@ -27,10 +27,15 @@ footer {
     bottom: 0;
     height: 140px;
     width: 100%;
-} 
+}
+.search-area select {
+    border-radius: 6px;
+    width: 20%;
+    margin-left: 40px;
+}
 .search-area input{
     border-radius:6px;
-    width:80%;
+    width:60%;
 }
 .search-area button {
     margin-bottom:4px;

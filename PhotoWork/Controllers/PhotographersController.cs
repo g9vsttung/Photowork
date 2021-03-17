@@ -72,25 +72,7 @@ namespace PhotoWork.Controllers
             }
             return View(photographer);
         }
-        /* public ActionResult ViewProfile(string id)
-         {
-             PhotographerProfile profile = new PhotographerProfile();
-             AuthenticatedUser photographer = db.AuthenticatedUsers.Find(Session["USERNAME"].ToString());
-             SqlConnection connection = new SqlConnection(con);
-             connection.Open();
-             string SQL = "select Username,phoneNumber,FullName,TotalProjectDone,Bio,LinkProject, LinkSocialMedia,CurrentMoney from Photographer p, AuthenticatedUser a  where a.email = p.username and p.username = @id";
-             SqlCommand command = new SqlCommand(SQL, connection);
-             command.Parameters.AddWithValue("@id", Session["USERNAME"].ToString());
-             SqlDataReader reader = command.ExecuteReader();
-
-             if (reader.Read())
-             {
-                 profile = new PhotographerProfile(reader["Username"].ToString(),reader["phoneNumber"].ToString(),reader["FullName"].ToString(),int.Parse(reader["TotalProjectDone"].ToString()),reader["Bio"].ToString(),reader["LinkProject"].ToString(),reader["LinkSocialMedia"].ToString(),float.Parse(reader["CurrentMoney"].ToString()));
-             }
-             connection.Close();
-             return View(photographer);
-         }
- */
+       
         // GET: Photographers/Create
         public ActionResult Create()
         {
@@ -186,8 +168,6 @@ namespace PhotoWork.Controllers
             command.ExecuteNonQuery();
             connection.Close();
             return RedirectToAction("ViewProfile");
-
-
         }
         // GET: Photographers/Delete/5
         public ActionResult Delete(string id)

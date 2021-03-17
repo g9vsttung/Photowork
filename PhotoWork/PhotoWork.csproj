@@ -316,6 +316,8 @@
     <Content Include="Views\Photographers\GoToProfile.cshtml" />
     <Content Include="Views\Clients\ViewProfile.cshtml" />
     <Content Include="Views\Photographers\ViewProfile.cshtml" />
+    <Content Include="Views\Services\SearchByPhotographer.cshtml" />
+    <Content Include="Views\Services\SearchByService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -181,11 +181,13 @@ namespace PhotoWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 
-        public ActionResult Create(string returnUrl)
+        public ActionResult Create(Service service)
         {
-            string id = Request.Form["txtId"];
-            string name = Request.Form["txtName"];
-            string des = Request.Form["txtDes"];
+            DateTime dt = DateTime.Now;
+            string id = dt.ToString("ddMMyyyyffffssmmhh");
+
+            string name = service.ServiceName;
+            string des = service.Description;
             //db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id), new SqlParameter("@name", name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
             SqlConnection connection = new SqlConnection(con);
             string SQL = "insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID,Rating) values(@id,@name,@des,1,@createDate,0,@photo,0)";
@@ -230,11 +232,11 @@ namespace PhotoWork.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ServiceName,Description,isAvaiable,CreateDate,isDelete,deleteDate,PhotographerID,Rating")] Service service)
+        public ActionResult Edit(Service service)
         {
 
-            string name = Request.Form["txtName"];
-            string des = Request.Form["txtDes"];
+            string name = service.ServiceName;
+            string des = service.Description;
             bool avai = Boolean.Parse(Request.Form["cbIsAvaiable"]);
             SqlConnection connection = new SqlConnection(con);
             string SQL = "update Service set ServiceName=@name, Description=@des,isavaiable=@avai where id=@id";

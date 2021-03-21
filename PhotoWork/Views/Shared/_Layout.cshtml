@@ -1,4 +1,4 @@
-﻿
+﻿@model PhotoWork.Models.AuthenticatedUser
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,21 +17,21 @@
         <!-- Navigation -->
         <nav class="fixed-top navbar-custom navbar-fixed-top top">
             <div class="container">
-                <a class="navbar-brand" href="/Home/Index" ><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
-               <div class="navbar-brand" >
-                   <div class="search-area">
-                       @using (Html.BeginForm("Search", "Services", FormMethod.Post))
-                       {
-                           <select name="searchBy">
-                               <option value="Service">Dịch Vụ</option>
-                               <option value="Photographer">Photographer</option>
-                           </select>
-                           <input type="text" name="content" required placeholder="Tìm kiếm photographer/dịch vụ" />
-                           <button class="btn btn-secondary">Search</button>
-                       }
-                   </div>
+                <a class="navbar-brand" href="/Home/Index"><img src="~/Content/img/Logo_WhiteBackGroud.png" width="20px" height="20px" /> PhotoWork</a>
+                <div class="navbar-brand">
+                    <div class="search-area">
+                        @using (Html.BeginForm("Search", "Services", FormMethod.Post))
+                        {
+                            <select name="searchBy">
+                                <option value="Service">Dịch Vụ</option>
+                                <option value="Photographer">Photographer</option>
+                            </select>
+                            <input type="text" name="content" required placeholder="Tìm kiếm photographer/dịch vụ" />
+                            <button class="btn btn-secondary">Search</button>
+                        }
+                    </div>
                 </div>
-                <div class="navbar-brand" id="navbarResponsive" style="float:right">                  
+                <div class="navbar-brand" id="navbarResponsive" style="float:right">
                     <a data-toggle="modal" href="#exampleModal1" class="regis">
                         ĐĂNG KÍ
                     </a>
@@ -126,7 +126,7 @@
                                 <span class="psw">
 
                                     <a href="" style="text-decoration: none " id="loginform-left">Bạn đã quên mật khẩu?</a>
-                                   
+
                                 </span>
                             </div><br />
 
@@ -165,48 +165,48 @@
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Email:</div>
+                                    @Html.LabelFor(model =>model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
-                                        <input class="form-control" type="email" name="email" required />
-                                        <span id="email_ERR" class="text-danger">@Request.QueryString["emailError"]</span>
+                                        @Html.EditorFor(model => model.Email)
+                                        <font color="red">@Html.ValidationMessageFor(model => model.Email)</font>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Mật khẩu: </div>
+                                    @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
-                                        <input class="form-control" type="password" name="password" required />
-                                        <span id="pasword_ERR" class="text-danger"></span>
+                                        @Html.EditorFor(model => model.passwords)
+                                        <font color="red">@Html.ValidationMessageFor(model => model.passwords)</font>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="control-label col-md-5">Xác nhận mật khẩu:</div>
+                                    @Html.LabelFor(model => model.repasswords, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
-                                        <input class="form-control" type="password" name="rePassword" required />
-                                        <span id="email_ERR" class="text-danger">@Request.QueryString["confirmError"]</span>
+                                        @Html.EditorFor(model => model.repasswords)
+                                        <font color="red">@Html.ValidationMessageFor(model => model.repasswords)</font>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Vai trò:</div>
+                                    @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
                                         <select name="role">
                                             <option>Client</option>
                                             <option>Photographer</option>
-                                        </select>                                        
+                                        </select>
                                         <span id="email_ERR" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Số điện thoại:</div>
+                                    @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
-                                        <input class="form-control" type="number" name="phone" required />
-                                        <span id="email_ERR" class="text-danger">@Request.QueryString["phoneError"]</span>
+                                        @Html.EditorFor(model => model.phoneNumber)
+                                        <font color="red">@Html.ValidationMessageFor(model => model.phoneNumber)</font>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="control-label col-md-4">Họ & Tên:</div>
+                                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-12">
-                                        <input class="form-control" type="text" name="fullName" required />
-                                        <span id="email_ERR" class="text-danger"></span>
+                                        @Html.EditorFor(model => model.FullName)
+                                        <font color="red">@Html.ValidationMessageFor(model => model.FullName)</font>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -215,7 +215,7 @@
 
                             </div><br />
 
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

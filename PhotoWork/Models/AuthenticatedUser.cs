@@ -17,7 +17,7 @@ namespace PhotoWork.Models
     public partial class AuthenticatedUser
     {
         [DisplayName("Email")]
-        [DataType(DataType.EmailAddress)]
+      
         [Required(ErrorMessage = "Vui lòng nhập Email!")]
         [StringLength(50)]
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Email không hợp lệ")]
@@ -25,12 +25,12 @@ namespace PhotoWork.Models
 
         [DisplayName("Mật khẩu")]
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
-        [StringLength(30)]
+        [MaxLength(15, ErrorMessage = "Tối đa 15 kí tự"), MinLength(3, ErrorMessage = "Tối thiểu 3 kí tự")]
         public string passwords { get; set; }
         public string Role { get; set; }
         [DisplayName("Số điện thoại")]
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        [StringLength(10)]
+        
         [RegularExpression(@"^(09|03|07|08|05)+([0-9]{8})\b", ErrorMessage = "Số điện thoại không hợp lệ")]
         public string phoneNumber { get; set; }
         [DisplayName("Họ và tên")]
@@ -38,8 +38,9 @@ namespace PhotoWork.Models
         [StringLength(50)]
         public string FullName { get; set; }
         [DisplayName("Nhập lại mật khẩu")]
-        [Required(ErrorMessage = "Vui lòng nhập lại mật khẩu")]
-        [StringLength(30)]
+        [Required(ErrorMessage = "Vui lòng xác nhận mật khẩu")]
+        [MaxLength(15, ErrorMessage = "Tối đa 15 kí tự"), MinLength(3, ErrorMessage = "Tối thiểu 3 kí tự")]
+        [Compare("passwords",ErrorMessage ="Xác nhận sai, vui lòng thử lại")]
         public string repasswords { get; set; }
         public bool isActive { get; set; }
         public string Avatar { get; set; }

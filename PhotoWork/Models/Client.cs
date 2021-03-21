@@ -18,21 +18,18 @@ namespace PhotoWork.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
-            this.ChattingRecords = new HashSet<ChattingRecord>();
             this.Invoices = new HashSet<Invoice>();
         }
-    
+
         public string Username { get; set; }
         public Nullable<int> timeReported { get; set; }
         [DisplayName("Link mạng xã hội")]
         public string LinkSocialmedia { get; set; }
         public byte[] updateDate { get; set; }
         public string AdminID { get; set; }
-    
+
         public virtual Admin Admin { get; set; }
         public virtual AuthenticatedUser AuthenticatedUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChattingRecord> ChattingRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
     }

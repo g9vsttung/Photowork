@@ -125,7 +125,7 @@ namespace PhotoWork.Controllers
                     Rating = int.Parse(rd["Rating"].ToString()),
                     FullName = rd["FullName"].ToString(),
                     PhotographerID = rd["PhotographerID"].ToString(),
-                    StartingPrice = double.Parse(rd["startingPrice"].ToString())
+                    StartingPrice = Double.Parse(rd["startingPrice"].ToString())
 
                 });
             }
@@ -156,7 +156,7 @@ namespace PhotoWork.Controllers
                     Rating = int.Parse(rd["Rating"].ToString()),
                     FullName = rd["FullName"].ToString(),
                     PhotographerID = rd["PhotographerID"].ToString(),
-                    StartingPrice = double.Parse(rd["startingPrice"].ToString())
+                    StartingPrice =Double.Parse(rd["startingPrice"].ToString())
 
                 });
             }

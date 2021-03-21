@@ -18,21 +18,18 @@ namespace PhotoWork.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.ChattingRecords = new HashSet<ChattingRecord>();
             this.Invoices = new HashSet<Invoice>();
             this.MediaFiles = new HashSet<MediaFile>();
-            this.PackageDetails = new HashSet<PackageDetail>();
             this.Skills = new HashSet<Skill>();
         }
     
         public string ID { get; set; }
-
         [Required(ErrorMessage = "Hãy nhập tên dịch vụ")]
-        [Display(Name ="Tên dịch vụ")]
+        [Display(Name = "Tên dịch vụ")]
         public string ServiceName { get; set; }
 
         [Required(ErrorMessage = "Hãy nhập mô tả")]
-        [MinLength(10,ErrorMessage ="Mô tả ít nhất 10 kí tự")]
+        [MinLength(10, ErrorMessage = "Mô tả ít nhất 10 kí tự")]
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
         public Nullable<bool> isAvaiable { get; set; }
@@ -48,13 +45,9 @@ namespace PhotoWork.Models
         public double StartingPrice { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChattingRecord> ChattingRecords { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MediaFile> MediaFiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PackageDetail> PackageDetails { get; set; }
         public virtual Photographer Photographer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Skill> Skills { get; set; }

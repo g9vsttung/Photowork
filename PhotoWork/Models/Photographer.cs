@@ -13,7 +13,7 @@ namespace PhotoWork.Models
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Photographer :AuthenticatedUser
+    public partial class Photographer:AuthenticatedUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Photographer()
@@ -22,7 +22,7 @@ namespace PhotoWork.Models
             this.PhotographerSkills = new HashSet<PhotographerSkill>();
             this.Services = new HashSet<Service>();
         }
-    
+
         public string Username { get; set; }
         public Nullable<int> TotalProjectDone { get; set; }
         [DisplayName("Bạn sẵn sàng để nhận dự án")]
@@ -37,7 +37,8 @@ namespace PhotoWork.Models
         [DisplayName("Số tiền hiện tại")]
         public Nullable<decimal> CurrentMoney { get; set; }
         public string AdminID { get; set; }
-    
+
+
         public virtual Admin Admin { get; set; }
         public virtual AuthenticatedUser AuthenticatedUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

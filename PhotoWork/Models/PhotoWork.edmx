@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PhotoWorkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PhotoWorkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Username" />
@@ -31,15 +31,6 @@
           </Key>
           <Property Name="CategoryID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="ChattingRecord">
-          <Key>
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ServiceID" />
-          </Key>
-          <Property Name="ChatFile" Type="varchar" MaxLength="200" />
-          <Property Name="ClientID" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ServiceID" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -87,24 +78,6 @@
           <Property Name="Location" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="ServiceID" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Package">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PackageDetail">
-          <Key>
-            <PropertyRef Name="PackageID" />
-            <PropertyRef Name="ServiceID" />
-          </Key>
-          <Property Name="deposit" Type="numeric" Precision="8" Scale="2" />
-          <Property Name="startingPrice" Type="numeric" Precision="8" Scale="2" />
-          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
-          <Property Name="PackageID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="ServiceID" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Photographer">
           <Key>
             <PropertyRef Name="Username" />
@@ -141,6 +114,7 @@
           <Property Name="deleteDate" Type="date" />
           <Property Name="PhotographerID" Type="varchar" MaxLength="50" />
           <Property Name="Rating" Type="float" />
+          <Property Name="StartingPrice" Type="numeric" Precision="8" Scale="2" />
         </EntityType>
         <EntityType Name="ServiceSkill">
           <Key>
@@ -168,7 +142,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__Admin__Username__3A81B327">
+        <Association Name="FK__Admin__Username__286302EC">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -180,31 +154,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChattingR__Clien__656C112C">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="ChattingRecord" Type="Self.ChattingRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="ChattingRecord">
-              <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ChattingR__Servi__66603565">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ChattingRecord" Type="Self.ChattingRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ChattingRecord">
-              <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Client__AdminID__3E52440B">
+        <Association Name="FK__Client__AdminID__2C3393D0">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +166,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Client__Username__3D5E1FD2">
+        <Association Name="FK__Client__Username__2B3F6F97">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -228,7 +178,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Photogr__44FF419A">
+        <Association Name="FK__History__Photogr__32E0915F">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,7 +190,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoice__ClientI__628FA481">
+        <Association Name="FK__Invoice__ClientI__5070F446">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoice__Service__619B8048">
+        <Association Name="FK__Invoice__Service__4F7CD00D">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,7 +214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MediaFile__Servi__59063A47">
+        <Association Name="FK__MediaFile__Servi__46E78A0C">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="MediaFile" Type="Self.MediaFile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,31 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PackageDe__Packa__5DCAEF64">
-          <End Role="Package" Type="Self.Package" Multiplicity="1" />
-          <End Role="PackageDetail" Type="Self.PackageDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Package">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PackageDetail">
-              <PropertyRef Name="PackageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PackageDe__Servi__5EBF139D">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="PackageDetail" Type="Self.PackageDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PackageDetail">
-              <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Photograp__Admin__4222D4EF">
+        <Association Name="FK__Photograp__Admin__300424B4">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -312,7 +238,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Photo__4D94879B">
+        <Association Name="FK__Photograp__Photo__3B75D760">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="1" />
           <End Role="PhotographerSkill" Type="Self.PhotographerSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -324,7 +250,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Skill__4CA06362">
+        <Association Name="FK__Photograp__Skill__3A81B327">
           <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
           <End Role="PhotographerSkill" Type="Self.PhotographerSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -336,7 +262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Usern__412EB0B6">
+        <Association Name="FK__Photograp__Usern__2F10007B">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -348,7 +274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Service__Photogr__52593CB8">
+        <Association Name="FK__Service__Photogr__403A8C7D">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="0..1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
           <ReferentialConstraint>
@@ -360,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceSk__Servi__5535A963">
+        <Association Name="FK__ServiceSk__Servi__4316F928">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="ServiceSkill" Type="Self.ServiceSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -372,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceSk__Skill__5629CD9C">
+        <Association Name="FK__ServiceSk__Skill__440B1D61">
           <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
           <End Role="ServiceSkill" Type="Self.ServiceSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -384,7 +310,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Skill__CategoryI__49C3F6B7">
+        <Association Name="FK__Skill__CategoryI__37A5467C">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -427,102 +353,85 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ufn_removeMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="text" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="PhotoWorkModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthenticatedUser" EntityType="Self.AuthenticatedUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChattingRecord" EntityType="Self.ChattingRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MediaFile" EntityType="Self.MediaFile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PackageDetail" EntityType="Self.PackageDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photographer" EntityType="Self.Photographer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotographerSkill" EntityType="Self.PhotographerSkill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceSkill" EntityType="Self.ServiceSkill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Admin__Username__3A81B327" Association="Self.FK__Admin__Username__3A81B327">
+          <AssociationSet Name="FK__Admin__Username__286302EC" Association="Self.FK__Admin__Username__286302EC">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUser" />
             <End Role="Admin" EntitySet="Admin" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChattingR__Clien__656C112C" Association="Self.FK__ChattingR__Clien__656C112C">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="ChattingRecord" EntitySet="ChattingRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChattingR__Servi__66603565" Association="Self.FK__ChattingR__Servi__66603565">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="ChattingRecord" EntitySet="ChattingRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Client__AdminID__3E52440B" Association="Self.FK__Client__AdminID__3E52440B">
+          <AssociationSet Name="FK__Client__AdminID__2C3393D0" Association="Self.FK__Client__AdminID__2C3393D0">
             <End Role="Admin" EntitySet="Admin" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
-          <AssociationSet Name="FK__Client__Username__3D5E1FD2" Association="Self.FK__Client__Username__3D5E1FD2">
+          <AssociationSet Name="FK__Client__Username__2B3F6F97" Association="Self.FK__Client__Username__2B3F6F97">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUser" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Photogr__44FF419A" Association="Self.FK__History__Photogr__44FF419A">
+          <AssociationSet Name="FK__History__Photogr__32E0915F" Association="Self.FK__History__Photogr__32E0915F">
             <End Role="Photographer" EntitySet="Photographer" />
             <End Role="History" EntitySet="History" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoice__ClientI__628FA481" Association="Self.FK__Invoice__ClientI__628FA481">
+          <AssociationSet Name="FK__Invoice__ClientI__5070F446" Association="Self.FK__Invoice__ClientI__5070F446">
             <End Role="Client" EntitySet="Client" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoice__Service__619B8048" Association="Self.FK__Invoice__Service__619B8048">
+          <AssociationSet Name="FK__Invoice__Service__4F7CD00D" Association="Self.FK__Invoice__Service__4F7CD00D">
             <End Role="Service" EntitySet="Service" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
-          <AssociationSet Name="FK__MediaFile__Servi__59063A47" Association="Self.FK__MediaFile__Servi__59063A47">
+          <AssociationSet Name="FK__MediaFile__Servi__46E78A0C" Association="Self.FK__MediaFile__Servi__46E78A0C">
             <End Role="Service" EntitySet="Service" />
             <End Role="MediaFile" EntitySet="MediaFile" />
           </AssociationSet>
-          <AssociationSet Name="FK__PackageDe__Packa__5DCAEF64" Association="Self.FK__PackageDe__Packa__5DCAEF64">
-            <End Role="Package" EntitySet="Package" />
-            <End Role="PackageDetail" EntitySet="PackageDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PackageDe__Servi__5EBF139D" Association="Self.FK__PackageDe__Servi__5EBF139D">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="PackageDetail" EntitySet="PackageDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Admin__4222D4EF" Association="Self.FK__Photograp__Admin__4222D4EF">
+          <AssociationSet Name="FK__Photograp__Admin__300424B4" Association="Self.FK__Photograp__Admin__300424B4">
             <End Role="Admin" EntitySet="Admin" />
             <End Role="Photographer" EntitySet="Photographer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Photo__4D94879B" Association="Self.FK__Photograp__Photo__4D94879B">
+          <AssociationSet Name="FK__Photograp__Photo__3B75D760" Association="Self.FK__Photograp__Photo__3B75D760">
             <End Role="Photographer" EntitySet="Photographer" />
             <End Role="PhotographerSkill" EntitySet="PhotographerSkill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Skill__4CA06362" Association="Self.FK__Photograp__Skill__4CA06362">
+          <AssociationSet Name="FK__Photograp__Skill__3A81B327" Association="Self.FK__Photograp__Skill__3A81B327">
             <End Role="Skill" EntitySet="Skill" />
             <End Role="PhotographerSkill" EntitySet="PhotographerSkill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Usern__412EB0B6" Association="Self.FK__Photograp__Usern__412EB0B6">
+          <AssociationSet Name="FK__Photograp__Usern__2F10007B" Association="Self.FK__Photograp__Usern__2F10007B">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUser" />
             <End Role="Photographer" EntitySet="Photographer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Service__Photogr__52593CB8" Association="Self.FK__Service__Photogr__52593CB8">
+          <AssociationSet Name="FK__Service__Photogr__403A8C7D" Association="Self.FK__Service__Photogr__403A8C7D">
             <End Role="Photographer" EntitySet="Photographer" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceSk__Servi__5535A963" Association="Self.FK__ServiceSk__Servi__5535A963">
+          <AssociationSet Name="FK__ServiceSk__Servi__4316F928" Association="Self.FK__ServiceSk__Servi__4316F928">
             <End Role="Service" EntitySet="Service" />
             <End Role="ServiceSkill" EntitySet="ServiceSkill" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceSk__Skill__5629CD9C" Association="Self.FK__ServiceSk__Skill__5629CD9C">
+          <AssociationSet Name="FK__ServiceSk__Skill__440B1D61" Association="Self.FK__ServiceSk__Skill__440B1D61">
             <End Role="Skill" EntitySet="Skill" />
             <End Role="ServiceSkill" EntitySet="ServiceSkill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Skill__CategoryI__49C3F6B7" Association="Self.FK__Skill__CategoryI__49C3F6B7">
+          <AssociationSet Name="FK__Skill__CategoryI__37A5467C" Association="Self.FK__Skill__CategoryI__37A5467C">
             <End Role="Category" EntitySet="Category" />
             <End Role="Skill" EntitySet="Skill" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PhotoWorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -532,9 +441,9 @@
           </Key>
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="logFileLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Admin__Username__3A81B327" FromRole="Admin" ToRole="AuthenticatedUser" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK__Client__AdminID__3E52440B" FromRole="Admin" ToRole="Client" />
-          <NavigationProperty Name="Photographers" Relationship="Self.FK__Photograp__Admin__4222D4EF" FromRole="Admin" ToRole="Photographer" />
+          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Admin__Username__286302EC" FromRole="Admin" ToRole="AuthenticatedUser" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Client__AdminID__2C3393D0" FromRole="Admin" ToRole="Client" />
+          <NavigationProperty Name="Photographers" Relationship="Self.FK__Photograp__Admin__300424B4" FromRole="Admin" ToRole="Photographer" />
         </EntityType>
         <EntityType Name="AuthenticatedUser">
           <Key>
@@ -548,9 +457,9 @@
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <Property Name="Avatar" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="isBanned" Type="Boolean" />
-          <NavigationProperty Name="Admin" Relationship="Self.FK__Admin__Username__3A81B327" FromRole="AuthenticatedUser" ToRole="Admin" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__Client__Username__3D5E1FD2" FromRole="AuthenticatedUser" ToRole="Client" />
-          <NavigationProperty Name="Photographer" Relationship="Self.FK__Photograp__Usern__412EB0B6" FromRole="AuthenticatedUser" ToRole="Photographer" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Admin__Username__286302EC" FromRole="AuthenticatedUser" ToRole="Admin" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Client__Username__2B3F6F97" FromRole="AuthenticatedUser" ToRole="Client" />
+          <NavigationProperty Name="Photographer" Relationship="Self.FK__Photograp__Usern__2F10007B" FromRole="AuthenticatedUser" ToRole="Photographer" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -558,18 +467,7 @@
           </Key>
           <Property Name="CategoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Skills" Relationship="Self.FK__Skill__CategoryI__49C3F6B7" FromRole="Category" ToRole="Skill" />
-        </EntityType>
-        <EntityType Name="ChattingRecord">
-          <Key>
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ServiceID" />
-          </Key>
-          <Property Name="ChatFile" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ClientID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ServiceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__ChattingR__Clien__656C112C" FromRole="ChattingRecord" ToRole="Client" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__ChattingR__Servi__66603565" FromRole="ChattingRecord" ToRole="Service" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK__Skill__CategoryI__37A5467C" FromRole="Category" ToRole="Skill" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -580,10 +478,9 @@
           <Property Name="LinkSocialmedia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="updateDate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="AdminID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Admin" Relationship="Self.FK__Client__AdminID__3E52440B" FromRole="Client" ToRole="Admin" />
-          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Client__Username__3D5E1FD2" FromRole="Client" ToRole="AuthenticatedUser" />
-          <NavigationProperty Name="ChattingRecords" Relationship="Self.FK__ChattingR__Clien__656C112C" FromRole="Client" ToRole="ChattingRecord" />
-          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__ClientI__628FA481" FromRole="Client" ToRole="Invoice" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Client__AdminID__2C3393D0" FromRole="Client" ToRole="Admin" />
+          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Client__Username__2B3F6F97" FromRole="Client" ToRole="AuthenticatedUser" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__ClientI__5070F446" FromRole="Client" ToRole="Invoice" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -594,7 +491,7 @@
           <Property Name="Date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="MoneyOut" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="Ramain" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Photographer" Relationship="Self.FK__History__Photogr__44FF419A" FromRole="History" ToRole="Photographer" />
+          <NavigationProperty Name="Photographer" Relationship="Self.FK__History__Photogr__32E0915F" FromRole="History" ToRole="Photographer" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -613,8 +510,8 @@
           <Property Name="SubmitDate" Type="DateTime" Precision="3" />
           <Property Name="Rating" Type="Int32" />
           <Property Name="FileReportLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__Invoice__ClientI__628FA481" FromRole="Invoice" ToRole="Client" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__Invoice__Service__619B8048" FromRole="Invoice" ToRole="Service" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Invoice__ClientI__5070F446" FromRole="Invoice" ToRole="Client" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Invoice__Service__4F7CD00D" FromRole="Invoice" ToRole="Service" />
         </EntityType>
         <EntityType Name="MediaFile">
           <Key>
@@ -623,28 +520,7 @@
           <Property Name="ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ServiceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__MediaFile__Servi__59063A47" FromRole="MediaFile" ToRole="Service" />
-        </EntityType>
-        <EntityType Name="Package">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PackageDetails" Relationship="Self.FK__PackageDe__Packa__5DCAEF64" FromRole="Package" ToRole="PackageDetail" />
-        </EntityType>
-        <EntityType Name="PackageDetail">
-          <Key>
-            <PropertyRef Name="PackageID" />
-            <PropertyRef Name="ServiceID" />
-          </Key>
-          <Property Name="deposit" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="startingPrice" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="PackageID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ServiceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Package" Relationship="Self.FK__PackageDe__Packa__5DCAEF64" FromRole="PackageDetail" ToRole="Package" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__PackageDe__Servi__5EBF139D" FromRole="PackageDetail" ToRole="Service" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__MediaFile__Servi__46E78A0C" FromRole="MediaFile" ToRole="Service" />
         </EntityType>
         <EntityType Name="Photographer">
           <Key>
@@ -659,11 +535,11 @@
           <Property Name="updateDate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="CurrentMoney" Type="Decimal" Precision="8" Scale="2" />
           <Property Name="AdminID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Admin" Relationship="Self.FK__Photograp__Admin__4222D4EF" FromRole="Photographer" ToRole="Admin" />
-          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Photograp__Usern__412EB0B6" FromRole="Photographer" ToRole="AuthenticatedUser" />
-          <NavigationProperty Name="Histories" Relationship="Self.FK__History__Photogr__44FF419A" FromRole="Photographer" ToRole="History" />
-          <NavigationProperty Name="PhotographerSkills" Relationship="Self.FK__Photograp__Photo__4D94879B" FromRole="Photographer" ToRole="PhotographerSkill" />
-          <NavigationProperty Name="Services" Relationship="Self.FK__Service__Photogr__52593CB8" FromRole="Photographer" ToRole="Service" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK__Photograp__Admin__300424B4" FromRole="Photographer" ToRole="Admin" />
+          <NavigationProperty Name="AuthenticatedUser" Relationship="Self.FK__Photograp__Usern__2F10007B" FromRole="Photographer" ToRole="AuthenticatedUser" />
+          <NavigationProperty Name="Histories" Relationship="Self.FK__History__Photogr__32E0915F" FromRole="Photographer" ToRole="History" />
+          <NavigationProperty Name="PhotographerSkills" Relationship="Self.FK__Photograp__Photo__3B75D760" FromRole="Photographer" ToRole="PhotographerSkill" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Service__Photogr__403A8C7D" FromRole="Photographer" ToRole="Service" />
         </EntityType>
         <EntityType Name="PhotographerSkill">
           <Key>
@@ -673,8 +549,8 @@
           <Property Name="SkillID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhotographerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Experience" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Photographer" Relationship="Self.FK__Photograp__Photo__4D94879B" FromRole="PhotographerSkill" ToRole="Photographer" />
-          <NavigationProperty Name="Skill" Relationship="Self.FK__Photograp__Skill__4CA06362" FromRole="PhotographerSkill" ToRole="Skill" />
+          <NavigationProperty Name="Photographer" Relationship="Self.FK__Photograp__Photo__3B75D760" FromRole="PhotographerSkill" ToRole="Photographer" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK__Photograp__Skill__3A81B327" FromRole="PhotographerSkill" ToRole="Skill" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -689,12 +565,11 @@
           <Property Name="deleteDate" Type="DateTime" Precision="0" />
           <Property Name="PhotographerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Rating" Type="Double" />
-          <NavigationProperty Name="ChattingRecords" Relationship="Self.FK__ChattingR__Servi__66603565" FromRole="Service" ToRole="ChattingRecord" />
-          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Service__619B8048" FromRole="Service" ToRole="Invoice" />
-          <NavigationProperty Name="MediaFiles" Relationship="Self.FK__MediaFile__Servi__59063A47" FromRole="Service" ToRole="MediaFile" />
-          <NavigationProperty Name="PackageDetails" Relationship="Self.FK__PackageDe__Servi__5EBF139D" FromRole="Service" ToRole="PackageDetail" />
-          <NavigationProperty Name="Photographer" Relationship="Self.FK__Service__Photogr__52593CB8" FromRole="Service" ToRole="Photographer" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Service__4F7CD00D" FromRole="Service" ToRole="Invoice" />
+          <NavigationProperty Name="MediaFiles" Relationship="Self.FK__MediaFile__Servi__46E78A0C" FromRole="Service" ToRole="MediaFile" />
+          <NavigationProperty Name="Photographer" Relationship="Self.FK__Service__Photogr__403A8C7D" FromRole="Service" ToRole="Photographer" />
           <NavigationProperty Name="Skills" Relationship="Self.ServiceSkill" FromRole="Service" ToRole="Skill" />
+          <Property Name="StartingPrice" Type="Decimal" Precision="8" Scale="2" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -703,8 +578,8 @@
           <Property Name="ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CategoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Skill__CategoryI__49C3F6B7" FromRole="Skill" ToRole="Category" />
-          <NavigationProperty Name="PhotographerSkills" Relationship="Self.FK__Photograp__Skill__4CA06362" FromRole="Skill" ToRole="PhotographerSkill" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Skill__CategoryI__37A5467C" FromRole="Skill" ToRole="Category" />
+          <NavigationProperty Name="PhotographerSkills" Relationship="Self.FK__Photograp__Skill__3A81B327" FromRole="Skill" ToRole="PhotographerSkill" />
           <NavigationProperty Name="Services" Relationship="Self.ServiceSkill" FromRole="Skill" ToRole="Service" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -717,7 +592,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__Admin__Username__3A81B327">
+        <Association Name="FK__Admin__Username__286302EC">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -729,7 +604,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Client__AdminID__3E52440B">
+        <Association Name="FK__Client__AdminID__2C3393D0">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
@@ -741,7 +616,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Admin__4222D4EF">
+        <Association Name="FK__Photograp__Admin__300424B4">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -753,7 +628,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Client__Username__3D5E1FD2">
+        <Association Name="FK__Client__Username__2B3F6F97">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -765,7 +640,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Usern__412EB0B6">
+        <Association Name="FK__Photograp__Usern__2F10007B">
           <End Role="AuthenticatedUser" Type="Self.AuthenticatedUser" Multiplicity="1" />
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -777,7 +652,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Skill__CategoryI__49C3F6B7">
+        <Association Name="FK__Skill__CategoryI__37A5467C">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -789,31 +664,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChattingR__Clien__656C112C">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="ChattingRecord" Type="Self.ChattingRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="ChattingRecord">
-              <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ChattingR__Servi__66603565">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="ChattingRecord" Type="Self.ChattingRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ChattingRecord">
-              <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Invoice__ClientI__628FA481">
+        <Association Name="FK__Invoice__ClientI__5070F446">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -825,7 +676,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__History__Photogr__44FF419A">
+        <Association Name="FK__History__Photogr__32E0915F">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="1" />
           <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
@@ -837,7 +688,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoice__Service__619B8048">
+        <Association Name="FK__Invoice__Service__4F7CD00D">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -849,7 +700,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MediaFile__Servi__59063A47">
+        <Association Name="FK__MediaFile__Servi__46E78A0C">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="MediaFile" Type="Self.MediaFile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -861,31 +712,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PackageDe__Packa__5DCAEF64">
-          <End Role="Package" Type="Self.Package" Multiplicity="1" />
-          <End Role="PackageDetail" Type="Self.PackageDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Package">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PackageDetail">
-              <PropertyRef Name="PackageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PackageDe__Servi__5EBF139D">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
-          <End Role="PackageDetail" Type="Self.PackageDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PackageDetail">
-              <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Photograp__Photo__4D94879B">
+        <Association Name="FK__Photograp__Photo__3B75D760">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="1" />
           <End Role="PhotographerSkill" Type="Self.PhotographerSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -897,7 +724,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Service__Photogr__52593CB8">
+        <Association Name="FK__Service__Photogr__403A8C7D">
           <End Role="Photographer" Type="Self.Photographer" Multiplicity="0..1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
           <ReferentialConstraint>
@@ -909,7 +736,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photograp__Skill__4CA06362">
+        <Association Name="FK__Photograp__Skill__3A81B327">
           <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
           <End Role="PhotographerSkill" Type="Self.PhotographerSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -929,83 +756,64 @@
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="AuthenticatedUsers" EntityType="Self.AuthenticatedUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="ChattingRecords" EntityType="Self.ChattingRecord" />
           <EntitySet Name="Clients" EntityType="Self.Client" />
           <EntitySet Name="Histories" EntityType="Self.History" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
           <EntitySet Name="MediaFiles" EntityType="Self.MediaFile" />
-          <EntitySet Name="Packages" EntityType="Self.Package" />
-          <EntitySet Name="PackageDetails" EntityType="Self.PackageDetail" />
           <EntitySet Name="Photographers" EntityType="Self.Photographer" />
           <EntitySet Name="PhotographerSkills" EntityType="Self.PhotographerSkill" />
           <EntitySet Name="Services" EntityType="Self.Service" />
           <EntitySet Name="Skills" EntityType="Self.Skill" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK__Admin__Username__3A81B327" Association="Self.FK__Admin__Username__3A81B327">
+          <AssociationSet Name="FK__Admin__Username__286302EC" Association="Self.FK__Admin__Username__286302EC">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUsers" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Client__AdminID__3E52440B" Association="Self.FK__Client__AdminID__3E52440B">
+          <AssociationSet Name="FK__Client__AdminID__2C3393D0" Association="Self.FK__Client__AdminID__2C3393D0">
             <End Role="Admin" EntitySet="Admins" />
             <End Role="Client" EntitySet="Clients" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Admin__4222D4EF" Association="Self.FK__Photograp__Admin__4222D4EF">
+          <AssociationSet Name="FK__Photograp__Admin__300424B4" Association="Self.FK__Photograp__Admin__300424B4">
             <End Role="Admin" EntitySet="Admins" />
             <End Role="Photographer" EntitySet="Photographers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Client__Username__3D5E1FD2" Association="Self.FK__Client__Username__3D5E1FD2">
+          <AssociationSet Name="FK__Client__Username__2B3F6F97" Association="Self.FK__Client__Username__2B3F6F97">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUsers" />
             <End Role="Client" EntitySet="Clients" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Usern__412EB0B6" Association="Self.FK__Photograp__Usern__412EB0B6">
+          <AssociationSet Name="FK__Photograp__Usern__2F10007B" Association="Self.FK__Photograp__Usern__2F10007B">
             <End Role="AuthenticatedUser" EntitySet="AuthenticatedUsers" />
             <End Role="Photographer" EntitySet="Photographers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Skill__CategoryI__49C3F6B7" Association="Self.FK__Skill__CategoryI__49C3F6B7">
+          <AssociationSet Name="FK__Skill__CategoryI__37A5467C" Association="Self.FK__Skill__CategoryI__37A5467C">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Skill" EntitySet="Skills" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChattingR__Clien__656C112C" Association="Self.FK__ChattingR__Clien__656C112C">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="ChattingRecord" EntitySet="ChattingRecords" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChattingR__Servi__66603565" Association="Self.FK__ChattingR__Servi__66603565">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="ChattingRecord" EntitySet="ChattingRecords" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Invoice__ClientI__628FA481" Association="Self.FK__Invoice__ClientI__628FA481">
+          <AssociationSet Name="FK__Invoice__ClientI__5070F446" Association="Self.FK__Invoice__ClientI__5070F446">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__History__Photogr__44FF419A" Association="Self.FK__History__Photogr__44FF419A">
+          <AssociationSet Name="FK__History__Photogr__32E0915F" Association="Self.FK__History__Photogr__32E0915F">
             <End Role="Photographer" EntitySet="Photographers" />
             <End Role="History" EntitySet="Histories" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoice__Service__619B8048" Association="Self.FK__Invoice__Service__619B8048">
+          <AssociationSet Name="FK__Invoice__Service__4F7CD00D" Association="Self.FK__Invoice__Service__4F7CD00D">
             <End Role="Service" EntitySet="Services" />
             <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__MediaFile__Servi__59063A47" Association="Self.FK__MediaFile__Servi__59063A47">
+          <AssociationSet Name="FK__MediaFile__Servi__46E78A0C" Association="Self.FK__MediaFile__Servi__46E78A0C">
             <End Role="Service" EntitySet="Services" />
             <End Role="MediaFile" EntitySet="MediaFiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__PackageDe__Packa__5DCAEF64" Association="Self.FK__PackageDe__Packa__5DCAEF64">
-            <End Role="Package" EntitySet="Packages" />
-            <End Role="PackageDetail" EntitySet="PackageDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PackageDe__Servi__5EBF139D" Association="Self.FK__PackageDe__Servi__5EBF139D">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="PackageDetail" EntitySet="PackageDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Photo__4D94879B" Association="Self.FK__Photograp__Photo__4D94879B">
+          <AssociationSet Name="FK__Photograp__Photo__3B75D760" Association="Self.FK__Photograp__Photo__3B75D760">
             <End Role="Photographer" EntitySet="Photographers" />
             <End Role="PhotographerSkill" EntitySet="PhotographerSkills" />
           </AssociationSet>
-          <AssociationSet Name="FK__Service__Photogr__52593CB8" Association="Self.FK__Service__Photogr__52593CB8">
+          <AssociationSet Name="FK__Service__Photogr__403A8C7D" Association="Self.FK__Service__Photogr__403A8C7D">
             <End Role="Photographer" EntitySet="Photographers" />
             <End Role="Service" EntitySet="Services" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photograp__Skill__4CA06362" Association="Self.FK__Photograp__Skill__4CA06362">
+          <AssociationSet Name="FK__Photograp__Skill__3A81B327" Association="Self.FK__Photograp__Skill__3A81B327">
             <End Role="Skill" EntitySet="Skills" />
             <End Role="PhotographerSkill" EntitySet="PhotographerSkills" />
           </AssociationSet>
@@ -1091,15 +899,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ChattingRecords">
-            <EntityTypeMapping TypeName="PhotoWorkModel.ChattingRecord">
-              <MappingFragment StoreEntitySet="ChattingRecord">
-                <ScalarProperty Name="ChatFile" ColumnName="ChatFile" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="PhotoWorkModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -1150,25 +949,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="PhotoWorkModel.Package">
-              <MappingFragment StoreEntitySet="Package">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PackageDetails">
-            <EntityTypeMapping TypeName="PhotoWorkModel.PackageDetail">
-              <MappingFragment StoreEntitySet="PackageDetail">
-                <ScalarProperty Name="deposit" ColumnName="deposit" />
-                <ScalarProperty Name="startingPrice" ColumnName="startingPrice" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Photographers">
             <EntityTypeMapping TypeName="PhotoWorkModel.Photographer">
               <MappingFragment StoreEntitySet="Photographer">
@@ -1196,6 +976,7 @@
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="PhotoWorkModel.Service">
               <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="StartingPrice" ColumnName="StartingPrice" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

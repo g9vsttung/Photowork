@@ -22,25 +22,19 @@
 
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="control-label col-md-4">ID:</div>
-                <div class="col-md-12">
-                    <input class="form-control" type="text" name="txtId" required />
-                    <span id="email_ERR" class="text-danger"></span>
-                </div>
-            </div>
+            
             <div class="form-group">
                 <div class="control-label col-md-4">Service name:</div>
                 <div class="col-md-12">
-                    <input class="form-control" type="text" name="txtName" required />
-                    <span id="email_ERR" class="text-danger"></span>
+                    @Html.EditorFor(model => model.ServiceName)
+                    <font color="red">@Html.ValidationMessageFor(model => model.ServiceName)</font>
                 </div>
             </div>
             <div class="form-group">
                 <div class="control-label col-md-4">Description:</div>
                 <div class="col-md-12">
-                    <input class="form-control" type="text" name="txtDes" required />
-                    <span id="email_ERR" class="text-danger"></span>
+                    @Html.EditorFor(model => model.Description)
+                    <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Tạo</button>

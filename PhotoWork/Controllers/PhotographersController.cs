@@ -19,6 +19,10 @@ namespace PhotoWork.Controllers
     {
         string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         private PhotoWorkEntities db = new PhotoWorkEntities();
+        public ActionResult Home()
+        {
+            return View();
+        }
         // GET: Photographers
         public ActionResult Index()
         {

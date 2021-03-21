@@ -28,14 +28,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" name="txtName" value="@Model.ServiceName" />
+                @Html.EditorFor(model => model.ServiceName)
+                <font color="red">@Html.ValidationMessageFor(model=>model.ServiceName)</font>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" name="txtDes" value="@Model.Description" />
+                @Html.EditorFor(model => model.Description)
+                <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
             </div>
         </div>
 

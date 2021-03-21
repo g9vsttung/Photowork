@@ -318,6 +318,7 @@
     <Content Include="Views\Photographers\ViewProfile.cshtml" />
     <Content Include="Views\Services\SearchByPhotographer.cshtml" />
     <Content Include="Views\Services\SearchByService.cshtml" />
+    <Content Include="Views\Photographers\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,49 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="11224a7d815448cbbd9c11ec0527dc40" Name="Diagram1">
-        <EntityTypeShape EntityType="PhotoWorkModel.Admin" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.AuthenticatedUser" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="15.5" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.ChattingRecord" Width="1.5" PointX="13.125" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Client" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.MediaFile" Width="1.5" PointX="12.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Package" Width="1.5" PointX="10.25" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.PackageDetail" Width="1.5" PointX="12.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Photographer" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.PhotographerSkill" Width="1.5" PointX="13.5" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Service" Width="1.5" PointX="9.625" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Skill" Width="1.5" PointX="16.5" PointY="17.375" IsExpanded="true" />
+      <Diagram DiagramId="d0ace62e4e4a46b3adc910a7afbcb547" Name="Diagram1">
+        <EntityTypeShape EntityType="PhotoWorkModel.Admin" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.AuthenticatedUser" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Client" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="12.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.MediaFile" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Photographer" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.PhotographerSkill" Width="1.5" PointX="11.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Service" Width="1.5" PointX="10.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Skill" Width="1.5" PointX="12.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Admin__Username__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Client__AdminID__3E52440B" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Admin__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Client__Username__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Usern__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Skill__CategoryI__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__ChattingR__Clien__656C112C" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6" PointY="13.6244921875" />
-          <ConnectorPoint PointX="6" PointY="14.314392903645832" />
-          <ConnectorPoint PointX="6.3229191666666669" PointY="14.314392903645832" />
-          <ConnectorPoint PointX="6.4895858333333329" PointY="14.314392903645832" />
-          <ConnectorPoint PointX="8.8541661666666673" PointY="14.314392903645832" />
-          <ConnectorPoint PointX="9.0208328333333352" PointY="14.314392903645832" />
-          <ConnectorPoint PointX="13.125" PointY="14.314392903645832" />
-        </AssociationConnector>
-        <AssociationConnector Association="PhotoWorkModel.FK__ChattingR__Servi__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Invoice__ClientI__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__History__Photogr__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Invoice__Service__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__MediaFile__Servi__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__PackageDe__Packa__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__PackageDe__Servi__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Photo__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Service__Photogr__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Skill__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="PhotoWorkModel.ServiceSkill" ManuallyRouted="false" >
-        </AssociationConnector>
+        <AssociationConnector Association="PhotoWorkModel.FK__Admin__Username__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Client__AdminID__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Admin__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Client__Username__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Usern__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Skill__CategoryI__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Invoice__ClientI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__History__Photogr__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Invoice__Service__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__MediaFile__Servi__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Photo__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Service__Photogr__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.FK__Photograp__Skill__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoWorkModel.ServiceSkill" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

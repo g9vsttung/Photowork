@@ -30,13 +30,10 @@ namespace PhotoWork.Models
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<AuthenticatedUser> AuthenticatedUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<ChattingRecord> ChattingRecords { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<MediaFile> MediaFiles { get; set; }
-        public virtual DbSet<Package> Packages { get; set; }
-        public virtual DbSet<PackageDetail> PackageDetails { get; set; }
         public virtual DbSet<Photographer> Photographers { get; set; }
         public virtual DbSet<PhotographerSkill> PhotographerSkills { get; set; }
         public virtual DbSet<Service> Services { get; set; }

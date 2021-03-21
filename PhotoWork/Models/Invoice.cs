@@ -47,11 +47,7 @@ namespace PhotoWork.Models
 
         public bool isBannedClient { get; set; }
 
-
-
         public virtual Client Client { get; set; }
         public virtual Service Service { get; set; }
-
-
     }
 }

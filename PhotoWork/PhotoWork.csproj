@@ -148,9 +148,6 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChattingRecord.cs">
-      <DependentUpon>PhotoWork.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Client.cs">
       <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
@@ -161,12 +158,6 @@
       <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MediaFile.cs">
-      <DependentUpon>PhotoWork.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Package.cs">
-      <DependentUpon>PhotoWork.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PackageDetail.cs">
       <DependentUpon>PhotoWork.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Photographer.cs">
@@ -228,13 +219,6 @@
     <Content Include="Content\owl.theme.green.css" />
     <Content Include="Content\owl.theme.green.min.css" />
     <Content Include="Content\styles.css" />
-    <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\owl.carousel.js" />
-    <Content Include="Scripts\owl.carousel.min.js" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\PhotoWork.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PhotoWork.edmx</DependentUpon>
@@ -245,6 +229,13 @@
       <DependentUpon>PhotoWork.edmx</DependentUpon>
       <LastGenOutput>PhotoWork.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\PhotoWork.edmx">

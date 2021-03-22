@@ -132,6 +132,7 @@
     <Compile Include="Controllers\AuthenticatedUsersController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\PhotographersController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="DTO\PhotographerProfile.cs" />
@@ -311,10 +312,13 @@
     <Content Include="Views\Services\SearchByService.cshtml" />
     <Content Include="Views\Photographers\Home.cshtml" />
     <Content Include="Views\Services\MoreDetails.cshtml" />
+    <Content Include="Views\Photographers\Requirement.cshtml" />
+    <Content Include="Views\Clients\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\App_LocalResources\" />
+    <Folder Include="Views\Invoices\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

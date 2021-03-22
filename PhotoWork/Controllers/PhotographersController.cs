@@ -207,5 +207,58 @@ namespace PhotoWork.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Requirement(string id)
+        {
+            List<Invoice> list = new List<Invoice>();
+            string SQL = "select I.id,Contract, ClientID, process, DateStart,I.ServiceID,S.ServiceName,S.Description from invoice I, Service S where I.ServiceID=S.ID and PhotographerID = @photo and (process like 'CanceledByClient' or process like 'Waiting' or process like 'Doing') ";
+            SqlConnection connection = new SqlConnection(con);
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@photo", Session["USERNAME"].ToString());
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+
+            while (rd.Read())
+            {
+                list.Add(new Invoice()
+                {
+                    ID = rd["ID"].ToString(),
+                    ServiceID = rd["ServiceID"].ToString(),
+                    Contract = rd["Contract"].ToString(),
+                    ClientID = rd["ClientID"].ToString(),
+                    process = rd["process"].ToString(),
+                    DateStart = DateTime.Parse(rd["DateStart"].ToString()),
+                    ServiceName = rd["ServiceName"].ToString(),
+                    Description = rd["Description"].ToString()
+                });
+
+            }
+
+            connection.Close();
+            return View(list);
+        }
+
+        public ActionResult Accept(string id)
+        {
+            string SQL = "update invoice set process='Doing' where ID=@id";
+            SqlConnection connection = new SqlConnection(con);
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Requirement");
+        }
+
+        public ActionResult Reject(string id)
+        {
+            string SQL = "delete from invoice where ID=@id";
+            SqlConnection connection = new SqlConnection(con);
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Requirement");
+        }
     }
 }

@@ -166,5 +166,34 @@ namespace PhotoWork.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Services()
+        {
+            List<Invoice> list = new List<Invoice>();
+            string SQL = "select I.id,Contract, process, DateStart,I.ServiceID,S.ServiceName,S.Description from invoice I, Service S where I.ServiceID=S.ID and ClientID = @client and (process like 'Waiting' or process like 'Doing' or process like 'CanceledByPhoto') ";
+            SqlConnection connection = new SqlConnection(con);
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@client", Session["USERNAME"].ToString());
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+
+            while (rd.Read())
+            {
+                list.Add(new Invoice()
+                {
+                    ID = rd["ID"].ToString(),
+                    ServiceID = rd["ServiceID"].ToString(),
+                    Contract = rd["Contract"].ToString(),
+                    
+                    process = rd["process"].ToString(),
+                    DateStart = DateTime.Parse(rd["DateStart"].ToString()),
+                    ServiceName = rd["ServiceName"].ToString(),
+                    Description = rd["Description"].ToString()
+                });
+
+            }
+
+            connection.Close();
+            return View(list);
+        }
     }
 }

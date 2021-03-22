@@ -81,7 +81,7 @@ namespace PhotoWork.Controllers
                     Bio = rd["Bio"].ToString(),
                     Avatar = rd["Avatar"].ToString(),
                     FullName = rd["FullName"].ToString()
-                }); 
+                });
             }
             connection.Close();
             return View(list);
@@ -106,10 +106,9 @@ namespace PhotoWork.Controllers
         {
             if (content == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice " +
-                        "from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p " +
-                        "where ss.ServiceID = s.ID and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0 and p.PackageID = 1 " +
-                       " and p.ServiceID = s.ID and dbo.ufn_removeMark(serviceName) like @content";
+            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, s.startingPrice " +
+                            "from service s, ServiceSkill ss, AuthenticatedUser u " +
+                            "where ss.ServiceID = s.ID and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0  and dbo.ufn_removeMark(serviceName) like  @content";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@content", "%" + nonAccentVietnamese(content) + "%");
             connection.Open();
@@ -125,7 +124,7 @@ namespace PhotoWork.Controllers
                     Rating = int.Parse(rd["Rating"].ToString()),
                     FullName = rd["FullName"].ToString(),
                     PhotographerID = rd["PhotographerID"].ToString(),
-                    StartingPrice = Double.Parse(rd["startingPrice"].ToString())
+                    StartingPrice = decimal.Parse(rd["startingPrice"].ToString())
 
                 });
             }
@@ -138,9 +137,9 @@ namespace PhotoWork.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice" +
-                            " from service s, ServiceSkill ss, AuthenticatedUser u, PackageDetail p " +
-                            "where ss.ServiceID = s.ID and ss.SkillID = @id and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0 and p.PackageID = 1 and p.ServiceID = s.ID";
+            string SQL = "select s.ID,serviceName, s.Description,PhotographerID,FullName,rating, startingPrice " +
+                    "from service s, ServiceSkill ss, AuthenticatedUser u " +
+                    "where ss.ServiceID = s.ID and ss.SkillID = @id and u.Email = s.PhotographerID and iSdelete = 0 and isBanned = 0";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@id", id);
             connection.Open();
@@ -153,10 +152,10 @@ namespace PhotoWork.Controllers
                     ID = rd["ID"].ToString(),
                     ServiceName = rd["ServiceName"].ToString(),
                     Description = rd["Description"].ToString(),
-                    Rating = int.Parse(rd["Rating"].ToString()),
+                    Rating = double.Parse(rd["Rating"].ToString()),
                     FullName = rd["FullName"].ToString(),
                     PhotographerID = rd["PhotographerID"].ToString(),
-                    StartingPrice =Double.Parse(rd["startingPrice"].ToString())
+                   StartingPrice = Decimal.Parse(rd["startingPrice"].ToString())
 
                 });
             }
@@ -175,7 +174,7 @@ namespace PhotoWork.Controllers
 
             return View();
         }
-
+       
         // POST: Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

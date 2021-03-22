@@ -35,10 +35,36 @@
                         <img src="~/Content/img/01.jpg" class="avatar" />
                         @Html.DisplayFor(modelItem => item.FullName)
                         <p> @Html.DisplayFor(modelItem => item.Description)</p>
-                        <i class="fa fa-star" style="color:#f0b30c">4.2</i>
+                        <i class="fa fa-star" style="color:#f0b30c">@item.Rating</i>
+                        <i style="float:right; margin-right:10px"><a data-toggle="modal" data-target="#myModal" href="Services/MoreDetails/@item.ID">Đặt dịch vụ </a></i>
                     </div><hr />
                     <div class="price">
                         Giá khởi điểm @Html.DisplayFor(modelItem => item.StartingPrice)k
+                    </div>
+                </div>
+            </div>
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Form đặt dịch vụ</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Thời gian bắt đầu
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
                     </div>
                 </div>
             </div>

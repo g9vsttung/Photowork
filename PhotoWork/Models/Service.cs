@@ -42,7 +42,8 @@ namespace PhotoWork.Models
         public string FullName { get; set; }
         [Required(ErrorMessage = "Hãy nhập giá cơ bản")]
         [Display(Name = "Giá cơ bản")]
-        public double StartingPrice { get; set; }
+        public Decimal StartingPrice { get; set; }
+        public string photographerID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

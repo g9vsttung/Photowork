@@ -38,8 +38,6 @@ namespace PhotoWork.Models
         public Nullable<decimal> CurrentMoney { get; set; }
         public string AdminID { get; set; }
 
-
-        public virtual Admin Admin { get; set; }
         public virtual AuthenticatedUser AuthenticatedUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> Histories { get; set; }

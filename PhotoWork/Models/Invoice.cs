@@ -25,9 +25,10 @@ namespace PhotoWork.Models
         public string ServiceID { get; set; }
         [DisplayName("Email Khách Hàng")]
         public string ClientID { get; set; }
-        [DisplayName("Ngày Bắt Đầu Dịch Vụ")]
-        public Nullable<System.DateTime> DateEnd { get; set; }
+    
         [DisplayName("Ngày Hoàn Thành Dự Kiến ")]
+        public Nullable<System.DateTime> DateEnd { get; set; }
+        [DisplayName("Ngày Bắt Đầu Dịch Vụ")]
         public Nullable<System.DateTime> DateStart { get; set; }
         [DisplayName("Trạng Thái Của Hóa Đơn")]
         public string process { get; set; }

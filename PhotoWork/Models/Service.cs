@@ -22,7 +22,7 @@ namespace PhotoWork.Models
             this.MediaFiles = new HashSet<MediaFile>();
             this.Skills = new HashSet<Skill>();
         }
-    
+
         public string ID { get; set; }
         [Required(ErrorMessage = "Hãy nhập tên dịch vụ")]
         [Display(Name = "Tên dịch vụ")]
@@ -38,12 +38,14 @@ namespace PhotoWork.Models
         public Nullable<System.DateTime> deleteDate { get; set; }
         public string PhotographerID { get; set; }
         public Nullable<double> Rating { get; set; }
-        //Extra 
-        public string FullName { get; set; }
         [Required(ErrorMessage = "Hãy nhập giá cơ bản")]
         [Display(Name = "Giá cơ bản")]
-        public Decimal StartingPrice { get; set; }
+        public Nullable<decimal> StartingPrice { get; set; }
+        //Extra 
+        public string FullName { get; set; }
+ 
         public string photographerID { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

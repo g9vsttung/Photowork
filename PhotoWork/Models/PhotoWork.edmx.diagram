@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="PhotoWorkModel.Category" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Client" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.History" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="12.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoWorkModel.Invoice" Width="1.5" PointX="14.375" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.MediaFile" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.Photographer" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PhotoWorkModel.PhotographerSkill" Width="1.5" PointX="11.75" PointY="3.25" IsExpanded="true" />

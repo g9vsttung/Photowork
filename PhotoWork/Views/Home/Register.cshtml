@@ -1,73 +1,64 @@
 ﻿@model PhotoWork.Models.AuthenticatedUser
-
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/fullpage.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register</h2>
-
-
-@using (Html.BeginForm("Login", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new {name = "register" } ))
+<h2>Đăng ký</h2>
+@using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
 {
+
+
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>AuthenticatedUser</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Email)
+            <font color="red">@Html.ValidationMessageFor(model => model.Email)</font>
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.passwords)
+            <font color="red">@Html.ValidationMessageFor(model => model.passwords)</font>
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.repasswords, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.repasswords)
+            <font color="red">@Html.ValidationMessageFor(model => model.repasswords)</font>
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.passwords, new { htmlAttributes = new { @class = "form-control" , @id = "passwords" } })
-                @Html.ValidationMessageFor(model => model.passwords, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            <select name="role">
+                <option>Client</option>
+                <option>Photographer</option>
+            </select>
+            <span id="email_ERR" class="text-danger"></span>
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.repasswords, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.repasswords, new { htmlAttributes = new { @class = "form-control", @id = "repasswords" } })
-            @Html.ValidationMessageFor(model => model.repasswords, "", new { @class = "text-danger", @id = "repasswordserror" })
+        @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.phoneNumber)
+            <font color="red">@Html.ValidationMessageFor(model => model.phoneNumber)</font>
         </div>
     </div>
-
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="button"  class="btn btn-default" onclick="dangki()">Dang ki</button>
+        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.FullName)
+            <font color="red">@Html.ValidationMessageFor(model => model.FullName)</font>
         </div>
     </div>
-</div>
-}
+    <div class="form-group">
+        <span id="ERR" style="color:red;font-style:italic;margin-left:25px;"></span>
+    </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <button type="submit" class="btn btn-primary">Tạo mới</button>
 }

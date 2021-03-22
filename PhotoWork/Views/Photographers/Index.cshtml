@@ -4,60 +4,60 @@
     Layout = "~/Views/Shared/_PhotographerLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">Quản lý dịch vụ</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Services")
+    <button class="btn btn-success" style="margin-left:40px">@Html.ActionLink("Create New", "Create", "Services", new {}, new { style = "color:white" })</button>
 </p>
+<div style="margin:0px 40px 0px 40px">
+    <table class="table">
+        <tr style="background-color:orange">
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isAvaiable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ServiceName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isAvaiable)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.ServiceName
-            </td>
-            <td>
-                @item.Description
-            </td>
-            <td>
-                @item.isAvaiable
-            </td>
-            <td>
-                @item.CreateDate
-            </td>            
-            <td>
-                @item.Rating
-            </td>
-            <td>
-                @item.ID
-            </td>
-            <td>
-                @Html.ActionLink("Chỉnh sửa", "Edit","Services", new { id = item.ID },"") |
-                @Html.ActionLink("Xóa", "Delete","Services", new { id = item.ID },"")
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                Quản lý
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color:antiquewhite">
+                <td>
+                    @item.ServiceName
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.isAvaiable
+                </td>
+                <td>
+                    @item.CreateDate
+                </td>
+                <td>
+                    @item.Rating
+                </td>
 
+                <td>
+                    <button class="btn btn-warning" >@Html.ActionLink("Chỉnh sửa", "Edit", "Services", new { id = item.ID }, new { style = "color:black" })</button> |
+                    <button class="btn btn-danger">@Html.ActionLink("Xóa", "Delete", "Services", new { id = item.ID }, new { style = "color:white" })</button>
+</td>
+            </tr>
+        }
+
+    </table>
+</div>

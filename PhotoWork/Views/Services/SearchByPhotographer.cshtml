@@ -18,12 +18,12 @@
         {
             <div class="col-md-3">
                 <div class="service-form">
-                    <img src="~/Content/img/01.jpg" class="img-service" />
-                    <div class="photographer-pro">
-                        <img src="~/Content/img/01.jpg" class="avatar" />
-                        @Html.DisplayFor(modelItem => item .FullName)
-                        <p> @Html.DisplayFor(modelItem => item.Bio)</p>
-                       
+                    <img src="~/Content/img/01.jpg" class="img-service" />  
+                    <div >
+                        <p style="text-align:center;font-weight:bold">@item.FullName</p>
+                        <p style="text-align:center">@item.Bio</p>
+                        <p style="text-align:center">Số đơn đã phục vụ: @item.TotalProjectDone</p>
+                        <p style="text-align:center">Số điện thoại: @item.phoneNumber</p>
                     </div>
                 </div>
             </div>

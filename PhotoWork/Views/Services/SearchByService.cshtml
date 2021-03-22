@@ -24,10 +24,50 @@
                         <img src="~/Content/img/01.jpg" class="avatar" />
                         @Html.DisplayFor(modelItem => item.FullName)
                         <p> @Html.DisplayFor(modelItem => item.Description)</p>
-                        <i class="fa fa-star" style="color:#f0b30c">4.2</i>
+                        <i class="fa fa-star" style="color:#f0b30c">@item.Rating</i>
+                        <i style="float:right; margin-right:10px"><a data-toggle="modal" data-target="#myModal_@item.ID" href="#">Đặt dịch vụ </a></i>
                     </div><hr />
                     <div class="price">
                         Giá khởi điểm @Html.DisplayFor(modelItem => item.StartingPrice)k
+                    </div>
+                </div>
+            </div>
+            <!-- The Modal -->
+            <div class="modal" id="myModal_@item.ID">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Form đặt dịch vụ</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        @using (Html.BeginForm("Booking", "Services", new { id = item.ID }, FormMethod.Post))
+                        {
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-4" style="text-align:right">Thời gian bắt đầu</div>
+                                    <div class="col-8">
+                                        <input type="date" name="timeStart" required />
+                                    </div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-4" style="text-align:right">Chi tiết yêu cầu(Ghi thêm địa điểm nếu có)</div>
+                                    <div class="col-8">
+                                        <textarea name="requirement" required></textarea>
+                                    </div>
+                                </div><br />
+
+
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Tiếp tục</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

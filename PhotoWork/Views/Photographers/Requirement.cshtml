@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PhotoWork.Models.Invoice>
+@{
+    ViewBag.Title = "Requirement";
+    Layout = "~/Views/Shared/_PhotographerLayout.cshtml";
+}
+
+<h2 style="text-align:center">Dịch vụ của tôi</h2>
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+
+        //====================================================
+        <div class="container">
+            <span>-----------------------------------------------------------------------------------------------</span><br />
+
+            <div style="border-left: 7px dashed #2f15b2;width: 70%;padding-left:15px;border-radius:5px">
+                <a href="#">Client Page</a><br />
+                <input type="hidden" value="@item.ID" name="txtID" />
+                <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.ServiceName) : </span>@item.ServiceName<br />
+                <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Description) : </span>@item.Description<br />
+                <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Contract) : </span>@item.Contract<br />
+                <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.DateStart) : </span>@item.DateStart<br />
+                <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.process) : </span>@item.process<br /><br />
+                @if (item.process.Equals("Waiting"))
+                {
+                    <button class="btn btn-success" style="margin-right:15px">@Html.ActionLink("Chấp nhận", "Accept", "Photographers", new { id = item.ID }, new { style = "color:white;font-weight:bold" })</button>
+                    <button class="btn btn-danger">@Html.ActionLink("Từ chối", "Reject", "Photographers", new { id = item.ID }, new { style = "color:white;font-weight:bold" })</button>
+                }
+                else if (item.process.Equals("Doing"))
+                {
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#a_@item.ID">
+                        Hủy dịch vụ
+                    </button>
+                }
+                else
+                {
+                    using (Html.BeginForm("DeleteInvoiceByPhoto", "Invoices"))
+                    {
+                        <input type="hidden" name="txtID" value="@item.ID" />
+                        <button type="submit" class="btn btn-primary">Đã biết</button>
+                    }
+                }
+
+            </div>
+        </div>
+
+
+    }
+    foreach (var item in Model)
+    {
+        if (item.process.Equals("Doing"))
+        {
+            //MODAL
+            <div class="modal fade" id="a_@item.ID" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="a_@item.ID">Hủy dịch vụ</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @using (Html.BeginForm("Cancel", "Services"))
+                        {
+
+                            <div class="modal-body">
+                                <span style="font-weight:bold;  color:darkred">Dịch vụ hủy: </span> @item.ServiceName<br />
+                                <span style="font-weight:bold; color:darkred">Lý do: </span><br />
+                                <textarea name="txtReason" required placeholder="Lý do hủy dịch vụ"></textarea>
+                                <input type="hidden" name="txtID" value="@item.ID" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary">Xác nhận hủy</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        //end modal
+    }
+}
+
+
+

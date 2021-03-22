@@ -12,6 +12,7 @@ namespace PhotoWork.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Invoice
     {
@@ -49,5 +50,16 @@ namespace PhotoWork.Models
 
         public virtual Client Client { get; set; }
         public virtual Service Service { get; set; }
+        //extra
+        [Required(ErrorMessage = "Hãy nhập tên dịch vụ")]
+        [Display(Name = "Tên dịch vụ")]
+        public string ServiceName { get; set; }
+
+        [Required(ErrorMessage = "Hãy nhập mô tả")]
+        [MinLength(10, ErrorMessage = "Mô tả ít nhất 10 kí tự")]
+        [Display(Name = "Mô tả")]
+        public string Description { get; set; }
+        //extra
+        public string cancelReason { get; set; }
     }
 }

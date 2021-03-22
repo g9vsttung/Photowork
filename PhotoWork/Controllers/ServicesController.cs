@@ -311,5 +311,33 @@ namespace PhotoWork.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Cancel()
+        {
+            string cancelReason = Request.Form["txtReason"];
+            string id = Request.Form["txtID"];
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "update Invoice set cancelReason=@reason, process='CanceledByPhoto' where id=@id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            command.Parameters.AddWithValue("@reason", cancelReason);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Requirement","Photographers"); 
+        }
+        public ActionResult ClientCancel()
+        {
+            string cancelReason = Request.Form["txtReason"];
+            string id = Request.Form["txtID"];
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "update Invoice set cancelReason=@reason, process='CanceledByClient' where id=@id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            command.Parameters.AddWithValue("@reason", cancelReason);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Services", "Clients");
+        }
     }
 }

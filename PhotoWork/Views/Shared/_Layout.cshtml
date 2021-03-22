@@ -1,4 +1,4 @@
-﻿@model PhotoWork.Models.AuthenticatedUser
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,7 +157,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    @using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                  @*  @using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
                     {
 
                         <div class="modal-body">
@@ -221,7 +221,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                             <button type="submit" class="btn btn-primary">Đăng kí</button>
                         </div>
-                    }
+                    }*@
                 </div>
             </div>
         </div>

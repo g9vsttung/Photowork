@@ -65,9 +65,9 @@ namespace PhotoWork.Controllers
         {
             if (content == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "select FullName,Bio,Avatar,Username " +
-                            "from AuthenticatedUser A, Photographer p " +
-                            "where dbo.ufn_removeMark(FullName) like @content and Username=Email";
+            string SQL = "select FullName,Bio,Avatar,Username ,phoneNumber,TotalProjectDone "+
+                            "from AuthenticatedUser A, Photographer p "+
+                            "where dbo.ufn_removeMark(FullName) like @content and Username = Email";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@content", "%" + nonAccentVietnamese(content) + "%");
             connection.Open();
@@ -80,7 +80,9 @@ namespace PhotoWork.Controllers
                     Username = rd["Username"].ToString(),
                     Bio = rd["Bio"].ToString(),
                     Avatar = rd["Avatar"].ToString(),
-                    FullName = rd["FullName"].ToString()
+                    FullName = rd["FullName"].ToString(),
+                    phoneNumber = rd["phoneNumber"].ToString(),
+                    TotalProjectDone =int.Parse(rd["TotalProjectDone"].ToString()),
                 });
             }
             connection.Close();
@@ -133,6 +135,7 @@ namespace PhotoWork.Controllers
             return View(list);
         }
         // GET: Services/Details/5
+       
         public ActionResult Details(string id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -166,7 +169,7 @@ namespace PhotoWork.Controllers
             ViewBag.Category = db.Categories.Where(c => c.CategoryID == skill.CategoryID)
                                                .FirstOrDefault<Category>().name.ToString();
 
-            return View(list.ToList());
+            return View(list);
         }
         // GET: Services/Create
         public ActionResult Create()
@@ -174,12 +177,35 @@ namespace PhotoWork.Controllers
 
             return View();
         }
-       
+        //POST : Services/Booking
+        //To book a service
+        [HttpPost]
+        [Authorize(Roles = "Client")]
+        public ActionResult Booking(string id)
+        {
+          
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //Create new Invoice -> set process is 'Waiting'
+          
+            
+            Invoice i = new Invoice()
+            {
+                ID = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString(),
+                ServiceID = id,
+                ClientID = Session["USERNAME"].ToString(),
+                process = "Waiting",
+                DateStart = DateTime.Parse(Request.Form["timeStart"]),
+                Contract= Request.Form["requirement"],
+            };
+            Debug.WriteLine("hi");
+            db.Invoices.Add(i);
+            db.SaveChanges();
+            return RedirectToAction("Index","Clients");
+        }
         // POST: Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-
         public ActionResult Create(Service service)
         {
             DateTime dt = DateTime.Now;

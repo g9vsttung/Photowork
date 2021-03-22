@@ -15,6 +15,11 @@ namespace PhotoWork.Controllers
 {
     public class HomeController : Controller
     {
+        /*
+         Select * 
+        from Service s, Invoice i 
+        where s.ID=i.ServiceID and PhotographerID='hi2@gmail.com'
+         */
         string con = ConfigurationManager.ConnectionStrings["strConnection"].ConnectionString;
         /* [Authorize(Roles = "Admin")]*/
         public ActionResult Index()

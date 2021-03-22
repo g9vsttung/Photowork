@@ -19,7 +19,7 @@ namespace PhotoWork.Models
         public string ID { get; set; }
         [DisplayName("Phương Thức Thanh Toán")]
         public string PaymentMethod { get; set; }
-        [DisplayName("Hợp Đồng")]
+        [DisplayName("Yêu cầu khách hàng")]
         public string Contract { get; set; }
         [DisplayName("Mã Dịch Vụ")]
         public string ServiceID { get; set; }

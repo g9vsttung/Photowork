@@ -32,6 +32,7 @@ namespace PhotoWork.Models
         [MinLength(10, ErrorMessage = "Mô tả ít nhất 10 kí tự")]
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
+        [Display(Name = "Trạng thái")]
         public Nullable<bool> isAvaiable { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> isDelete { get; set; }
@@ -40,12 +41,12 @@ namespace PhotoWork.Models
         public Nullable<double> Rating { get; set; }
         [Required(ErrorMessage = "Hãy nhập giá cơ bản")]
         [Display(Name = "Giá cơ bản")]
+        [RegularExpression("[1-9][0-9]{0,7}",ErrorMessage ="Hãy nhập đúng kiểu số!")]
         public Nullable<decimal> StartingPrice { get; set; }
         //Extra 
         public string FullName { get; set; }
  
-        public string photographerID { get; set; }
-
+  
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

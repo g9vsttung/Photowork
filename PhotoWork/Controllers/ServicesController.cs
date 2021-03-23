@@ -213,24 +213,41 @@ namespace PhotoWork.Controllers
         [HttpPost]
         public ActionResult Create(Service service)
         {
+            
             DateTime dt = DateTime.Now;
             string id = dt.ToString("ddMMyyyyffffssmmhh");
 
             string name = service.ServiceName;
             string des = service.Description;
+            string[] skill = Request.Form["skill"].Split(',');
+            
+            Debug.WriteLine(skill);
             //db.Services.SqlQuery("insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID) values(@id,@name,@des,1,@createDate,0,@photo)", new SqlParameter("@id", id), new SqlParameter("@name", name), new SqlParameter("@des", des), new SqlParameter("@photo", Session["USERNAME"].ToString()));
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID,Rating) values(@id,@name,@des,1,@createDate,0,@photo,0)";
+            string SQL = "insert  Service(id,ServiceName,Description,isAvaiable,CreateDate,isDelete,PhotographerID,Rating,startingPrice) values(@id,@name,@des,1,@createDate,0,@photo,0,@price)";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@des", des);
             command.Parameters.AddWithValue("@photo", Session["USERNAME"].ToString());
             command.Parameters.AddWithValue("@id", id);
+            command.Parameters.AddWithValue("@price", service.StartingPrice);
             DateTime date = DateTime.Now;
             string now = date.ToString("yyyy-MM-dd");
             command.Parameters.AddWithValue("@createDate", now);
             connection.Open();
             command.ExecuteNonQuery();
+
+            foreach(var x in skill)
+            {
+                SQL = "insert serviceskill(serviceid, skillID) values(@serid,@skillid)";
+                command = new SqlCommand(SQL, connection);
+                command.Parameters.AddWithValue("@serid", id);
+                command.Parameters.AddWithValue("@skillid", x);
+                command.ExecuteNonQuery();
+            }
+
+
+
             connection.Close();
             return RedirectToAction("Index", "Photographers");
 
@@ -253,7 +270,23 @@ namespace PhotoWork.Controllers
             {
                 return HttpNotFound();
             }
-
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "select k.SkillID from service s, serviceskill k, invoice i where i.serviceid = s.id and s.id=k.serviceid and i.id like @id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", service.ID);
+            string skill = "";
+            connection.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            int count = 0;
+            while (rd.Read())
+            {
+                if (count != 0)
+                    skill += "-";
+                skill += rd["SkillID"].ToString();
+                count++;
+            }
+            connection.Close();
+            TempData["SKILL"] = skill;
             return View(service);
         }
 
@@ -269,12 +302,13 @@ namespace PhotoWork.Controllers
             string des = service.Description;
             bool avai = Boolean.Parse(Request.Form["cbIsAvaiable"]);
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "update Service set ServiceName=@name, Description=@des,isavaiable=@avai where id=@id";
+            string SQL = "update Service set ServiceName=@name, Description=@des,isavaiable=@avai, startingprice=@price where id=@id";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@des", des);
             command.Parameters.AddWithValue("@avai", avai);
             command.Parameters.AddWithValue("@id", service.ID);
+            command.Parameters.AddWithValue("@price", service.StartingPrice);
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();

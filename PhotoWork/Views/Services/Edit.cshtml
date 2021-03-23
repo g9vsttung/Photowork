@@ -5,71 +5,107 @@
     Layout = "~/Views/Shared/_PhotographerLayout.cshtml";
 }
 
+
 <h2>Edit</h2>
 
-@if (Request.QueryString["status"] != null)
-{
-    if (Request.QueryString["status"].Equals("SUCCESS"))
-    {
-        <h3 style="color: red">Edit successful</h3>
-    }
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
-}
-@using (Html.BeginForm(FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div style="text-align:center">
+                    <h2>Chỉnh sửa dịch vụ</h2>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
 
-    <div class="form-horizontal">
-        <h4>Service</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ServiceName, new { style = "color:darkred; font-weight:bold" })
+                        <div>
+                            @Html.EditorFor(model => model.ServiceName)<br />
+                            <font color="red">@Html.ValidationMessageFor(model => model.ServiceName)</font>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ServiceName)
-                <font color="red">@Html.ValidationMessageFor(model=>model.ServiceName)</font>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, new { style = "color:darkred; font-weight:bold" })
+                        <div>
+                            @Html.TextAreaFor(model => model.Description)<br />
+                            <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.isAvaiable, new { style = "color:darkred; font-weight:bold" })
+                        <div>
+                            <select name="cbIsAvaiable">
+                                @if (Model.isAvaiable == true)
+                                {
+                                    <option selected="selected" value="true">Mở</option>
+                                    <option value="false">Đóng</option>
+                                }
+                                else
+                                {
+                                    <option value="true">Mở</option>
+                                    <option selected="selected" value="false">Đóng</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartingPrice, new { style = "color:darkred;font-weight:bold" }) (nghìn đồng) <br />
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.StartingPrice)<br />
+                            <font color="red">@Html.ValidationMessageFor(model => model.StartingPrice)</font>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>Chụp ảnh</h3>
+
+                        <input id="skill_1" type="checkbox" name="skill" value="1" />Ngoại cảnh <br />
+                        <input id="skill_2" type="checkbox" name="skill" value="2" /> Studio <br />
+                        <input id="skill_3" type="checkbox" name="skill" value="3" /> Sự kiện/ Hội nghị<br />
+                        <input id="skill_4" type="checkbox" name="skill" value="4" /> Nhóm <br />
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Quay phim</h3>
+                        <input id="skill_5" type="checkbox" name="skill" value="5" /> Ngoại Cảnh <br />
+                        <input id="skill_6" type="checkbox" name="skill" value="6" /> Studio <br />
+                        <input id="skill_7" type="checkbox" name="skill" value="7" /> Sự kiện/ Hội nghị <br />
+                        <input id="skill_8" type="checkbox" name="skill" value="8" /> Theo Ngày <br />
+
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Chỉnh sửa</h3>
+                        <input id="skill_9" type="checkbox" name="skill" value="9" /> Ảnh <br />
+                        <input id="skill_10" type="checkbox" name="skill" value="10" /> Video/Clip <br />
+
+                    </div>
+                </div>
+                <br />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
-                <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
+            <div class="form-group" style="text-align:center">
+                <div>
+                    <input type="submit" value="Lưu" class="btn btn-success" />
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.isAvaiable, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="cbIsAvaiable">
-                    @if (Model.isAvaiable == true)
-                    {
-                        <option selected="selected">true</option>
-                        <option>false</option>
-                    }
-                    else
-                    {
-                        <option>true</option>
-                        <option selected="selected">false</option>
-                    }
+            <input type="hidden" name="txtID" value="@TempData["photoId"]" />
 
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-        <input type="hidden" name="txtID" value="@TempData["photoId"]" />
+        }
     </div>
-}
+    <div class="col-sm-3"></div>
+</div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index","Photographers")
+<div style="text-align:center">
+    @Html.ActionLink("Quay về", "Index", "Photographers", new { }, new { @class = "btn btn-warning", style = "text-align:center" })
 </div>
 
 @section Scripts {

@@ -6,6 +6,7 @@
 
 body {
     font-family: 'Lato';
+   
 }
 
 .top {
@@ -22,7 +23,7 @@ footer {
     text-align: center;
     color: white;
     padding-top: 20px;
- /*   position: fixed;*/
+
     left: 0;
     bottom: 0;
     height: 140px;
@@ -31,7 +32,7 @@ footer {
 .search-area select {
     border-radius: 6px;
     width: 20%;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .search-area input{
     border-radius:6px;

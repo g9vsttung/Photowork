@@ -116,19 +116,24 @@ namespace PhotoWork.Controllers
             connection.Open();
             SqlDataReader rd = command.ExecuteReader();
             List<Service> list = new List<Service>();
+            List<string> check = new List<string>();
             while (rd.Read())
             {
-                list.Add(new Service()
+                if (!check.Contains(rd["ID"].ToString()))
                 {
-                    ID = rd["ID"].ToString(),
-                    ServiceName = rd["ServiceName"].ToString(),
-                    Description = rd["Description"].ToString(),
-                    Rating = int.Parse(rd["Rating"].ToString()),
-                    FullName = rd["FullName"].ToString(),
-                    PhotographerID = rd["PhotographerID"].ToString(),
-                    StartingPrice = decimal.Parse(rd["startingPrice"].ToString())
-
-                });
+                    list.Add(new Service()
+                    {
+                        ID = rd["ID"].ToString(),
+                        ServiceName = rd["ServiceName"].ToString(),
+                        Description = rd["Description"].ToString(),
+                        Rating = double.Parse(rd["Rating"].ToString()),
+                        FullName = rd["FullName"].ToString(),
+                        PhotographerID = rd["PhotographerID"].ToString(),
+                        StartingPrice = decimal.Parse(rd["startingPrice"].ToString())
+                    });
+                    check.Add(rd["ID"].ToString());
+                }
+                
             }
             connection.Close();
 
@@ -186,20 +191,20 @@ namespace PhotoWork.Controllers
           
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //Create new Invoice -> set process is 'Waiting'
-          
-            
-            Invoice i = new Invoice()
-            {
-                ID = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString(),
-                ServiceID = id,
-                ClientID = Session["USERNAME"].ToString(),
-                process = "Waiting",
-                DateStart = DateTime.Parse(Request.Form["timeStart"]),
-                Contract= Request.Form["requirement"],
-            };
-            Debug.WriteLine("hi");
-            db.Invoices.Add(i);
-            db.SaveChanges();
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "insert into Invoice(ID,ServiceID,ClientID,process,DateStart,Contract) values "+
+               " (@id, @serviceId, @clientId, 'Waiting', @date, @contract)  ";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString());
+            command.Parameters.AddWithValue("@serviceId", id);
+            command.Parameters.AddWithValue("@clientId", Session["USERNAME"].ToString());
+            command.Parameters.AddWithValue("@date", DateTime.Parse(Request.Form["timeStart"]));
+            command.Parameters.AddWithValue("@contract", Request.Form["requirement"]);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+           
             return RedirectToAction("Index","Clients");
         }
         // POST: Services/Create

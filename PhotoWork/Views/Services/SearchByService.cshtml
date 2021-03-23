@@ -1,4 +1,5 @@
-﻿@model IEnumerable <PhotoWork.Models.Service>
+﻿
+@model IEnumerable <PhotoWork.Models.Service>
 
 @{
     ViewBag.Title = "SearchByService";
@@ -25,7 +26,13 @@
                         @Html.DisplayFor(modelItem => item.FullName)
                         <p> @Html.DisplayFor(modelItem => item.Description)</p>
                         <i class="fa fa-star" style="color:#f0b30c">@item.Rating</i>
-                        <i style="float:right; margin-right:10px"><a data-toggle="modal" data-target="#myModal_@item.ID" href="#">Đặt dịch vụ </a></i>
+                        @if (Session["ROLE"] != null)
+                        {
+                    <i style="float:right; margin-right:10px"><a data-toggle="modal" data-target="#myModal_@item.ID" href="#">Đặt dịch vụ </a></i>
+                        }
+                       
+
+                        
                     </div><hr />
                     <div class="price">
                         Giá khởi điểm @Html.DisplayFor(modelItem => item.StartingPrice)k
@@ -64,7 +71,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                                 <button type="submit" class="btn btn-success">Tiếp tục</button>
                             </div>
                         }

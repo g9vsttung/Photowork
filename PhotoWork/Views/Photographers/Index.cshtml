@@ -7,7 +7,7 @@
 <h2 style="text-align:center">Quản lý dịch vụ</h2>
 
 <p>
-    <button class="btn btn-success" style="margin-left:40px">@Html.ActionLink("Create New", "Create", "Services", new {}, new { style = "color:white" })</button>
+    <button class="btn btn-success" style="margin-left:40px">@Html.ActionLink("Tạo mới", "Create", "Services", new {}, new { style = "color:white" })</button>
 </p>
 <div style="margin:0px 40px 0px 40px">
     <table class="table">
@@ -43,7 +43,14 @@
                     @item.Description
                 </td>
                 <td>
-                    @item.isAvaiable
+                    @if (item.isAvaiable.Value)
+                    {
+                    <span>Mở</span>
+                    }
+                    else
+                    {
+                    <span>Đóng</span>
+                    }
                 </td>
                 <td>
                     @item.CreateDate

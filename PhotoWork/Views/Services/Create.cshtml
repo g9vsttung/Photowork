@@ -5,55 +5,86 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <br />
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="form-horizontal">
+                <h2 style="text-align:center">
+                    Tạo Dịch Vụ
+                </h2>
+                <hr />
+                @using (Html.BeginForm("Create", "Services", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div style="text-align:center">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ServiceName, new { style = "color:darkred;font-weight:bold" })<br />
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.ServiceName)<br />
+                                <font color="red">@Html.ValidationMessageFor(model => model.ServiceName)</font>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, new { style = "color:darkred;font-weight:bold" })<br />
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.Description)<br />
+                                <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model=>model.StartingPrice,new { style= "color:darkred;font-weight:bold" }) (nghìn đồng) <br />
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.StartingPrice)<br />
+                                <font color="red">@Html.ValidationMessageFor(model => model.StartingPrice)</font>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3>Chụp ảnh</h3>
+                            <input type="checkbox" name="skill" value="1" /> Ngoại cảnh <br />
+                            <input type="checkbox" name="skill" value="2" /> Studio <br />
+                            <input type="checkbox" name="skill" value="3" /> Sự kiện/ Hội nghị<br />
+                            <input type="checkbox" name="skill" value="4" /> Nhóm <br />
+                        </div>
+                        <div class="col-sm-4">
+                            <h3>Quay phim</h3>
+                            <input type="checkbox" name="skill" value="5" /> Ngoại Cảnh <br />
+                            <input type="checkbox" name="skill" value="6" /> Studio <br />
+                            <input type="checkbox" name="skill" value="7" /> Sự kiện/ Hội nghị <br />
+                            <input type="checkbox" name="skill" value="8" /> Theo Ngày <br />
 
-    <div class="form-horizontal">
-        <h4>Service</h4>
-        <hr />
-        @using (Html.BeginForm("CreateSer", "Services", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
-        {
+                        </div>
+                        <div class="col-sm-4">
+                            <h3>Chỉnh sửa</h3>
+                            <input type="checkbox" name="skill" value="9" /> Ảnh <br />
+                            <input type="checkbox" name="skill" value="10" /> Video/Clip <br />
 
+                        </div>
+                    </div>
+                    <br />
+                    <div style="text-align:center">
+                        <button type="submit" class="btn btn-primary">Tạo</button>
+                    </div>
 
-
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            
-            <div class="form-group">
-                <div class="control-label col-md-4">Service name:</div>
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.ServiceName)
-                    <font color="red">@Html.ValidationMessageFor(model => model.ServiceName)</font>
-                </div>
+                }
             </div>
-            <div class="form-group">
-                <div class="control-label col-md-4">Description:</div>
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.Description)
-                    <font color="red">@Html.ValidationMessageFor(model => model.Description)</font>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Tạo</button>
-
-
-
-
-
-
-
-
-
-
-        }
+        </div>
+        <div class="col-sm-3"></div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+}
+<br />
+<div style="text-align:center">
+    @Html.ActionLink("Quay về", "Index", "Photographers", new { }, new { @class = "btn btn-warning", style = "text-align:center" })
 </div>
 
 @section Scripts {

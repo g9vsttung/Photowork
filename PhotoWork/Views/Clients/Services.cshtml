@@ -21,11 +21,15 @@
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Description) : </span>@item.Description<br />
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Contract) : </span>@item.Contract<br />
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.DateStart) : </span>@item.DateStart<br />
+                @if (item.process.Equals("CanceledByPhoto"))
+                {
+                    <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.cancelReason) : </span>@item.cancelReason<br />
+                }
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.process) : </span>@item.process<br /><br />
                 @if (item.process.Equals("Waiting"))
                 {
-                    
-                    
+
+
                 }
                 else if (item.process.Equals("Doing"))
                 {

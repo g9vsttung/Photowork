@@ -45,6 +45,7 @@ namespace PhotoWork.Models
         public Nullable<decimal> StartingPrice { get; set; }
         //Extra 
         public string FullName { get; set; }
+        
  
   
 

@@ -61,6 +61,7 @@ namespace PhotoWork.Models
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
         //extra
+        [Display(Name = "<Lý do hủy dịch vụ>")]
         public string cancelReason { get; set; }
     }
 }

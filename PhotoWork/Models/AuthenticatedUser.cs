@@ -10,14 +10,13 @@
 namespace PhotoWork.Models
 {
     using System;
-    using System.Collections.Generic;
+  
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class AuthenticatedUser
     {
         [DisplayName("Email")]
-
         [Required(ErrorMessage = "Vui lòng nhập Email!")]
         [StringLength(50)]
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Email không hợp lệ")]

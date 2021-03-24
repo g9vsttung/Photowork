@@ -40,7 +40,7 @@ namespace PhotoWork.Models
         [DisplayName("Ngày Tố Cáo")]
         public Nullable<System.DateTime> SubmitDate { get; set; }
         public Nullable<int> Rating { get; set; }
-        [DisplayName("File Tố Cáo")]
+        [DisplayName("Nội Dung Tố Cáo")]
         public string FileReportLocation { get; set; }
         //Extra
         [DisplayName("Email Photographer")]

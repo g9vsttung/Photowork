@@ -192,8 +192,8 @@ namespace PhotoWork.Controllers
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //Create new Invoice -> set process is 'Waiting'
             SqlConnection connection = new SqlConnection(con);
-            string SQL = "insert into Invoice(ID,ServiceID,ClientID,process,DateStart,Contract) values "+
-               " (@id, @serviceId, @clientId, 'Waiting', @date, @contract)  ";
+            string SQL = "insert into Invoice(ID,ServiceID,ClientID,process,DateStart,Contract,cancelReason) values "+
+               " (@id, @serviceId, @clientId, 'Waiting', @date, @contract,'')  ";
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@id", DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString());
             command.Parameters.AddWithValue("@serviceId", id);
@@ -297,7 +297,7 @@ namespace PhotoWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Service service)
         {
-
+            string[] skill = Request.Form["skill"].Split(',');
             string name = service.ServiceName;
             string des = service.Description;
             bool avai = Boolean.Parse(Request.Form["cbIsAvaiable"]);
@@ -311,6 +311,19 @@ namespace PhotoWork.Controllers
             command.Parameters.AddWithValue("@price", service.StartingPrice);
             connection.Open();
             command.ExecuteNonQuery();
+            SQL = "delete from serviceskill where ServiceID like @serid";
+            command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@serid", service.ID);
+            command.ExecuteNonQuery();
+            foreach (var x in skill)
+            {
+                
+                SQL = "insert serviceskill(serviceid, skillID) values(@serid,@skillid)";
+                command = new SqlCommand(SQL, connection);
+                command.Parameters.AddWithValue("@serid", service.ID);
+                command.Parameters.AddWithValue("@skillid", x);
+                command.ExecuteNonQuery();
+            }
             connection.Close();
 
             return RedirectToAction("Index", "Photographers");

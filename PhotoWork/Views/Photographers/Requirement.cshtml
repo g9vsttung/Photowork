@@ -21,11 +21,16 @@
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Description) : </span>@item.Description<br />
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.Contract) : </span>@item.Contract<br />
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.DateStart) : </span>@item.DateStart<br />
+
+                @if (item.process.Equals("CanceledByClient"))
+                {
+                    <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.cancelReason) : </span>@item.cancelReason<br />
+                }
                 <span style="font-weight:bold;color:darkred">@Html.DisplayNameFor(model => model.process) : </span>@item.process<br /><br />
                 @if (item.process.Equals("Waiting"))
                 {
-                    <button class="btn btn-success" style="margin-right:15px">@Html.ActionLink("Chấp nhận", "Accept", "Photographers", new { id = item.ID }, new { style = "color:white;font-weight:bold" })</button>
-                    <button class="btn btn-danger">@Html.ActionLink("Từ chối", "Reject", "Photographers", new { id = item.ID }, new { style = "color:white;font-weight:bold" })</button>
+                    @Html.ActionLink("Chấp nhận", "Accept", "Photographers", new { id = item.ID }, new { @class = "btn btn-success", style = "color:white;font-weight:bold;margin-right:15px" })
+                    @Html.ActionLink("Từ chối", "Reject", "Photographers", new { id = item.ID }, new { @class = "btn btn-danger", style = "color:white;font-weight:bold" })
                 }
                 else if (item.process.Equals("Doing"))
                 {

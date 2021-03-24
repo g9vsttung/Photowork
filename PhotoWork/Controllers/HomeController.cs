@@ -47,8 +47,8 @@ namespace PhotoWork.Controllers
         }
         public ActionResult Register()
         {
-            AuthenticatedUser au = new AuthenticatedUser();
-            return View(au);
+            
+            return View();
         }
             [HttpPost]
         public ActionResult Register(AuthenticatedUser user)

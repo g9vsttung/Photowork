@@ -210,7 +210,7 @@ namespace PhotoWork.Controllers
         public ActionResult Requirement(string id)
         {
             List<Invoice> list = new List<Invoice>();
-            string SQL = "select I.id,Contract, ClientID, process, DateStart,I.ServiceID,S.ServiceName,S.Description from invoice I, Service S where I.ServiceID=S.ID and PhotographerID = @photo and (process like 'CanceledByClient' or process like 'Waiting' or process like 'Doing') ";
+            string SQL = "select I.id,Contract, ClientID, process, DateStart,I.ServiceID,S.ServiceName,S.Description, i.cancelReason from invoice I, Service S where I.ServiceID=S.ID and PhotographerID = @photo and (process like 'CanceledByClient' or process like 'Waiting' or process like 'Doing') ";
             SqlConnection connection = new SqlConnection(con);
             SqlCommand command = new SqlCommand(SQL, connection);
             command.Parameters.AddWithValue("@photo", Session["USERNAME"].ToString());
@@ -228,7 +228,8 @@ namespace PhotoWork.Controllers
                     process = rd["process"].ToString(),
                     DateStart = DateTime.Parse(rd["DateStart"].ToString()),
                     ServiceName = rd["ServiceName"].ToString(),
-                    Description = rd["Description"].ToString()
+                    Description = rd["Description"].ToString(),
+                    cancelReason=rd["cancelReason"].ToString()
                 });
 
             }

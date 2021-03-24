@@ -55,13 +55,40 @@
 
         @foreach (var item in Model)
         {
+            <div class="modal" id="serv_@item.ID">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Mô tả dịch vụ</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                             @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+
+
+
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="service-form">
                     <img src="~/Content/img/01.jpg" class="img-service" />
                     <div class="photographer-pro">
                         <img src="~/Content/img/01.jpg" class="avatar" />
                         @Html.DisplayFor(modelItem => item.FullName)
-                        <p> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <p> @Html.DisplayFor(modelItem => item.ServiceName)</p>
+                        <a data-toggle="modal" data-target="#serv_@item.ID" href="#">Xem thông tin</a><br/>
                         <i class="fa fa-star" style="color:#f0b30c">@item.Rating</i>
                         @if (Session["ROLE"] != null)
                         {

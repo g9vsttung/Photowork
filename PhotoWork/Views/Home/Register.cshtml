@@ -3,62 +3,64 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<h2 style="text-align:center;color:chocolate">Đăng ký</h2>
+<div style="margin-left: 42%">
+    @using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+    {
 
-<h2>Đăng ký</h2>
-@using (Html.BeginForm("Register", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
-{
 
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                @Html.EditorFor(model => model.Email)
+                <font color="red">@Html.ValidationMessageFor(model => model.Email)</font>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.passwords, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                @Html.PasswordFor(model => model.passwords)
+                <font color="red">@Html.ValidationMessageFor(model => model.passwords)</font>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.repasswords, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                @Html.PasswordFor(model => model.repasswords)
+                <font color="red">@Html.ValidationMessageFor(model => model.repasswords)</font>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Role, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                <select name="role">
+                    <option>Client</option>
+                    <option>Photographer</option>
+                </select>
+                <span id="email_ERR" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                @Html.EditorFor(model => model.phoneNumber)
+                <font color="red">@Html.ValidationMessageFor(model => model.phoneNumber)</font>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { style = "color:darkred;font-weight:bold" })
+            <div>
+                @Html.EditorFor(model => model.FullName)
+                <font color="red">@Html.ValidationMessageFor(model => model.FullName)</font>
+            </div>
+        </div>
 
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.Email)
-            <font color="red">@Html.ValidationMessageFor(model => model.Email)</font>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.passwords, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.passwords)
-            <font color="red">@Html.ValidationMessageFor(model => model.passwords)</font>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.repasswords, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.repasswords)
-            <font color="red">@Html.ValidationMessageFor(model => model.repasswords)</font>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            <select name="role">
-                <option>Client</option>
-                <option>Photographer</option>
-            </select>
-            <span id="email_ERR" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.phoneNumber)
-            <font color="red">@Html.ValidationMessageFor(model => model.phoneNumber)</font>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.FullName)
-            <font color="red">@Html.ValidationMessageFor(model => model.FullName)</font>
-        </div>
-    </div>
-    <div class="form-group">
-        <span id="ERR" style="color:red;font-style:italic;margin-left:25px;"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Tạo mới</button>
+        <button type="submit" class="btn btn-primary">Tạo mới</button>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

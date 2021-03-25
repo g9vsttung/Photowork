@@ -349,6 +349,14 @@ namespace PhotoWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            SqlConnection connection = new SqlConnection(con);
+            string SQL = "delete from Serviceskill where serviceid=@id";
+            SqlCommand command = new SqlCommand(SQL, connection);
+            command.Parameters.AddWithValue("@id", id);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
             Service service = db.Services.Find(id);
             db.Services.Remove(service);
             db.SaveChanges();
